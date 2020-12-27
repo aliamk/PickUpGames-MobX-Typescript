@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Domain;
+using Domain;                               // Value
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
+using Microsoft.EntityFrameworkCore;        // ToListAsync
+using Persistence;                          // context
 
 namespace API.Controllers
 {
