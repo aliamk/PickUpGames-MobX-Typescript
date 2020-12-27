@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Persistence;
+// using Microsoft.EntityFrameworkCore;
+// using Persistence;
 
 namespace API.Controllers
 {
@@ -11,11 +11,11 @@ namespace API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly DataContext _context;
-        public ValuesController(DataContext context)
-        {
-            _context = context;
-        }
+        // private readonly DataContext _context;
+        // public ValuesController(DataContext context)
+        // {
+        //     _context = context;
+        // }
 
         // GET api/values
         [HttpGet]
