@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import "./App.css"
 import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
-import { Header, Icon, List } from 'semantic-ui-react'
+import { Header, Image, List } from 'semantic-ui-react'
 
 // interface IState {
 //   values: []
@@ -27,13 +27,13 @@ class App extends Component {
     return (
       <div>
         <Header as='h2'>
-          <Icon name='users' />
+          <Image src='../heart_logo.png' as='a' size='large' href='http://localhost:3000' />
           <Header.Content>Pinga</Header.Content>
         </Header>
 
         <List>
-            {this.state.values.map((value) => (
-              <List.Item key={ value.Id }>{ value.name }</List.Item>
+            {this.state.values.map((value: any) => (
+              <List.Item key={ value.id }>{ value.name }</List.Item>
             ))}
         </List>
       </div>
