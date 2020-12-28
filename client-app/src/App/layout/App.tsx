@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
-import { Header, Image, List } from 'semantic-ui-react'
+import { List } from 'semantic-ui-react'
 import { IVisit } from '../models/visit_interface'
+import NavBar from '../../Features/nav/NavBar'
 
 
 const App = () => {
@@ -18,11 +19,7 @@ const App = () => {
   
   return (
     <div>
-      <Header as='h2'>
-        <Image src='../../../public/heart_logo.png' as='a' size='mini' href='http://localhost:3000' />
-        <Header.Content>Pinga</Header.Content>
-      </Header>
-
+      <NavBar />
       <List>
           {visits.map(visit => (
             <List.Item key={ visit.id }>{ visit.title }</List.Item>
@@ -30,7 +27,12 @@ const App = () => {
       </List>
     </div>
   )
-
 }
 
 export default App 
+
+
+/*        <Header as='h2'>
+        <Image src='../../../public/heart_logo.png' as='a' size='mini' href='http://localhost:3000' />
+        <Header.Content>Pinga</Header.Content>
+      </Header> */
