@@ -4,21 +4,21 @@ import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
 import { Header, Image, List } from 'semantic-ui-react'
 
-// interface IState {
-//   values: []
-// }
+interface IState {
+  visits: []
+}
 
-class App extends Component {
-  state = {
-    values: []
+class App extends Component<{}, IState> {
+  readonly state: IState = {
+    visits: []
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/api/values')
+    axios.get('http://localhost:5000/api/visits')
     .then((response) => {
       // console.log(response)
       this.setState({
-        values: response.data
+        visits: response.data
       })
     })    
   }
@@ -32,8 +32,8 @@ class App extends Component {
         </Header>
 
         <List>
-            {this.state.values.map((value: any) => (
-              <List.Item key={ value.id }>{ value.name }</List.Item>
+            {this.state.visits.map((visit: any) => (
+              <List.Item key={ visit.id }>{ visit.title }</List.Item>
             ))}
         </List>
       </div>
