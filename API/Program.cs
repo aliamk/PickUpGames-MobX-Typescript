@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;     // CreateScope
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Persistence;                                  // DataContext
-using Persistence.Migrations;
 
 namespace API
 {
