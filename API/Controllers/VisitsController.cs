@@ -26,14 +26,14 @@ namespace API.Controllers
             return await _mediator.Send(new List.Query());
         }
 
-        /*
+
         // Request for a single item  - see the Details Handler in Details.cs
         [HttpGet("{id}")]
         public async Task<ActionResult<Visit>> Details(Guid id)
         {
             return await _mediator.Send(new Details.Query { Id = id }); // initialise Id 
         }
-
+        /*
         // For users to add their own Visit item to the database - see the Create Handler in Create.cs
         [HttpPost]
         public async Task<ActionResult<Unit>> Create(Create.Command command)
