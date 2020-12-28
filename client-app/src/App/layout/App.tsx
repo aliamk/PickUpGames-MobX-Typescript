@@ -19,7 +19,7 @@ const App = () => {
   return (
     <div>
       <Header as='h2'>
-        <Image src='../../public/heart_logo.png' as='a' size='large' href='http://localhost:3000' />
+        <Image src='../../../public/heart_logo.png' as='a' size='mini' href='http://localhost:3000' />
         <Header.Content>Pinga</Header.Content>
       </Header>
 

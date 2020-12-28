@@ -9,5 +9,4 @@ export interface IVisit
     description: string;
     date: string;       // Temporarily set to string instead of Date to avoid errors in the ActivityForm Submit button
     location: string;
-
 }
