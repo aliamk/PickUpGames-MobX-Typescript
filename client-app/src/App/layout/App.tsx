@@ -23,9 +23,11 @@ const App = () => {
   }
 
   const handleCreateVisit = (visit: IVisit) => {
-    setVisits([ ...visits, visit])
-    setSelectedVisit(visit)
-    setEditMode(false)
+    agent.Visits.create(visit).then(() => {
+      setVisits([ ...visits, visit])
+      setSelectedVisit(visit)
+      setEditMode(false)
+    })
   }
 
   const handleEditVisit = (visit: IVisit) => {
