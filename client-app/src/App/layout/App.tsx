@@ -14,18 +14,36 @@ const App = () => {
 
   const handleSelectVisit = (id: string) => {
     setSelectedVisit(visits.filter(v => v.id === id)[0])
+    setEditMode(false)
   }
 
   const handleOpenCreateForm = () => {
     setSelectedVisit(null)
     setEditMode(true)
   }
+
+  const handleCreateVisit = (visit: IVisit) => {
+    setVisits([ ...visits, visit])
+    setSelectedVisit(visit)
+    setEditMode(false)
+  }
+
+  const handleEditVisit = (visit: IVisit) => {
+    setVisits([ ...visits.filter(v => v.id !== visit.id), visit])
+    setSelectedVisit(visit)
+    setEditMode(false)
+  }
   
   useEffect(() => {
     axios.get<IVisit[]>('http://localhost:5000/api/visits')
     .then((response) => {
       // console.log(response)
-      setVisits(response.data)
+      let visits: IVisit[] = []
+      response.data.forEach(visit => {
+        visit.date = visit.date.split('.')[0]
+        visits.push(visit)
+      })
+      setVisits(visits)
     })
   }, [])
   
@@ -40,6 +58,8 @@ const App = () => {
           editMode={editMode}
           setEditMode={setEditMode}
           setSelectedVisit={setSelectedVisit}
+          createVisit={handleCreateVisit}
+          editVisit={handleEditVisit}
           />
       </Container>
     </Fragment>
