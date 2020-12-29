@@ -6,14 +6,16 @@ import { IVisit } from '../models/visit_interface'
 
 
 class VisitStore {
+
     @observable visitRegistry = new Map()
     @observable visits:IVisit[] = []
     @observable selectedVisit: IVisit | undefined
-    @observable loadingInitial = false 
     @observable editMode = false
-    @observable submitting = false      // the loading icon
+    @observable loadingInitial = false  // the loading icon for the whole app
+    @observable submitting = false      // the loading icon within buttons
     @observable target = ''             // created for the deleteVisit action
 
+    // ========  Sorting Visit posts by date order ======== //
     @computed get visitsByDate() {
         return Array.from(this.visitRegistry.values()).sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
     }
@@ -35,7 +37,7 @@ class VisitStore {
     }
 
     // ========  Replaced Handler methods in App.tsx ======== //
-
+    // Method for creating Visit posts
     @action createVisit = async (visit: IVisit) => {
         this.submitting = true
         try {
@@ -49,7 +51,7 @@ class VisitStore {
         }
     }
 
-    // Method for editing Visits - replaced the handler in App.tsx
+    // Method for editing Visit posts
     @action editVisit = async (visit: IVisit) => {
         this.submitting = true
         try {
@@ -64,7 +66,7 @@ class VisitStore {
         }
     }
 
-    // Delete button's functionality
+    // Method for deleting Visit posts
     @action deleteVisit = async (event: SyntheticEvent<HTMLButtonElement>, id: string) => {
         this.submitting = true
         this.target = event.currentTarget.name
@@ -80,6 +82,7 @@ class VisitStore {
         }
     }
 
+    // Button functionality
     @action openCreateForm = () => {
         this.editMode = true
         this.selectedVisit = undefined
