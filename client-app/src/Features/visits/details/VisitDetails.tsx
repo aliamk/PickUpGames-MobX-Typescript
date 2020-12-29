@@ -1,13 +1,15 @@
-import { observer } from 'mobx-react-lite'
 import React, { useContext } from 'react'
+import { observer } from 'mobx-react-lite'
 import { Button, Card, Image } from 'semantic-ui-react'
-import { IVisit } from '../../../App/models/visit_interface'
+
 import VisitStore from '../../../App/stores/visitStore'
 
 
 const VisitDetails: React.FC = () => {
+
   const visitStore = useContext(VisitStore)
   const { selectedVisit: visit, openEditForm, canceSelectedVisit } = visitStore
+  
     return (
         <Card fluid>
         <Image src={`/assets/locationImages/${visit!.location}.png`} wrapped ui={false} />
