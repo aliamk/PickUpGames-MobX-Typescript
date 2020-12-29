@@ -1,11 +1,15 @@
 import React, { useEffect, Fragment, useContext } from 'react'
 import { Container } from 'semantic-ui-react'
 import { observer } from 'mobx-react-lite'
+import { Route} from 'react-router-dom'
 
+import HomePage from '../../Features/home/HomePage'
 import NavBar from '../../Features/nav/NavBar'
 import VisitDashboard from '../../Features/visits/dashboard/VisitDashboard'
 import LoadingComponent from '../layout/LoadingComponent'
 import VisitStore from '../stores/visitStore'
+// import VisitDetails from '../../Features/visits/details/VisitDetails'
+import VisitForm from '../../Features/visits/form/VisitForm'
 
 
 const App = () => {
@@ -26,7 +30,9 @@ const App = () => {
     <Fragment>
       <NavBar />
       <Container style={{marginTop: '7em'}}>
-        <VisitDashboard />
+        <Route exact path='/' component={HomePage} />
+        <Route exact path='/visits' component={VisitDashboard} />
+        <Route exact path='/createVisit' component={VisitForm} />
       </Container>
     </Fragment>
   )
