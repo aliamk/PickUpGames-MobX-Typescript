@@ -4,7 +4,7 @@ import { Item, Label, Button } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
 
 
-const ActivityListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
+const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
 
     return (
         <Item key={visit.id}>        
@@ -37,4 +37,4 @@ const ActivityListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
     )
 }
 
-export default ActivityListItem
+export default VisitListItem

@@ -18,7 +18,21 @@ class VisitStore {
 
     // ========  Sorting Visit posts by date order ======== //
     @computed get visitsByDate() {
-        return Array.from(this.visitRegistry.values()).sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
+        return this.groupVisitsByDate(Array.from(this.visitRegistry.values()))
+    }
+
+    groupVisitsByDate(visits: IVisit[]) {
+        // Sort all visits in date order
+        const sortedVisits = visits.sort(
+            (a, b) => Date.parse(a.date) - Date.parse(b.date)
+        )
+        // Take the DATE property of the sortedVisits array, and go through each item...
+        return Object.entries(sortedVisits.reduce((visits, visit) => {
+            const date = visit.date.split('T')[0]
+            // If items have matching dates, add the visit to the visits array; if they don't match, just return the visit in its own array
+            visits[date] = visits[date] ? [ ...visits[date], visit] : [visit]
+            return visits
+        }, {} as {[key: string]: IVisit[]}))
     }
 
     // ========  API CALLS (see useEffect in App.tsx) ======== //
