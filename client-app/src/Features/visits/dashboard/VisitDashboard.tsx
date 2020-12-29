@@ -15,13 +15,14 @@ interface IProps {
     createVisit: (visit: IVisit) => void;
     editVisit: (visit: IVisit) => void;
     deleteVisit: (id: string) => void;
+    submitting: boolean;
 }
 
-const VisitDashboard: React.FC<IProps> = ({ visits, selectVisit, selectedVisit, editMode, setEditMode, setSelectedVisit, createVisit, editVisit, deleteVisit }) => {
+const VisitDashboard: React.FC<IProps> = ({ visits, selectVisit, selectedVisit, editMode, setEditMode, setSelectedVisit, createVisit, editVisit, deleteVisit, submitting }) => {
     return (
         <Grid>
             <Grid.Column width={10}>
-                <VisitList visits={visits} selectVisit={selectVisit} deleteVisit={deleteVisit} />
+                <VisitList visits={visits} selectVisit={selectVisit} deleteVisit={deleteVisit} submitting={submitting} />
             </Grid.Column>
             <Grid.Column width={6}>
                 {selectedVisit && !editMode && (
@@ -29,7 +30,7 @@ const VisitDashboard: React.FC<IProps> = ({ visits, selectVisit, selectedVisit, 
                 )}
 
                 {editMode && ( 
-                    <VisitForm key={selectedVisit && (selectedVisit.id || 0)} setEditMode={setEditMode} visit={selectedVisit!} createVisit={createVisit} editVisit={editVisit}/>
+                    <VisitForm key={selectedVisit && (selectedVisit.id || 0)} setEditMode={setEditMode} visit={selectedVisit!} createVisit={createVisit} editVisit={editVisit}  submitting={submitting}/>
                 )}            
                 
                 {/* <h2>Activity Filters</h2> */}

@@ -12,8 +12,8 @@ const App = () => {
   const [ visits, setVisits ] = useState<IVisit[]>([])
   const [ selectedVisit, setSelectedVisit ] = useState<IVisit | null>(null)
   const [ editMode, setEditMode ] = useState(false)
-  const [loading, setLoading] = useState(true)
-  const [submitting, setSubmitting] = useState(false)
+  const [ loading, setLoading ] = useState(true)
+  const [ submitting, setSubmitting ] = useState(false)
 
   // ======== HANDLERS ======== //
   const handleSelectVisit = (id: string) => {
@@ -72,7 +72,7 @@ const App = () => {
       <NavBar openCreateForm={handleOpenCreateForm} />
       <Container style={{marginTop: '7em'}}>
         <VisitDashboard 
-          visits={ visits } 
+          visits={visits} 
           selectVisit={handleSelectVisit} 
           selectedVisit={selectedVisit}
           editMode={editMode}
