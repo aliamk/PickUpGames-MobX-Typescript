@@ -1,9 +1,11 @@
 import React, { FormEvent, useContext, useState } from 'react'
+import { observer } from 'mobx-react-lite'
 import { Form, Segment, Button } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
 import {v4 as uuid} from 'uuid'
 
 import VisitStore from '../../../App/stores/visitStore'
+
 
 interface IProps {
     visit: IVisit;
@@ -61,4 +63,4 @@ const VisitForm:React.FC<IProps> = ({ visit: initialFormState }) => {
     )
 }
 
-export default VisitForm
+export default observer(VisitForm)

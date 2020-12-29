@@ -1,9 +1,12 @@
 import { createContext, SyntheticEvent } from 'react'
-import { observable, action, computed } from 'mobx'
+import { observable, action, computed, configure, runInAction } from 'mobx'
 
 import agent from '../api/agent'
 import { IVisit } from '../models/visit_interface'
 
+
+// Enables strict mode - state mutations must be confined to within @actions
+configure({ enforceActions: 'always' })
 
 class VisitStore {
 
@@ -25,14 +28,18 @@ class VisitStore {
         this.loadingInitial = true      // mutating state with MobX
         try {
             const visits = await agent.Visits.list()    
-            visits.forEach(visit => {
-                visit.date = visit.date.split('.')[0]
-                this.visitRegistry.set(visit.id, visit);
-            })
-            this.loadingInitial = false
-        } catch (error) {
+            runInAction('loading visits', () => {
+                visits.forEach((visit) => {
+                    visit.date = visit.date.split('.')[0]
+                    this.visitRegistry.set(visit.id, visit);
+                })
+                this.loadingInitial = false
+            }) 
+            } catch (error) {
+                runInAction('loading visits error', () => {
+                    this.loadingInitial = false;                
+                })
             console.log(error)
-            this.loadingInitial = false
         }
     }
 
@@ -42,12 +49,15 @@ class VisitStore {
         this.submitting = true
         try {
             await agent.Visits.create(visit)       
-            this.visitRegistry.set(visit.id, visit);
-            this.editMode = false
-            this.submitting = false
+            runInAction('creating visit', () => {
+                this.visitRegistry.set(visit.id, visit);
+                this.submitting = false
+            })
         } catch (error) {
+            runInAction('creating visit error', () => {
+                this.submitting = false
+            })
             console.log(error)
-            this.submitting = false
         }
     }
 
@@ -56,13 +66,17 @@ class VisitStore {
         this.submitting = true
         try {
             await agent.Visits.update(visit)             
-            this.visitRegistry.set(visit.id, visit);
-            this.selectedVisit = visit
-            this.editMode = false
-            this.submitting = false            
-        } catch (error) {           
+            runInAction('editing visit', () => {
+                this.visitRegistry.set(visit.id, visit);
+                this.selectedVisit = visit
+                this.editMode = false
+                this.submitting = false
+            })          
+        } catch (error) {                   
+            runInAction('editing visit error', () => {
+                this.submitting = false
+            })
             console.log(error)
-            this.submitting = false
         }
     }
 
@@ -72,12 +86,16 @@ class VisitStore {
         this.target = event.currentTarget.name
         try {
             await agent.Visits.delete(id)                
-            this.visitRegistry.delete(id)
-            this.submitting = false
-            this.target = ''                
+            runInAction('deleting visit', () => {
+                this.visitRegistry.delete(id)
+                this.submitting = false
+                this.target = ''
+            })               
         } catch (error) {               
-            this.submitting = false
-            this.target = ''                
+            runInAction('deleting visits error', () => {
+                this.submitting = false
+                this.target = ''
+            })               
             console.log(error)
         }
     }
