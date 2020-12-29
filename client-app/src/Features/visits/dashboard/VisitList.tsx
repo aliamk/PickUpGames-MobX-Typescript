@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import React, { SyntheticEvent, useContext } from 'react'
 import { Item, Segment, Label, Button } from 'semantic-ui-react'
-import { IVisit } from '../../../App/models/visit_interface'
 import VisitStore from '../../../App/stores/visitStore'
 
 interface IProps {

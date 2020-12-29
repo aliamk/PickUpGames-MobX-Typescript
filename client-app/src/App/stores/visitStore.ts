@@ -12,17 +12,21 @@ class VisitStore {
     @observable submitting = false      // the loading icon
     @observable target = ''             // created for the deleteVisit action
 
-    @action loadVisits = () => {
+    @action loadVisits = async () => {
         this.loadingInitial = true      // mutating state with MobX
-        agent.Visits.list()    
-        .then(visits => {
-            // console.log(response)
+        try {
+            const visits = await agent.Visits.list()    
             visits.forEach(visit => {
                 visit.date = visit.date.split('.')[0]
                 this.visits.push(visit)
             })
-        }).finally(() => this.loadingInitial = false)
+            this.loadingInitial = false
+        } catch (error) {
+            console.log(error)
+            this.loadingInitial = false
+        }
     }
+
     @action selectVisit = (id: string) => {
         this.selectedVisit = this.visits.find(v => v.id === id)
         this.editMode = false
