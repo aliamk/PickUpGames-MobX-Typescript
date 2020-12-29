@@ -13,10 +13,10 @@ interface DetailParams {
     id: string
   }
 
-const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match }) => {
+const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history }) => {
 
     const visitStore = useContext(VisitStore)
-    const {createVisit, editVisit, submitting, cancelFormOpen, visit: initialFormState, loadVisit, clearVisit} = visitStore
+    const {createVisit, editVisit, submitting, visit: initialFormState, loadVisit, clearVisit} = visitStore
     const [ visit, setVisit ] = useState<IVisit>({
         id: '',
         title: '',
@@ -41,9 +41,9 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match }) => {
                 ...visit,
                 id: uuid()
             }
-            createVisit(newVisit)
+            createVisit(newVisit).then(() => history.push(`/visits/${newVisit.id}`) );
         } else {
-            editVisit(visit)
+            editVisit(visit).then(() => history.push(`/visits/${visit.id}`) )
         }
     }
 
@@ -60,7 +60,7 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match }) => {
                 <Form.Input onChange={handleInputChange} name='date' type='datetime-local' placeholder='Date'  value={visit.date}/>
                 <Form.Input onChange={handleInputChange} name='location' placeholder='Location' value={visit.location} />
                 <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
-                <Button onClick={cancelFormOpen} floated='right' type='button' content='Cancel' />
+                <Button onClick={() => history.push('/visits')}  floated='right' type='button' content='Cancel' />
             </Form>            
         </Segment>
     )

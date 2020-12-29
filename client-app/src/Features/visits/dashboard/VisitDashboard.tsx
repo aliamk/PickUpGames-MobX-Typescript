@@ -2,8 +2,6 @@ import React, { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Grid } from 'semantic-ui-react'
 
-import VisitDetails from '../details/VisitDetails'
-import VisitForm from '../form/VisitForm'
 import VisitList from './VisitList'
 import VisitStore from '../../../App/stores/visitStore'
 

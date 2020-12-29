@@ -28,14 +28,19 @@ const App:React.FC<RouteComponentProps> = ({ location }) => {
   // ======== DISPLAY DOM ======== //
   return (
     <Fragment>
-      <NavBar />
-      <Container style={{marginTop: '7em'}}>
         <Route exact path='/' component={HomePage} />
-        <Route exact path='/visits' component={VisitDashboard} />
-        <Route exact path='/visits/:id' component={VisitDetails} />
-        {/* Using location:key to create a new instance of the loaded component when a prop changes  */}
-        <Route key={location.key} path={['/createVisit', '/manage/:id']} component={VisitForm} />      
-      </Container>
+        <Route path={'/(.+)'} render={() => (
+          <Fragment>
+            <NavBar />
+            <Container style={{marginTop: '7em'}}>
+              <Route exact path='/' component={HomePage} />
+              <Route exact path='/visits' component={VisitDashboard} />
+              <Route exact path='/visits/:id' component={VisitDetails} />
+              {/* Using location:key to create a new instance of the loaded component when a prop changes  */}
+              <Route key={location.key} path={['/createVisit', '/manage/:id']} component={VisitForm} />      
+            </Container>
+          </Fragment>
+        )} />
     </Fragment>
   )
 }
