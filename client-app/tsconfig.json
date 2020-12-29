@@ -20,8 +20,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "experimentalDecorators": true
-  }
-  // "include": [
-  //   "src"
-  // ]
+  },
+  "include": [
+    "src"
+  ]
 }
