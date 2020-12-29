@@ -3,10 +3,11 @@ import { Item, Segment, Label, Button } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
 
 interface IProps {
-    visits: IVisit[]
+    visits: IVisit[];
+    selectVisit: (id: string) => void;
 }
 
-const VisitList: React.FC<IProps> = ({ visits }) => {
+const VisitList: React.FC<IProps> = ({ visits, selectVisit }) => {
     return (
         <Segment clearing>
             <Item.Group divided>
@@ -20,7 +21,7 @@ const VisitList: React.FC<IProps> = ({ visits }) => {
                                 <div>{visit.location}</div>
                             </Item.Description>
                             <Item.Extra>
-                                <Button floated='right' content='View' color='blue' />
+                                <Button onClick={() => selectVisit(visit.id)} floated='right' content='View' color='blue' />
                                 <Label basic content='category' />
                             </Item.Extra>
                         </Item.Content>

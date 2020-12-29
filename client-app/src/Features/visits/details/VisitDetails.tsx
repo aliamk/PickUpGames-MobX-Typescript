@@ -1,21 +1,22 @@
 import React from 'react'
 import { Button, Card, Image } from 'semantic-ui-react'
+import { IVisit } from '../../../App/models/visit_interface'
 
-// interface IProps {
-//     visits: IVisit[]
-// }
+interface IProps {
+    visit: IVisit;
+}
 
-const VisitDetails = () => {
+const VisitDetails: React.FC<IProps> = ({ visit }) => {
     return (
         <Card fluid>
-        <Image src='/assets/HospStThomas.png' wrapped ui={false} />
+        <Image src={`/assets/locationImages/${visit.location}.png`} wrapped ui={false} />
         <Card.Content>
-          <Card.Header>Title</Card.Header>
+          <Card.Header>{visit.title}</Card.Header>
           <Card.Meta>
-            <span>Date</span>
+            <span>{visit.date}</span>
           </Card.Meta>
           <Card.Description>
-              Description
+            {visit.description}
           </Card.Description>
         </Card.Content>
         <Card.Content extra>    

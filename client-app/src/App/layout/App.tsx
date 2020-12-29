@@ -9,6 +9,11 @@ import VisitDashboard from '../../Features/visits/dashboard/VisitDashboard'
 
 const App = () => {
   const [ visits, setVisits ] = useState<IVisit[]>([])
+  const [ selectedVisit, setSelectedVisit ] = useState<IVisit | null>()
+
+  const handleSelectVisit = (id: string) => {
+    setSelectedVisit(visits.filter(v => v.id === id)[0])
+  }
   
   useEffect(() => {
     axios.get<IVisit[]>('http://localhost:5000/api/visits')
@@ -22,7 +27,11 @@ const App = () => {
     <Fragment>
       <NavBar />
       <Container style={{marginTop: '7em'}}>
-        <VisitDashboard visits={ visits } />
+        <VisitDashboard 
+          visits={ visits } 
+          selectVisit={handleSelectVisit} 
+          selectedVisit={selectedVisit!}
+          />
       </Container>
     </Fragment>
   )

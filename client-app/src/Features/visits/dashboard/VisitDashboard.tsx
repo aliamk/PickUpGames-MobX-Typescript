@@ -6,17 +6,19 @@ import VisitForm from '../form/VisitForm'
 import VisitList from './VisitList'
 
 interface IProps {
-    visits: IVisit[]
+    visits: IVisit[];
+    selectVisit: (id: string) => void;
+    selectedVisit: IVisit | null;
 }
 
-const VisitDashboard: React.FC<IProps> = ({ visits }) => {
+const VisitDashboard: React.FC<IProps> = ({ visits, selectVisit, selectedVisit }) => {
     return (
         <Grid>
             <Grid.Column width={10}>
-                <VisitList visits={visits}/>
+                <VisitList visits={visits} selectVisit={selectVisit} />
             </Grid.Column>
             <Grid.Column width={6}>
-                <VisitDetails />
+                {selectedVisit && <VisitDetails visit={selectedVisit}/> }                
                 <VisitForm />
                 {/* <h2>Activity Filters</h2> */}
             </Grid.Column>
