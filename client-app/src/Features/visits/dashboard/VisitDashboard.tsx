@@ -22,7 +22,7 @@ const VisitDashboard: React.FC<IProps> = ({ visits, selectVisit, selectedVisit, 
             </Grid.Column>
             <Grid.Column width={6}>
                 {selectedVisit && !editMode && (<VisitDetails visit={selectedVisit} setEditMode={setEditMode} setSelectedVisit={setSelectedVisit} />) }    
-                {editMode && <VisitForm setEditMode={setEditMode} />}            
+                {editMode && <VisitForm setEditMode={setEditMode} visit={selectedVisit!} />}            
                 
                 {/* <h2>Activity Filters</h2> */}
             </Grid.Column>
