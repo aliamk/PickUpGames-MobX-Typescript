@@ -5,9 +5,10 @@ import { IVisit } from '../../../App/models/visit_interface'
 interface IProps {
     visits: IVisit[];
     selectVisit: (id: string) => void;
+    deleteVisit: (id: string) => void;
 }
 
-const VisitList: React.FC<IProps> = ({ visits, selectVisit }) => {
+const VisitList: React.FC<IProps> = ({ visits, selectVisit, deleteVisit }) => {
     return (
         <Segment clearing>
             <Item.Group divided>
@@ -22,6 +23,7 @@ const VisitList: React.FC<IProps> = ({ visits, selectVisit }) => {
                             </Item.Description>
                             <Item.Extra>
                                 <Button onClick={() => selectVisit(visit.id)} floated='right' content='View' color='blue' />
+                                <Button onClick={() => deleteVisit(visit.id)} floated='right' content='Delete' color='red' />
                                 <Label basic content='category' />
                             </Item.Extra>
                         </Item.Content>

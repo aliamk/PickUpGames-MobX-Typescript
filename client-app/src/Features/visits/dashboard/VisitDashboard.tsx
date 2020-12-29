@@ -14,13 +14,14 @@ interface IProps {
     setSelectedVisit: (visit: IVisit | null) => void;
     createVisit: (visit: IVisit) => void;
     editVisit: (visit: IVisit) => void;
+    deleteVisit: (id: string) => void;
 }
 
-const VisitDashboard: React.FC<IProps> = ({ visits, selectVisit, selectedVisit, editMode, setEditMode, setSelectedVisit, createVisit, editVisit }) => {
+const VisitDashboard: React.FC<IProps> = ({ visits, selectVisit, selectedVisit, editMode, setEditMode, setSelectedVisit, createVisit, editVisit, deleteVisit }) => {
     return (
         <Grid>
             <Grid.Column width={10}>
-                <VisitList visits={visits} selectVisit={selectVisit} />
+                <VisitList visits={visits} selectVisit={selectVisit} deleteVisit={deleteVisit} />
             </Grid.Column>
             <Grid.Column width={6}>
                 {selectedVisit && !editMode && (
@@ -28,7 +29,7 @@ const VisitDashboard: React.FC<IProps> = ({ visits, selectVisit, selectedVisit, 
                 )}
 
                 {editMode && ( 
-                    <VisitForm key={selectedVisit && selectedVisit.id || 0} setEditMode={setEditMode} visit={selectedVisit!} createVisit={createVisit} editVisit={editVisit}/>
+                    <VisitForm key={selectedVisit && (selectedVisit.id || 0)} setEditMode={setEditMode} visit={selectedVisit!} createVisit={createVisit} editVisit={editVisit}/>
                 )}            
                 
                 {/* <h2>Activity Filters</h2> */}

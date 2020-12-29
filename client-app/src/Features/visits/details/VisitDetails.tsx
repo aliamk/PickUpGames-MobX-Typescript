@@ -5,7 +5,7 @@ import { IVisit } from '../../../App/models/visit_interface'
 interface IProps {
     visit: IVisit;
     setEditMode: (editMode: boolean) => void;
-    setSelectedVisit: (visit: IVisit | null) => void
+    setSelectedVisit: (visit: IVisit | null) => void;
 }
 
 const VisitDetails: React.FC<IProps> = ({ visit, setEditMode, setSelectedVisit }) => {

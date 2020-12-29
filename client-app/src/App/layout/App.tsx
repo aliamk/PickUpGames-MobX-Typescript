@@ -33,6 +33,10 @@ const App = () => {
     setSelectedVisit(visit)
     setEditMode(false)
   }
+
+  const handleDeleteVisit = (id: string) => {
+    setVisits([ ...visits.filter(v => v.id !== id)])
+  }
   
   useEffect(() => {
     axios.get<IVisit[]>('http://localhost:5000/api/visits')
@@ -60,6 +64,7 @@ const App = () => {
           setSelectedVisit={setSelectedVisit}
           createVisit={handleCreateVisit}
           editVisit={handleEditVisit}
+          deleteVisit={handleDeleteVisit}
           />
       </Container>
     </Fragment>
