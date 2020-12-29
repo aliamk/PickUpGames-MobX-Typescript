@@ -2,11 +2,11 @@ import React from 'react'
 import 'semantic-ui-css/semantic.min.css' 
 import { Button, Container, Menu } from 'semantic-ui-react'
 
-// interface IProps {
-//     openCreateForm: () => void;
-// }
+interface IProps {
+    openCreateForm: () => void;
+}
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC<IProps> = ({ openCreateForm }) => {
 
     return (
         <Menu fixed='top' inverted >
@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
                 </Menu.Item>
                 <Menu.Item name='Visits' /*as={NavLink} exact to='/'*/ />
                 <Menu.Item>
-                    <Button /*onClick={openCreateForm}*/ positive content='Add a Visit' />
+                    <Button onClick={openCreateForm} positive content='Add a Visit' />
                 </Menu.Item>
             </Container>
         </Menu>

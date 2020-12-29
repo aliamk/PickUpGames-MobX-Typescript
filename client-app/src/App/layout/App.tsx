@@ -16,10 +16,10 @@ const App = () => {
     setSelectedVisit(visits.filter(v => v.id === id)[0])
   }
 
-  // const handleOpenCreateForm = (id: string) => {
-  //   setSelectedVisit(null)
-  //   // setEditMode(true)
-  // }
+  const handleOpenCreateForm = () => {
+    setSelectedVisit(null)
+    setEditMode(true)
+  }
   
   useEffect(() => {
     axios.get<IVisit[]>('http://localhost:5000/api/visits')
@@ -31,7 +31,7 @@ const App = () => {
   
   return (
     <Fragment>
-      <NavBar /*openCreateForm={handleOpenCreateForm}*//>
+      <NavBar openCreateForm={handleOpenCreateForm} />
       <Container style={{marginTop: '7em'}}>
         <VisitDashboard 
           visits={ visits } 
@@ -39,6 +39,7 @@ const App = () => {
           selectedVisit={selectedVisit}
           editMode={editMode}
           setEditMode={setEditMode}
+          setSelectedVisit={setSelectedVisit}
           />
       </Container>
     </Fragment>
