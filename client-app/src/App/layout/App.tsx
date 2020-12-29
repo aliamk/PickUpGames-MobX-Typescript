@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
-import { Container, List } from 'semantic-ui-react'
+import { Container } from 'semantic-ui-react'
 import { IVisit } from '../models/visit_interface'
 import NavBar from '../../Features/nav/NavBar'
+import VisitDashboard from '../../Features/visits/dashboard/VisitDashboard'
 
 
 const App = () => {
@@ -18,16 +19,12 @@ const App = () => {
   }, [])
   
   return (
-    <div>
+    <Fragment>
       <NavBar />
       <Container style={{marginTop: '7em'}}>
-        <List>
-            {visits.map(visit => (
-              <List.Item key={ visit.id }>{ visit.title }</List.Item>
-            ))}
-        </List>
+        <VisitDashboard visits={ visits } />
       </Container>
-    </div>
+    </Fragment>
   )
 }
 
