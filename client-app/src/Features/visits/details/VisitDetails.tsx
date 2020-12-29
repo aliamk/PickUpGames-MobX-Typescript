@@ -1,16 +1,29 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Button, Card, Image } from 'semantic-ui-react'
 
 import VisitStore from '../../../App/stores/visitStore'
+import { RouteComponentProps } from 'react-router-dom'
+import LoadingComponent from '../../../App/layout/LoadingComponent'
 
 
-const VisitDetails: React.FC = () => {
+// Need the interface to set typeface of ID for match.params.id
+interface DetailParams {
+  id: string
+}
+
+const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match }) => {
 
   const visitStore = useContext(VisitStore)
-  const { selectedVisit: visit, openEditForm, canceSelectedVisit } = visitStore
-  
-    return (
+  const { visit, openEditForm, cancelSelectedVisit, loadVisit, loadingInitial } = visitStore
+
+  useEffect(() => {
+    loadVisit(match.params.id)
+  }, [loadVisit, match.params.id])
+
+  if (loadingInitial || !visit) return <LoadingComponent content='Loading activity...' />
+
+  return (
         <Card fluid>
         <Image src={`/assets/locationImages/${visit!.location}.png`} wrapped ui={false} />
         <Card.Content>
@@ -25,7 +38,7 @@ const VisitDetails: React.FC = () => {
         <Card.Content extra>    
             <Button.Group widths={2}>
                 <Button onClick={() => openEditForm(visit!.id)} basic color='blue' content='Edit' />    
-                <Button onClick={canceSelectedVisit} basic color='grey' content='Cancel' />
+                <Button onClick={cancelSelectedVisit} basic color='grey' content='Cancel' />
             </Button.Group>     
         </Card.Content>
       </Card>

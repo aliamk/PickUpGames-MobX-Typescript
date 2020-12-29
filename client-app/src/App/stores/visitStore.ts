@@ -12,7 +12,7 @@ class VisitStore {
 
     @observable visitRegistry = new Map()
     @observable visits:IVisit[] = []
-    @observable selectedVisit: IVisit | undefined
+    @observable visit: IVisit | undefined
     @observable editMode = false
     @observable loadingInitial = false  // the loading icon for the whole app
     @observable submitting = false      // the loading icon within buttons
@@ -24,6 +24,7 @@ class VisitStore {
     }
 
     // ========  API CALLS (see useEffect in App.tsx) ======== //
+    // Method for loading all visit posts
     @action loadVisits = async () => {
         this.loadingInitial = true      // mutating state with MobX
         try {
@@ -41,6 +42,34 @@ class VisitStore {
                 })
             console.log(error)
         }
+    }
+
+    // Method for loading a single visit post
+    @action loadVisit = async (id: string) => {        
+       let visit = this.getVisit(id)                // Call the helper method GETVISIT and pass in the ID from the View button
+       if (visit) {                                 // If getVisit finds a visit with that ID in the visitRegistry, return the visit
+           this.visit = visit
+       } else {           
+           this.loadingInitial = true               // Else, show the loading spinner            
+           try {                                    // Whilst the try/catch block fetches the visit from the API (Visits.details - see SRC > APP > API > AGENT.TS)
+               visit = await agent.Visits.details(id)
+               runInAction('getting visit', () => {
+                   this.visit = visit
+                   this.loadingInitial = false
+               })
+           } catch (error) {
+               runInAction('getting visit error', () => {
+                   this.loadingInitial = false
+               })
+               console.log(error)
+           }
+       }
+   }
+
+    // Helper method for the 'loadVisit' action above (not mutating state so NO need for @action)
+    // The loadVisit action calls getVisit and searches the visitRegistry using the ID from the clicked View button
+    getVisit = (id: string) => {
+        return this.visitRegistry.get(id)
     }
 
     // ========  Replaced Handler methods in App.tsx ======== //
@@ -68,7 +97,7 @@ class VisitStore {
             await agent.Visits.update(visit)             
             runInAction('editing visit', () => {
                 this.visitRegistry.set(visit.id, visit);
-                this.selectedVisit = visit
+                this.visit = visit
                 this.editMode = false
                 this.submitting = false
             })          
@@ -103,11 +132,11 @@ class VisitStore {
     // Button functionality
     @action openCreateForm = () => {
         this.editMode = true
-        this.selectedVisit = undefined
+        this.visit = undefined
     }
 
-    @action canceSelectedVisit = () => {
-        this.selectedVisit = undefined
+    @action cancelSelectedVisit = () => {
+        this.visit = undefined
     }
 
     @action cancelFormOpen = () => {
@@ -115,12 +144,12 @@ class VisitStore {
     }
 
     @action openEditForm = (id: string) => {
-        this.selectedVisit =  this.visitRegistry.get(id)
+        this.visit =  this.visitRegistry.get(id)
         this.editMode = true
     }
     
     @action selectVisit = (id: string) => {
-        this.selectedVisit = this.visitRegistry.get(id)
+        this.visit = this.visitRegistry.get(id)
         this.editMode = false
     }
 }

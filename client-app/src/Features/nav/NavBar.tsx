@@ -8,7 +8,9 @@ import VisitStore from '../../App/stores/visitStore'
 
 
 const NavBar: React.FC = () => {
+
     const visitStore = useContext(VisitStore)
+    
     return (
         <Menu fixed='top' inverted >
             <Container> 

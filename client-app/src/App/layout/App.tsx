@@ -8,8 +8,8 @@ import NavBar from '../../Features/nav/NavBar'
 import VisitDashboard from '../../Features/visits/dashboard/VisitDashboard'
 import LoadingComponent from '../layout/LoadingComponent'
 import VisitStore from '../stores/visitStore'
-// import VisitDetails from '../../Features/visits/details/VisitDetails'
 import VisitForm from '../../Features/visits/form/VisitForm'
+import VisitDetails from '../../Features/visits/details/VisitDetails'
 
 
 const App = () => {
@@ -32,6 +32,7 @@ const App = () => {
       <Container style={{marginTop: '7em'}}>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/visits' component={VisitDashboard} />
+        <Route exact path='/visits/:id' component={VisitDetails} />
         <Route exact path='/createVisit' component={VisitForm} />
       </Container>
     </Fragment>

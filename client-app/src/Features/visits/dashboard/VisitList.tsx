@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { Item, Segment, Label, Button } from 'semantic-ui-react'
 
 import VisitStore from '../../../App/stores/visitStore'
+import { Link } from 'react-router-dom'
 
 
 const VisitList: React.FC = () => {
@@ -24,7 +25,7 @@ const VisitList: React.FC = () => {
                             </Item.Description>
                             <Item.Extra>
                                 <Button 
-                                    onClick={() => selectVisit(visit.id)} 
+                                    as={Link} to={`/visits/${visit.id}`}
                                     floated='right' 
                                     content='View' 
                                     color='blue' 

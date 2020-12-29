@@ -11,7 +11,7 @@ import VisitStore from '../../../App/stores/visitStore'
 const VisitDashboard: React.FC = () => {
 
     const visitStore = useContext(VisitStore)
-    const {editMode, selectedVisit} = visitStore
+    const {editMode, visit} = visitStore
     
     return (
         <Grid>
@@ -19,18 +19,7 @@ const VisitDashboard: React.FC = () => {
                 <VisitList />
             </Grid.Column>
             <Grid.Column width={6}>
-                {selectedVisit && !editMode && (
-                    <VisitDetails />
-                )}
-
-                {editMode && ( 
-                    <VisitForm 
-                    key={selectedVisit && (selectedVisit.id || 0)} 
-                    visit={selectedVisit!} 
-                    />
-                )}            
-                
-                {/* <h2>Activity Filters</h2> */}
+                <h2>Activity Filters</h2>
             </Grid.Column>
         </Grid>
     )
