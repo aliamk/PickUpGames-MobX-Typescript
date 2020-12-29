@@ -12,7 +12,7 @@ interface DetailParams {
   id: string
 }
 
-const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match }) => {
+const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match, history }) => {
 
   const visitStore = useContext(VisitStore)
   const { visit, openEditForm, cancelSelectedVisit, loadVisit, loadingInitial } = visitStore
@@ -38,7 +38,7 @@ const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match }) =>
         <Card.Content extra>    
             <Button.Group widths={2}>
                 <Button onClick={() => openEditForm(visit!.id)} basic color='blue' content='Edit' />    
-                <Button onClick={cancelSelectedVisit} basic color='grey' content='Cancel' />
+                <Button onClick={() => history.push('/visits')} basic color='grey' content='Cancel' />
             </Button.Group>     
         </Card.Content>
       </Card>
