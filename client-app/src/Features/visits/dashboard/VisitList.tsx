@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 const VisitList: React.FC = () => {
     
     const visitStore = useContext(VisitStore)
-    const {visitsByDate, selectVisit, deleteVisit, submitting, target} = visitStore
+    const {visitsByDate, deleteVisit, submitting, target} = visitStore
 
     return (
         <Segment clearing>

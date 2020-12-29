@@ -1,15 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { observer } from 'mobx-react-lite'
 import 'semantic-ui-css/semantic.min.css' 
 import { Button, Container, Menu } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
 
-import VisitStore from '../../App/stores/visitStore'
-
 
 const NavBar: React.FC = () => {
-
-    const visitStore = useContext(VisitStore)
     
     return (
         <Menu fixed='top' inverted >

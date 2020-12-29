@@ -15,7 +15,7 @@ interface DetailParams {
 const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match, history }) => {
 
   const visitStore = useContext(VisitStore)
-  const { visit, openEditForm, cancelSelectedVisit, loadVisit, loadingInitial } = visitStore
+  const { visit, loadVisit, loadingInitial } = visitStore
 
   useEffect(() => {
     loadVisit(match.params.id)

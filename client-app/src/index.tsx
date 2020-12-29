@@ -7,11 +7,11 @@ import reportWebVitals from './reportWebVitals';
 import ScrollToTop from './App/layout/ScrollToTop'
 
 ReactDOM.render(
-  <ScrollToTop>
-    <BrowserRouter>
+  <BrowserRouter>
+    <ScrollToTop>
       <App />
-    </BrowserRouter>
-  </ScrollToTop>,
+    </ScrollToTop>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

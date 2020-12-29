@@ -11,9 +11,7 @@ configure({ enforceActions: 'always' })
 class VisitStore {
 
     @observable visitRegistry = new Map()
-    @observable visits:IVisit[] = []
     @observable visit: IVisit | null = null;
-    @observable editMode = false
     @observable loadingInitial = false  // the loading icon for the whole app
     @observable submitting = false      // the loading icon within buttons
     @observable target = ''             // created for the deleteVisit action
@@ -103,7 +101,6 @@ class VisitStore {
             runInAction('editing visit', () => {
                 this.visitRegistry.set(visit.id, visit);
                 this.visit = visit
-                this.editMode = false
                 this.submitting = false
             })          
         } catch (error) {                   
@@ -132,30 +129,6 @@ class VisitStore {
             })               
             console.log(error)
         }
-    }
-
-    // Button functionality
-    @action openCreateForm = () => {
-        this.editMode = true
-        this.visit = null
-    }
-
-    @action cancelSelectedVisit = () => {
-        this.visit = null
-    }
-
-    @action cancelFormOpen = () => {
-        this.editMode = false
-    }
-
-    @action openEditForm = (id: string) => {
-        this.visit =  this.visitRegistry.get(id)
-        this.editMode = true
-    }
-    
-    @action selectVisit = (id: string) => {
-        this.visit = this.visitRegistry.get(id)
-        this.editMode = false
     }
 }
 
