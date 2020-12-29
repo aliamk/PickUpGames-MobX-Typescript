@@ -31,13 +31,17 @@ const App = () => {
   }
 
   const handleEditVisit = (visit: IVisit) => {
-    setVisits([ ...visits.filter(v => v.id !== visit.id), visit])
-    setSelectedVisit(visit)
-    setEditMode(false)
+    agent.Visits.update(visit).then(() => {
+      setVisits([ ...visits.filter(v => v.id !== visit.id), visit])
+      setSelectedVisit(visit)
+      setEditMode(false)
+    })
   }
 
   const handleDeleteVisit = (id: string) => {
-    setVisits([ ...visits.filter(v => v.id !== id)])
+    agent.Visits.delete(id).then(() => {
+      setVisits([ ...visits.filter(v => v.id !== id)])
+    })
   }
   
   useEffect(() => {
