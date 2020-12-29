@@ -1,7 +1,7 @@
+import React, { useContext } from 'react'
 import { observer } from 'mobx-react-lite'
-import React, { SyntheticEvent, useContext } from 'react'
 import { Grid } from 'semantic-ui-react'
-import { IVisit } from '../../../App/models/visit_interface'
+
 import VisitDetails from '../details/VisitDetails'
 import VisitForm from '../form/VisitForm'
 import VisitList from './VisitList'
@@ -9,8 +9,10 @@ import VisitStore from '../../../App/stores/visitStore'
 
 
 const VisitDashboard: React.FC = () => {
+
     const visitStore = useContext(VisitStore)
     const {editMode, selectedVisit} = visitStore
+    
     return (
         <Grid>
             <Grid.Column width={10}>

@@ -8,7 +8,6 @@ import LoadingComponent from '../layout/LoadingComponent'
 import VisitStore from '../stores/visitStore'
 
 
-
 const App = () => {
 
   // ======== MobX's VisitStore for state management ======== //
