@@ -1,6 +1,6 @@
   
 import axios, { AxiosResponse } from 'axios';
-import { IVisit } from '../App/models/visit_interface';
+import { IVisit } from '../models/visit_interface';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -27,4 +27,4 @@ const Visits = {
     delete: (id: string) => requests.del(`/visits/${id}`)
 }
 
-export default Visits
+export default {Visits}

@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Fragment } from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import axios from 'axios'
 import { Container } from 'semantic-ui-react'
 import { IVisit } from '../models/visit_interface'
 import NavBar from '../../Features/nav/NavBar'
 import VisitDashboard from '../../Features/visits/dashboard/VisitDashboard'
+import agent from '../api/agent'
 
 
 const App = () => {
@@ -39,11 +39,11 @@ const App = () => {
   }
   
   useEffect(() => {
-    axios.get<IVisit[]>('http://localhost:5000/api/visits')
+    agent.Visits.list()    
     .then((response) => {
       // console.log(response)
       let visits: IVisit[] = []
-      response.data.forEach(visit => {
+      response.forEach(visit => {
         visit.date = visit.date.split('.')[0]
         visits.push(visit)
       })
