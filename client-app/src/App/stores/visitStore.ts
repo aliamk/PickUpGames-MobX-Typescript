@@ -12,7 +12,7 @@ class VisitStore {
 
     @observable visitRegistry = new Map()
     @observable visits:IVisit[] = []
-    @observable visit: IVisit | undefined
+    @observable visit: IVisit | null = null;
     @observable editMode = false
     @observable loadingInitial = false  // the loading icon for the whole app
     @observable submitting = false      // the loading icon within buttons
@@ -65,6 +65,11 @@ class VisitStore {
            }
        }
    }
+
+    // Clearing/Unmounting an activity from the edit form with useEffect in ActivityForm
+    @action clearVisit = () => {
+        this.visit = null
+    }
 
     // Helper method for the 'loadVisit' action above (not mutating state so NO need for @action)
     // The loadVisit action calls getVisit and searches the visitRegistry using the ID from the clicked View button
@@ -132,11 +137,11 @@ class VisitStore {
     // Button functionality
     @action openCreateForm = () => {
         this.editMode = true
-        this.visit = undefined
+        this.visit = null
     }
 
     @action cancelSelectedVisit = () => {
-        this.visit = undefined
+        this.visit = null
     }
 
     @action cancelFormOpen = () => {

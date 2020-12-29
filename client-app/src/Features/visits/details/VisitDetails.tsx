@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { Button, Card, Image } from 'semantic-ui-react'
 
 import VisitStore from '../../../App/stores/visitStore'
-import { RouteComponentProps } from 'react-router-dom'
+import { Link, RouteComponentProps } from 'react-router-dom'
 import LoadingComponent from '../../../App/layout/LoadingComponent'
 
 
@@ -37,7 +37,7 @@ const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match, hist
         </Card.Content>
         <Card.Content extra>    
             <Button.Group widths={2}>
-                <Button onClick={() => openEditForm(visit!.id)} basic color='blue' content='Edit' />    
+                <Button as={Link} to={`/manage/${visit.id}`} basic color='blue' content='Edit' />    
                 <Button onClick={() => history.push('/visits')} basic color='grey' content='Cancel' />
             </Button.Group>     
         </Card.Content>

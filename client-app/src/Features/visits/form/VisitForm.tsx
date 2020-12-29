@@ -1,36 +1,39 @@
-import React, { FormEvent, useContext, useState } from 'react'
+import React, { FormEvent, useContext, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Form, Segment, Button } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
 import {v4 as uuid} from 'uuid'
+import { RouteComponentProps } from 'react-router-dom'
 
 import VisitStore from '../../../App/stores/visitStore'
 
 
-interface IProps {
-    visit: IVisit;
-}
+// Need the interface to set typeface of ID for match.params.id
+interface DetailParams {
+    id: string
+  }
 
-const VisitForm:React.FC<IProps> = ({ visit: initialFormState }) => {
+const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match }) => {
 
     const visitStore = useContext(VisitStore)
-    const {createVisit, editVisit, submitting, cancelFormOpen} = visitStore
+    const {createVisit, editVisit, submitting, cancelFormOpen, visit: initialFormState, loadVisit, clearVisit} = visitStore
+    const [ visit, setVisit ] = useState<IVisit>({
+        id: '',
+        title: '',
+        description: '',
+        date: '',
+        location: ''
+    })
 
-    const initialiseForm = () => {
-        if (initialFormState) {
-            return initialFormState
-        } else {
-            return {
-                id: '',
-                title: '',
-                description: '',
-                date: '',
-                location: ''
-            }
+    useEffect(() => {
+        if (match.params.id && visit.id.length === 0) {
+            loadVisit(match.params.id).then(() => initialFormState && setVisit(initialFormState))
         }
-    }
+        return () => {
+            clearVisit()
+        }
+    }, [loadVisit, clearVisit, match.params.id, initialFormState, visit.id.length])
 
-    const [ visit, setVisit ] = useState<IVisit>(initialiseForm)
 
     const handleSubmit = () => {
         if (visit.id.length === 0) {
