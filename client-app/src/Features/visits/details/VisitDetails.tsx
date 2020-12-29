@@ -4,9 +4,10 @@ import { IVisit } from '../../../App/models/visit_interface'
 
 interface IProps {
     visit: IVisit;
+    setEditMode: (editMode: boolean) => void;
 }
 
-const VisitDetails: React.FC<IProps> = ({ visit }) => {
+const VisitDetails: React.FC<IProps> = ({ visit, setEditMode }) => {
     return (
         <Card fluid>
         <Image src={`/assets/locationImages/${visit.location}.png`} wrapped ui={false} />
@@ -21,7 +22,7 @@ const VisitDetails: React.FC<IProps> = ({ visit }) => {
         </Card.Content>
         <Card.Content extra>    
             <Button.Group widths={2}>
-                <Button basic color='blue' content='Edit' />    
+                <Button onClick={() => setEditMode(true)} basic color='blue' content='Edit' />    
                 <Button basic color='grey' content='Cancel' />
             </Button.Group>     
         </Card.Content>

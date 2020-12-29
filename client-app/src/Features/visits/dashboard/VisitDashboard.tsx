@@ -9,17 +9,20 @@ interface IProps {
     visits: IVisit[];
     selectVisit: (id: string) => void;
     selectedVisit: IVisit | null;
+    editMode: boolean;
+    setEditMode: (editMode: boolean) => void;
 }
 
-const VisitDashboard: React.FC<IProps> = ({ visits, selectVisit, selectedVisit }) => {
+const VisitDashboard: React.FC<IProps> = ({ visits, selectVisit, selectedVisit, editMode, setEditMode }) => {
     return (
         <Grid>
             <Grid.Column width={10}>
                 <VisitList visits={visits} selectVisit={selectVisit} />
             </Grid.Column>
             <Grid.Column width={6}>
-                {selectedVisit && <VisitDetails visit={selectedVisit}/> }                
-                <VisitForm />
+                {selectedVisit && !editMode && (<VisitDetails visit={selectedVisit} setEditMode={setEditMode} />) }    
+                {editMode && <VisitForm />}            
+                
                 {/* <h2>Activity Filters</h2> */}
             </Grid.Column>
         </Grid>

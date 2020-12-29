@@ -9,11 +9,17 @@ import VisitDashboard from '../../Features/visits/dashboard/VisitDashboard'
 
 const App = () => {
   const [ visits, setVisits ] = useState<IVisit[]>([])
-  const [ selectedVisit, setSelectedVisit ] = useState<IVisit | null>()
+  const [ selectedVisit, setSelectedVisit ] = useState<IVisit | null>(null)
+  const [ editMode, setEditMode ] = useState(false)
 
   const handleSelectVisit = (id: string) => {
     setSelectedVisit(visits.filter(v => v.id === id)[0])
   }
+
+  // const handleOpenCreateForm = (id: string) => {
+  //   setSelectedVisit(null)
+  //   // setEditMode(true)
+  // }
   
   useEffect(() => {
     axios.get<IVisit[]>('http://localhost:5000/api/visits')
@@ -25,12 +31,14 @@ const App = () => {
   
   return (
     <Fragment>
-      <NavBar />
+      <NavBar /*openCreateForm={handleOpenCreateForm}*//>
       <Container style={{marginTop: '7em'}}>
         <VisitDashboard 
           visits={ visits } 
           selectVisit={handleSelectVisit} 
-          selectedVisit={selectedVisit!}
+          selectedVisit={selectedVisit}
+          editMode={editMode}
+          setEditMode={setEditMode}
           />
       </Container>
     </Fragment>
