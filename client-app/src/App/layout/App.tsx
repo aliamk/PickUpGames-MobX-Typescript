@@ -23,15 +23,6 @@ const App = () => {
 
 
   // ======== HANDLERS ======== //
-  const handleEditVisit = (visit: IVisit) => {
-    setSubmitting(true)
-    agent.Visits.update(visit).then(() => {
-      setVisits([ ...visits.filter(v => v.id !== visit.id), visit])
-      setSelectedVisit(visit)
-      setEditMode(false)
-    }).then(() => setSubmitting(false))
-  }
-
   const handleDeleteVisit = (event: SyntheticEvent<HTMLButtonElement>, id: string) => {
     setSubmitting(true)
     setTarget(event.currentTarget.name)
@@ -54,9 +45,6 @@ const App = () => {
       <NavBar />
       <Container style={{marginTop: '7em'}}>
         <VisitDashboard 
-          setEditMode={setEditMode}
-          setSelectedVisit={setSelectedVisit}
-          editVisit={handleEditVisit}
           deleteVisit={handleDeleteVisit}
           submitting={submitting}
           target={target}

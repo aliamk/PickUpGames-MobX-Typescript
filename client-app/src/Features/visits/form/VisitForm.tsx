@@ -5,16 +5,13 @@ import {v4 as uuid} from 'uuid'
 import VisitStore from '../../../App/stores/visitStore'
 
 interface IProps {
-    setEditMode: (editMode: boolean) => void;
     visit: IVisit;
-    editVisit: (visit: IVisit) => void;
-    submitting: boolean;
 }
 
-const VisitForm:React.FC<IProps> = ({ setEditMode, visit: initialFormState, editVisit, submitting }) => {
+const VisitForm:React.FC<IProps> = ({ visit: initialFormState }) => {
 
     const visitStore = useContext(VisitStore)
-    const {createVisit} = visitStore
+    const {createVisit, editVisit, submitting, cancelFormOpen} = visitStore
 
     const initialiseForm = () => {
         if (initialFormState) {
@@ -57,7 +54,7 @@ const VisitForm:React.FC<IProps> = ({ setEditMode, visit: initialFormState, edit
                 <Form.Input onChange={handleInputChange} name='date' type='datetime-local' placeholder='Date'  value={visit.date}/>
                 <Form.Input onChange={handleInputChange} name='location' placeholder='Location' value={visit.location} />
                 <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
-                <Button onClick={() => setEditMode(false)} floated='right' type='button' content='Cancel' />
+                <Button onClick={cancelFormOpen} floated='right' type='button' content='Cancel' />
             </Form>            
         </Segment>
     )

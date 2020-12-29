@@ -8,18 +8,12 @@ import VisitList from './VisitList'
 import VisitStore from '../../../App/stores/visitStore'
 
 interface IProps {
-    setEditMode: (editMode: boolean) => void;
-    setSelectedVisit: (visit: IVisit | null) => void;
-    editVisit: (visit: IVisit) => void;
     deleteVisit: (e: SyntheticEvent<HTMLButtonElement>, id: string) => void;
     submitting: boolean;
     target: string;
 }
 
 const VisitDashboard: React.FC<IProps> = ({ 
-    setEditMode, 
-    setSelectedVisit, 
-    editVisit, 
     deleteVisit, 
     submitting,
     target 
@@ -37,19 +31,13 @@ const VisitDashboard: React.FC<IProps> = ({
             </Grid.Column>
             <Grid.Column width={6}>
                 {selectedVisit && !editMode && (
-                    <VisitDetails 
-                    setEditMode={setEditMode} 
-                    setSelectedVisit={setSelectedVisit} 
-                    />
+                    <VisitDetails />
                 )}
 
                 {editMode && ( 
                     <VisitForm 
                     key={selectedVisit && (selectedVisit.id || 0)} 
-                    setEditMode={setEditMode} 
                     visit={selectedVisit!} 
-                    editVisit={editVisit}  
-                    submitting={submitting}
                     />
                 )}            
                 

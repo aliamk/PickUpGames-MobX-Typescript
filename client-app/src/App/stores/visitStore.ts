@@ -48,9 +48,37 @@ class VisitStore {
         }
     }
 
+    // Method for editing Visits - replaced the handler in App.tsx
+    @action editVisit = async (visit: IVisit) => {
+        this.submitting = true
+        try {
+            await agent.Visits.update(visit)             
+            this.visitRegistry.set(visit.id, visit);
+            this.selectedVisit = visit
+            this.editMode = false
+            this.submitting = false            
+        } catch (error) {           
+            console.log(error)
+            this.submitting = false
+        }
+    }
+
     @action openCreateForm = () => {
         this.editMode = true
         this.selectedVisit = undefined
+    }
+
+    @action canceSelectedVisit = () => {
+        this.selectedVisit = undefined
+    }
+
+    @action cancelFormOpen = () => {
+        this.editMode = false
+    }
+
+    @action openEditForm = (id: string) => {
+        this.selectedVisit =  this.visitRegistry.get(id)
+        this.editMode = true
     }
     
     @action selectVisit = (id: string) => {
