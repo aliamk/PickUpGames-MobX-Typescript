@@ -1,27 +1,19 @@
-import React, { useState, useEffect, Fragment, SyntheticEvent, useContext } from 'react'
-import 'semantic-ui-css/semantic.min.css'
+import React, { useEffect, Fragment, useContext } from 'react'
 import { Container } from 'semantic-ui-react'
-import { IVisit } from '../models/visit_interface'
+import { observer } from 'mobx-react-lite'
+
 import NavBar from '../../Features/nav/NavBar'
 import VisitDashboard from '../../Features/visits/dashboard/VisitDashboard'
-import agent from '../api/agent'
 import LoadingComponent from '../layout/LoadingComponent'
 import VisitStore from '../stores/visitStore'
-import { observer } from 'mobx-react-lite'
+
 
 
 const App = () => {
 
+  // ======== MobX's VisitStore for state management ======== //
   const visitStore = useContext(VisitStore)
 
-  const [ visits, setVisits ] = useState<IVisit[]>([])
-  const [ selectedVisit, setSelectedVisit ] = useState<IVisit | null>(null)
-  const [ editMode, setEditMode ] = useState(false)
-  const [ loading, setLoading ] = useState(true)
-  const [ submitting, setSubmitting ] = useState(false)
-  const [ target, setTarget ] = useState('')
-
-  
   // ========  API CALLS (see @action loadVisits in visitStore.ts) ======== //
   useEffect(() => {
     visitStore.loadVisits()
