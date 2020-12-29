@@ -2,6 +2,7 @@ import React, { FormEvent, useContext, useState } from 'react'
 import { Form, Segment, Button } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
 import {v4 as uuid} from 'uuid'
+
 import VisitStore from '../../../App/stores/visitStore'
 
 interface IProps {

@@ -1,5 +1,6 @@
-import { observable, action, computed } from 'mobx'
 import { createContext, SyntheticEvent } from 'react'
+import { observable, action, computed } from 'mobx'
+
 import agent from '../api/agent'
 import { IVisit } from '../models/visit_interface'
 
