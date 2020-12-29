@@ -8,9 +8,10 @@ interface IProps {
     visit: IVisit;
     createVisit: (visit: IVisit) => void;
     editVisit: (visit: IVisit) => void;
+    submitting: boolean;
 }
 
-const VisitForm:React.FC<IProps> = ({ setEditMode, visit: initialFormState, createVisit, editVisit }) => {
+const VisitForm:React.FC<IProps> = ({ setEditMode, visit: initialFormState, createVisit, editVisit, submitting }) => {
     const initialiseForm = () => {
         if (initialFormState) {
             return initialFormState
@@ -51,7 +52,7 @@ const VisitForm:React.FC<IProps> = ({ setEditMode, visit: initialFormState, crea
                 <Form.TextArea onChange={handleInputChange} name='description' rows={2} placeholder='Description'  value={visit.description} />
                 <Form.Input onChange={handleInputChange} name='date' type='datetime-local' placeholder='Date'  value={visit.date}/>
                 <Form.Input onChange={handleInputChange} name='location' placeholder='Location' value={visit.location} />
-                <Button floated='right' positive type='submit' content='Submit' />
+                <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
                 <Button onClick={() => setEditMode(false)} floated='right' type='button' content='Cancel' />
             </Form>            
         </Segment>

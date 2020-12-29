@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react'
+import React, { useState, useEffect, Fragment, SyntheticEvent } from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import { Container } from 'semantic-ui-react'
 import { IVisit } from '../models/visit_interface'
@@ -14,6 +14,8 @@ const App = () => {
   const [ editMode, setEditMode ] = useState(false)
   const [ loading, setLoading ] = useState(true)
   const [ submitting, setSubmitting ] = useState(false)
+  const [ target, setTarget ] = useState('')
+
 
   // ======== HANDLERS ======== //
   const handleSelectVisit = (id: string) => {
@@ -44,8 +46,9 @@ const App = () => {
     }).then(() => setSubmitting(false))
   }
 
-  const handleDeleteVisit = (id: string) => {
+  const handleDeleteVisit = (event: SyntheticEvent<HTMLButtonElement>, id: string) => {
     setSubmitting(true)
+    setTarget(event.currentTarget.name)
     agent.Visits.delete(id).then(() => {
       setVisits([ ...visits.filter(v => v.id !== id)])
     }).then(() => setSubmitting(false))
@@ -82,6 +85,7 @@ const App = () => {
           editVisit={handleEditVisit}
           deleteVisit={handleDeleteVisit}
           submitting={submitting}
+          target={target}
           />
       </Container>
     </Fragment>

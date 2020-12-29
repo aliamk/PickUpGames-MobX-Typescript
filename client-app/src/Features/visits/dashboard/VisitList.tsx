@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { Item, Segment, Label, Button } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
 
 interface IProps {
     visits: IVisit[];
     selectVisit: (id: string) => void;
-    deleteVisit: (id: string) => void;
+    deleteVisit: (event: SyntheticEvent<HTMLButtonElement>, id: string) => void;
+    submitting: boolean;
+    target: string;
 }
 
-const VisitList: React.FC<IProps> = ({ visits, selectVisit, deleteVisit }) => {
+const VisitList: React.FC<IProps> = ({ visits, selectVisit, deleteVisit, submitting, target }) => {
     return (
         <Segment clearing>
             <Item.Group divided>
@@ -22,8 +24,20 @@ const VisitList: React.FC<IProps> = ({ visits, selectVisit, deleteVisit }) => {
                                 <div>{visit.location}</div>
                             </Item.Description>
                             <Item.Extra>
-                                <Button onClick={() => selectVisit(visit.id)} floated='right' content='View' color='blue' />
-                                <Button onClick={() => deleteVisit(visit.id)} floated='right' content='Delete' color='red' />
+                                <Button 
+                                    onClick={() => selectVisit(visit.id)} 
+                                    floated='right' 
+                                    content='View' 
+                                    color='blue' 
+                                />
+                                <Button 
+                                    name={visit.id}
+                                    loading={target === visit.id && submitting} 
+                                    onClick={(e) => deleteVisit(e, visit.id)} 
+                                    floated='right' 
+                                    content='Delete' 
+                                    color='red' 
+                                />
                                 <Label basic content='category' />
                             </Item.Extra>
                         </Item.Content>

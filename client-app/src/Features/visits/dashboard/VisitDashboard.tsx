@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { Grid } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
 import VisitDetails from '../details/VisitDetails'
@@ -14,15 +14,34 @@ interface IProps {
     setSelectedVisit: (visit: IVisit | null) => void;
     createVisit: (visit: IVisit) => void;
     editVisit: (visit: IVisit) => void;
-    deleteVisit: (id: string) => void;
+    deleteVisit: (e: SyntheticEvent<HTMLButtonElement>, id: string) => void;
     submitting: boolean;
+    target: string;
 }
 
-const VisitDashboard: React.FC<IProps> = ({ visits, selectVisit, selectedVisit, editMode, setEditMode, setSelectedVisit, createVisit, editVisit, deleteVisit, submitting }) => {
+const VisitDashboard: React.FC<IProps> = ({ 
+    visits, 
+    selectVisit, 
+    selectedVisit, 
+    editMode, 
+    setEditMode, 
+    setSelectedVisit, 
+    createVisit, 
+    editVisit, 
+    deleteVisit, 
+    submitting,
+    target 
+}) => {
     return (
         <Grid>
             <Grid.Column width={10}>
-                <VisitList visits={visits} selectVisit={selectVisit} deleteVisit={deleteVisit} submitting={submitting} />
+                <VisitList 
+                    visits={visits} 
+                    selectVisit={selectVisit} 
+                    deleteVisit={deleteVisit} 
+                    submitting={submitting} 
+                    target={target}
+                />
             </Grid.Column>
             <Grid.Column width={6}>
                 {selectedVisit && !editMode && (
