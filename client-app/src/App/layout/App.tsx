@@ -59,13 +59,15 @@ const App = () => {
     }).then(() => setSubmitting(false))
   }
   
-  // ========  API CALLS ======== //
+  // ========  API CALLS (see @action loadVisits in visitStore.ts) ======== //
   useEffect(() => {
     visitStore.loadVisits()
   }, [visitStore])
 
+  // ========  LOADING SPINNER ======== //
   if (visitStore.loadingInitial) return <LoadingComponent content='Loading Visits...' />
   
+  // ======== DISPLAY DOM ======== //
   return (
     <Fragment>
       <NavBar openCreateForm={handleOpenCreateForm} />
