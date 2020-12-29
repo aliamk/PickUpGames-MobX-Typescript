@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import React, { SyntheticEvent } from 'react'
 import { Item, Segment, Label, Button } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
@@ -48,4 +49,4 @@ const VisitList: React.FC<IProps> = ({ visits, selectVisit, deleteVisit, submitt
     )
 }
 
-export default VisitList
+export default observer(VisitList)
