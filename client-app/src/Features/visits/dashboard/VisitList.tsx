@@ -15,12 +15,12 @@ const VisitList: React.FC<IProps> = ({
     target 
 }) => {
     const visitStore = useContext(VisitStore)
-    const {visits, selectVisit} = visitStore
+    const {visitsByDate, selectVisit} = visitStore
 
     return (
         <Segment clearing>
             <Item.Group divided>
-                {visits.map(visit => (
+                {visitsByDate.map(visit => (
                     <Item key={visit.id}>        
                         <Item.Content>
                             <Item.Header as='a'>{visit.title}</Item.Header>
