@@ -1,10 +1,12 @@
-import { observer } from 'mobx-react-lite'
 import React, { useContext } from 'react'
+import { observer } from 'mobx-react-lite'
 import { Item, Segment, Label, Button } from 'semantic-ui-react'
+
 import VisitStore from '../../../App/stores/visitStore'
 
 
 const VisitList: React.FC = () => {
+    
     const visitStore = useContext(VisitStore)
     const {visitsByDate, selectVisit, deleteVisit, submitting, target} = visitStore
 
