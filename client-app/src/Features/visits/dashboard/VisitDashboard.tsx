@@ -20,8 +20,6 @@ interface IProps {
 }
 
 const VisitDashboard: React.FC<IProps> = ({ 
-    visits, 
-    selectVisit, 
     setEditMode, 
     setSelectedVisit, 
     createVisit, 
@@ -36,8 +34,6 @@ const VisitDashboard: React.FC<IProps> = ({
         <Grid>
             <Grid.Column width={10}>
                 <VisitList 
-                    visits={visits} 
-                    selectVisit={selectVisit} 
                     deleteVisit={deleteVisit} 
                     submitting={submitting} 
                     target={target}
@@ -45,11 +41,21 @@ const VisitDashboard: React.FC<IProps> = ({
             </Grid.Column>
             <Grid.Column width={6}>
                 {selectedVisit && !editMode && (
-                    <VisitDetails setEditMode={setEditMode} setSelectedVisit={setSelectedVisit} />
+                    <VisitDetails 
+                    setEditMode={setEditMode} 
+                    setSelectedVisit={setSelectedVisit} 
+                    />
                 )}
 
                 {editMode && ( 
-                    <VisitForm key={selectedVisit && (selectedVisit.id || 0)} setEditMode={setEditMode} visit={selectedVisit!} createVisit={createVisit} editVisit={editVisit}  submitting={submitting}/>
+                    <VisitForm 
+                    key={selectedVisit && (selectedVisit.id || 0)} 
+                    setEditMode={setEditMode} 
+                    visit={selectedVisit!} 
+                    createVisit={createVisit} 
+                    editVisit={editVisit}  
+                    submitting={submitting}
+                    />
                 )}            
                 
                 {/* <h2>Activity Filters</h2> */}

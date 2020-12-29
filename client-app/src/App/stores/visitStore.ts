@@ -13,7 +13,7 @@ class VisitStore {
     @observable target = ''             // created for the deleteVisit action
 
     @action loadVisits = () => {
-        this.loadingInitial = true                  // mutating state with MobX
+        this.loadingInitial = true      // mutating state with MobX
         agent.Visits.list()    
         .then(visits => {
             // console.log(response)
@@ -23,7 +23,7 @@ class VisitStore {
             })
         }).finally(() => this.loadingInitial = false)
     }
-    @action selectedVisit = (id: string) => {
+    @action selectVisit = (id: string) => {
         this.selectedVisit = this.visits.find(v => v.id === id)
         this.editMode = false
     }
