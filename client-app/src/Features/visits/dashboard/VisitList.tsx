@@ -47,8 +47,5 @@ const VisitList: React.FC<IProps> = ({ visits, selectVisit, deleteVisit, submitt
         </Segment>
     )
 }
-      
-
-
 
 export default VisitList
