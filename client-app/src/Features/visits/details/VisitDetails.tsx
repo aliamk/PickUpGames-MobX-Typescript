@@ -1,24 +1,30 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { useContext } from 'react'
 import { Button, Card, Image } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
+import VisitStore from '../../../App/stores/visitStore'
 
 interface IProps {
-    visit: IVisit;
     setEditMode: (editMode: boolean) => void;
     setSelectedVisit: (visit: IVisit | null) => void;
 }
 
-const VisitDetails: React.FC<IProps> = ({ visit, setEditMode, setSelectedVisit }) => {
+const VisitDetails: React.FC<IProps> = ({ 
+  setEditMode, 
+  setSelectedVisit 
+}) => {
+  const visitStore = useContext(VisitStore)
+  const { selectedVisit: visit } = visitStore
     return (
         <Card fluid>
-        <Image src={`/assets/locationImages/${visit.location}.png`} wrapped ui={false} />
+        <Image src={`/assets/locationImages/${visit!.location}.png`} wrapped ui={false} />
         <Card.Content>
-          <Card.Header>{visit.title}</Card.Header>
+          <Card.Header>{visit!.title}</Card.Header>
           <Card.Meta>
-            <span>{visit.date}</span>
+            <span>{visit!.date}</span>
           </Card.Meta>
           <Card.Description>
-            {visit.description}
+            {visit!.description}
           </Card.Description>
         </Card.Content>
         <Card.Content extra>    
@@ -31,4 +37,4 @@ const VisitDetails: React.FC<IProps> = ({ visit, setEditMode, setSelectedVisit }
     )
 }
 
-export default VisitDetails
+export default observer(VisitDetails)

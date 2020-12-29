@@ -6,7 +6,11 @@ import { IVisit } from '../models/visit_interface'
 
 class VisitStore {
     @observable visits:IVisit[] = []
+    @observable selectedVisit: IVisit | undefined
     @observable loadingInitial = false 
+    @observable editMode = false
+    @observable submitting = false      // the loading icon
+    @observable target = ''             // created for the deleteVisit action
 
     @action loadVisits = () => {
         this.loadingInitial = true                  // mutating state with MobX
@@ -18,6 +22,10 @@ class VisitStore {
                 this.visits.push(visit)
             })
         }).finally(() => this.loadingInitial = false)
+    }
+    @action selectedVisit = (id: string) => {
+        this.selectedVisit = this.visits.find(v => v.id === id)
+        this.editMode = false
     }
 }
 

@@ -7,7 +7,7 @@ import VisitDashboard from '../../Features/visits/dashboard/VisitDashboard'
 import agent from '../api/agent'
 import LoadingComponent from '../layout/LoadingComponent'
 import VisitStore from '../stores/visitStore'
-import {observer} from 'mobx-react-lite'
+import { observer } from 'mobx-react-lite'
 
 
 const App = () => {
@@ -73,8 +73,6 @@ const App = () => {
         <VisitDashboard 
           visits={visitStore.visits} 
           selectVisit={handleSelectVisit} 
-          selectedVisit={selectedVisit}
-          editMode={editMode}
           setEditMode={setEditMode}
           setSelectedVisit={setSelectedVisit}
           createVisit={handleCreateVisit}
