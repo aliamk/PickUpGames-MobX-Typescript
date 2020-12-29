@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
-import { List } from 'semantic-ui-react'
+import { Container, List } from 'semantic-ui-react'
 import { IVisit } from '../models/visit_interface'
 import NavBar from '../../Features/nav/NavBar'
 
@@ -20,11 +20,13 @@ const App = () => {
   return (
     <div>
       <NavBar />
-      <List>
-          {visits.map(visit => (
-            <List.Item key={ visit.id }>{ visit.title }</List.Item>
-          ))}
-      </List>
+      <Container style={{marginTop: '7em'}}>
+        <List>
+            {visits.map(visit => (
+              <List.Item key={ visit.id }>{ visit.title }</List.Item>
+            ))}
+        </List>
+      </Container>
     </div>
   )
 }

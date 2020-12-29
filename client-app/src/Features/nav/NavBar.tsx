@@ -5,7 +5,7 @@ import { Button, Container, Menu } from 'semantic-ui-react'
 const NavBar: React.FC = () => {
 
     return (
-        <Menu fixed='top'>
+        <Menu fixed='top' inverted >
             <Container> 
                 <Menu.Item header /*as={NavLink} exact to='/'*/>
                     <img src="/assets/heart_logo.png" alt="logo" style={{marginRight: '10px'}}/>
