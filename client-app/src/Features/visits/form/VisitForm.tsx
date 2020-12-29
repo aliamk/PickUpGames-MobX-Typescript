@@ -1,17 +1,21 @@
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useContext, useState } from 'react'
 import { Form, Segment, Button } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
 import {v4 as uuid} from 'uuid'
+import VisitStore from '../../../App/stores/visitStore'
 
 interface IProps {
     setEditMode: (editMode: boolean) => void;
     visit: IVisit;
-    createVisit: (visit: IVisit) => void;
     editVisit: (visit: IVisit) => void;
     submitting: boolean;
 }
 
-const VisitForm:React.FC<IProps> = ({ setEditMode, visit: initialFormState, createVisit, editVisit, submitting }) => {
+const VisitForm:React.FC<IProps> = ({ setEditMode, visit: initialFormState, editVisit, submitting }) => {
+
+    const visitStore = useContext(VisitStore)
+    const {createVisit} = visitStore
+
     const initialiseForm = () => {
         if (initialFormState) {
             return initialFormState

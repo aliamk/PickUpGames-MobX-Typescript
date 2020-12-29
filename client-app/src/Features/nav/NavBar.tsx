@@ -1,13 +1,11 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { useContext } from 'react'
 import 'semantic-ui-css/semantic.min.css' 
 import { Button, Container, Menu } from 'semantic-ui-react'
+import VisitStore from '../../App/stores/visitStore'
 
-interface IProps {
-    openCreateForm: () => void;
-}
-
-const NavBar: React.FC<IProps> = ({ openCreateForm }) => {
-
+const NavBar: React.FC = () => {
+    const visitStore = useContext(VisitStore)
     return (
         <Menu fixed='top' inverted >
             <Container> 
@@ -17,11 +15,11 @@ const NavBar: React.FC<IProps> = ({ openCreateForm }) => {
                 </Menu.Item>
                 <Menu.Item name='Visits' /*as={NavLink} exact to='/'*/ />
                 <Menu.Item>
-                    <Button onClick={openCreateForm} positive content='Add a Visit' />
+                    <Button onClick={visitStore.openCreateForm} positive content='Add a Visit' />
                 </Menu.Item>
             </Container>
         </Menu>
     )
 }
 
-export default NavBar
+export default observer(NavBar)

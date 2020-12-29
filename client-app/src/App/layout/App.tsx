@@ -23,25 +23,6 @@ const App = () => {
 
 
   // ======== HANDLERS ======== //
-  const handleSelectVisit = (id: string) => {
-    setSelectedVisit(visits.filter(v => v.id === id)[0])
-    setEditMode(false)
-  }
-
-  const handleOpenCreateForm = () => {
-    setSelectedVisit(null)
-    setEditMode(true)
-  }
-
-  const handleCreateVisit = (visit: IVisit) => {
-    setSubmitting(true)
-    agent.Visits.create(visit).then(() => {
-      setVisits([ ...visits, visit])
-      setSelectedVisit(visit)
-      setEditMode(false)
-    }).then(() => setSubmitting(false))
-  }
-
   const handleEditVisit = (visit: IVisit) => {
     setSubmitting(true)
     agent.Visits.update(visit).then(() => {
@@ -70,14 +51,11 @@ const App = () => {
   // ======== DISPLAY DOM ======== //
   return (
     <Fragment>
-      <NavBar openCreateForm={handleOpenCreateForm} />
+      <NavBar />
       <Container style={{marginTop: '7em'}}>
         <VisitDashboard 
-          visits={visitStore.visits} 
-          selectVisit={handleSelectVisit} 
           setEditMode={setEditMode}
           setSelectedVisit={setSelectedVisit}
-          createVisit={handleCreateVisit}
           editVisit={handleEditVisit}
           deleteVisit={handleDeleteVisit}
           submitting={submitting}
