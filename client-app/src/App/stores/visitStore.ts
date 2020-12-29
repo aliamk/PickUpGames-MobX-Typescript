@@ -1,5 +1,5 @@
 import { observable, action, computed } from 'mobx'
-import { createContext } from 'react'
+import { createContext, SyntheticEvent } from 'react'
 import agent from '../api/agent'
 import { IVisit } from '../models/visit_interface'
 
@@ -60,6 +60,22 @@ class VisitStore {
         } catch (error) {           
             console.log(error)
             this.submitting = false
+        }
+    }
+
+    // Delete button's functionality
+    @action deleteVisit = async (event: SyntheticEvent<HTMLButtonElement>, id: string) => {
+        this.submitting = true
+        this.target = event.currentTarget.name
+        try {
+            await agent.Visits.delete(id)                
+            this.visitRegistry.delete(id)
+            this.submitting = false
+            this.target = ''                
+        } catch (error) {               
+            this.submitting = false
+            this.target = ''                
+            console.log(error)
         }
     }
 

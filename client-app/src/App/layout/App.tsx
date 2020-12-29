@@ -21,15 +21,6 @@ const App = () => {
   const [ submitting, setSubmitting ] = useState(false)
   const [ target, setTarget ] = useState('')
 
-
-  // ======== HANDLERS ======== //
-  const handleDeleteVisit = (event: SyntheticEvent<HTMLButtonElement>, id: string) => {
-    setSubmitting(true)
-    setTarget(event.currentTarget.name)
-    agent.Visits.delete(id).then(() => {
-      setVisits([ ...visits.filter(v => v.id !== id)])
-    }).then(() => setSubmitting(false))
-  }
   
   // ========  API CALLS (see @action loadVisits in visitStore.ts) ======== //
   useEffect(() => {
@@ -44,11 +35,7 @@ const App = () => {
     <Fragment>
       <NavBar />
       <Container style={{marginTop: '7em'}}>
-        <VisitDashboard 
-          deleteVisit={handleDeleteVisit}
-          submitting={submitting}
-          target={target}
-          />
+        <VisitDashboard />
       </Container>
     </Fragment>
   )

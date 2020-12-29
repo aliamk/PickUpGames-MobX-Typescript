@@ -7,27 +7,14 @@ import VisitForm from '../form/VisitForm'
 import VisitList from './VisitList'
 import VisitStore from '../../../App/stores/visitStore'
 
-interface IProps {
-    deleteVisit: (e: SyntheticEvent<HTMLButtonElement>, id: string) => void;
-    submitting: boolean;
-    target: string;
-}
 
-const VisitDashboard: React.FC<IProps> = ({ 
-    deleteVisit, 
-    submitting,
-    target 
-}) => {
+const VisitDashboard: React.FC = () => {
     const visitStore = useContext(VisitStore)
     const {editMode, selectedVisit} = visitStore
     return (
         <Grid>
             <Grid.Column width={10}>
-                <VisitList 
-                    deleteVisit={deleteVisit} 
-                    submitting={submitting} 
-                    target={target}
-                />
+                <VisitList />
             </Grid.Column>
             <Grid.Column width={6}>
                 {selectedVisit && !editMode && (

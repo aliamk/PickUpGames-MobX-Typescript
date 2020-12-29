@@ -1,21 +1,12 @@
 import { observer } from 'mobx-react-lite'
-import React, { SyntheticEvent, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Item, Segment, Label, Button } from 'semantic-ui-react'
 import VisitStore from '../../../App/stores/visitStore'
 
-interface IProps {
-    deleteVisit: (event: SyntheticEvent<HTMLButtonElement>, id: string) => void;
-    submitting: boolean;
-    target: string;
-}
 
-const VisitList: React.FC<IProps> = ({ 
-    deleteVisit, 
-    submitting, 
-    target 
-}) => {
+const VisitList: React.FC = () => {
     const visitStore = useContext(VisitStore)
-    const {visitsByDate, selectVisit} = visitStore
+    const {visitsByDate, selectVisit, deleteVisit, submitting, target} = visitStore
 
     return (
         <Segment clearing>
