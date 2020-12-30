@@ -26,6 +26,9 @@ namespace Application.Visits
             public CommandValidator()
             {
                 RuleFor(x => x.Title).NotEmpty();
+                RuleFor(x => x.Description).NotEmpty();
+                RuleFor(x => x.Date).NotEmpty();
+                RuleFor(x => x.Location).NotEmpty();
             }
         }
 
