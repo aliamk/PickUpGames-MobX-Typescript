@@ -1,6 +1,8 @@
 using System;                   // Exception
+using System.Net;               // HttpStatusCode
 using System.Threading;         // CancellationToken
 using System.Threading.Tasks;   // Task
+using Application.Errors;       // RestException
 using MediatR;                  // IRequest
 using Persistence;              // DataContext
 
@@ -25,7 +27,7 @@ namespace Application.Visits
                 var visit = await _context.Visits.FindAsync(request.Id);
                 // If the a match for the visit id is not found, return error message
                 if (visit == null)
-                    throw new Exception("Could not find visit");
+                    throw new RestException(HttpStatusCode.NotFound, new { visit = "Not found" });
                 //  Else, delete the visit
                 _context.Remove(visit);
 
