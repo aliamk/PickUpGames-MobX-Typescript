@@ -4,6 +4,10 @@ import { IVisit } from '../models/visit_interface';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
+axios.interceptors.response.use(undefined, error => {
+    console.log(error.response)
+})
+
 // Store the response.data
 const responseBody = (response: AxiosResponse) => response.data;
 
