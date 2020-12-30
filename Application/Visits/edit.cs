@@ -1,7 +1,7 @@
 using System;                   // Exception
 using System.Threading;         // CancellationToken
 using System.Threading.Tasks;   // Task
-using FluentValidation;
+using FluentValidation;         // AbstractValidator
 using MediatR;                  // IRequest
 using Persistence;              // DataContext
 
@@ -12,13 +12,14 @@ namespace Application.Visits
     {
         public class Command : IRequest
         {
-            public Guid Id { get; set; }        // User can't edit this but it's included for identification purposes
+            public Guid Id { get; set; }            // User can't edit this but it's included for identification purposes
             public string Title { get; set; }
             public string Description { get; set; }
             public DateTime? Date { get; set; }     // Question mark added because it's optional
             public string Location { get; set; }
         }
 
+        // Using the Fluent Validation package to intercept and validate data sent by the user
         public class CommandValidator : AbstractValidator<Command>
         {
             public CommandValidator()
@@ -53,7 +54,7 @@ namespace Application.Visits
                 // successfully added an item to the database and we just want to return that value
                 var success = await _context.SaveChangesAsync() > 0;
                 if (success) return Unit.Value;
-                //  Else, retirn this error message
+                //  Else, return this error message
                 throw new Exception("Problem saving changes");
             }
         }
