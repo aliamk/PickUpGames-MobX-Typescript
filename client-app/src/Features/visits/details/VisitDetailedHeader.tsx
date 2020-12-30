@@ -1,7 +1,7 @@
 // import { format } from 'path'
 import { observer } from 'mobx-react-lite';
 import React from 'react'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button, Header, Item, Segment, Image } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface';
 
@@ -37,9 +37,9 @@ const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
                 </Segment>
             </Segment>
             <Segment clearing attached='bottom'>
-                <Button color='orange' floated='right' >Manage Event</Button>
-                <Button>Cancel attendance</Button>
                 <Button color='teal'>Join Activity</Button>
+                <Button>Cancel attendance</Button>                
+                <Button as={Link} to={`/manage/${visit.id}`} color='orange' floated='right' >Manage Event</Button>
             </Segment>
         </Segment.Group>
     )
