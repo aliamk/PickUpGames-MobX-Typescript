@@ -1,6 +1,8 @@
 using System;                   // Guid
-using System.Threading;         //  IRequestHandler
+using System.Net;               // HttpStatusCode
+using System.Threading;         // IRequestHandler
 using System.Threading.Tasks;   // IRequestHandler
+using Application.Errors;       // RestException
 using Domain;                   // Visit
 using MediatR;                  // IRequest
 using Persistence;              // DataContext
@@ -26,6 +28,12 @@ namespace Application.Visits
                 CancellationToken cancellationToken)
             {
                 var visit = await _context.Visits.FindAsync(request.Id);
+
+                if (visit == null)
+                    throw new RestException(HttpStatusCode.NotFound, new { visit = "Not found" });
+                //  Else, delete the visit
+                _context.Remove(visit);
+
                 return visit;
             }
         }
