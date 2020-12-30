@@ -7,6 +7,9 @@ import { IVisit } from '../models/visit_interface';
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
 axios.interceptors.response.use(undefined, error => {
+    if (error.message === 'Network Error' && !error.response) {
+        toast.error('Network error - make sure API is running!')
+    }
     const {status, data, config} = error.response
     if (status === 404) {
         history.push('/notfound')
