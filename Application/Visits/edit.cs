@@ -1,6 +1,8 @@
 using System;                   // Exception
+using System.Net;               // HttpStatusCode
 using System.Threading;         // CancellationToken
 using System.Threading.Tasks;   // Task
+using Application.Errors;       // RestException
 using FluentValidation;         // AbstractValidator
 using MediatR;                  // IRequest
 using Persistence;              // DataContext
@@ -40,15 +42,17 @@ namespace Application.Visits
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var activity = await _context.Visits.FindAsync(request.Id);
-                if (activity == null)
-                    throw new Exception("Could not find activity");
+                var visit = await _context.Visits.FindAsync(request.Id);
+                if (visit == null)
+                    throw new RestException(HttpStatusCode.NotFound, new { visit = "Not found" });
+                //  Else, delete the visit
+                _context.Remove(visit);
 
                 // User can edit all of these files.  If user doesn't enter a Title field, just leave it as Title
-                activity.Title = request.Title ?? activity.Title;
-                activity.Description = request.Description ?? activity.Description;
-                activity.Date = request.Date ?? activity.Date;
-                activity.Location = request.Location ?? activity.Location;
+                visit.Title = request.Title ?? visit.Title;
+                visit.Description = request.Description ?? visit.Description;
+                visit.Date = request.Date ?? visit.Date;
+                visit.Location = request.Location ?? visit.Location;
 
                 // If SaveChangesAsync returns a value more than 0, this means user has 
                 // successfully added an item to the database and we just want to return that value
