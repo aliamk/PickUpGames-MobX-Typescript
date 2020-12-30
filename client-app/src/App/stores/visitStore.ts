@@ -73,7 +73,7 @@ class VisitStore {
                runInAction('getting visit error', () => {
                    this.loadingInitial = false
                })
-               console.log(error)
+               throw error
            }
        }
    }
