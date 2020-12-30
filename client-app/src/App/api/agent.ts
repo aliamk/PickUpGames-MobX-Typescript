@@ -6,7 +6,12 @@ import { IVisit } from '../models/visit_interface';
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
 axios.interceptors.response.use(undefined, error => {
-    if (error.response.status === 404) {
+    const {status, data, config} = error.response
+    if (status === 404) {
+        history.push('/notfound')
+    }
+    console.log(error.response)
+    if (status === 400 && config.method === 'get' && data.errors.hasOwnProperty('id')) {
         history.push('/notfound')
     }
 })
