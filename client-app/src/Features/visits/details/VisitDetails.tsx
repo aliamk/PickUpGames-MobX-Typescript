@@ -22,9 +22,7 @@ const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match, hist
   const { visit, loadVisit, loadingInitial } = visitStore
 
   useEffect(() => {
-    loadVisit(match.params.id).catch(() => {
-      history.push('/notfound')
-    })
+    loadVisit(match.params.id)
   }, [loadVisit, match.params.id, history])
 
   if (loadingInitial) return <LoadingComponent content='Loading activity...' />
