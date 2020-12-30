@@ -6,6 +6,7 @@ import {v4 as uuid} from 'uuid'
 import { RouteComponentProps } from 'react-router-dom'
 import { Form as FinalForm, Field } from 'react-final-form';
 import TextInput from '../../../App/common/form/TextInput'
+import TextAreaInput from '../../../App/common/form/TextAreaInput'
 
 import VisitStore from '../../../App/stores/visitStore'
 
@@ -36,7 +37,6 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
         }
     }, [loadVisit, clearVisit, match.params.id, initialFormState, visit.id.length])
 
-
     // const handleSubmit = () => {
     //     if (visit.id.length === 0) {
     //         let newVisit = {
@@ -53,12 +53,7 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
         console.log(values)
       };
 
-    // const handleInputChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    //     const {name, value} = event.currentTarget
-    //     setVisit({ ...visit, [name]: value})
-    // }
-
-    return (
+     return (
         <Grid>
             <Grid.Column width={10}>
                 <Segment clearing>
@@ -67,7 +62,7 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                         render={({ handleSubmit }) => (
                             <Form onSubmit={handleSubmit}>
                                 <Field name='title' placeholder='Title' value={visit.title} component={TextInput} />
-                                <Field name='description' placeholder='Description' value={visit.description} component={TextInput} />
+                                <Field name='description' rows={3} placeholder='Description' value={visit.description} component={TextAreaInput} />
                                 <Field name='date' placeholder='Date' value={visit.date} component={TextInput}/>
                                 <Field name='location' placeholder='Location' value={visit.location} component={TextInput} />
                                 <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
