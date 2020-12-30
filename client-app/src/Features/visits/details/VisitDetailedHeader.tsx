@@ -37,9 +37,9 @@ const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
                 </Segment>
             </Segment>
             <Segment clearing attached='bottom'>
-                <Button color='teal'>Join Activity</Button>
+                <Button color='teal'>Join Visit</Button>
                 <Button>Cancel attendance</Button>                
-                <Button as={Link} to={`/manage/${visit.id}`} color='orange' floated='right' >Manage Event</Button>
+                <Button as={Link} to={`/manage/${visit.id}`} color='orange' floated='right'>Manage Visit</Button>
             </Segment>
         </Segment.Group>
     )
