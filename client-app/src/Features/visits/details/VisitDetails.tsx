@@ -31,8 +31,8 @@ const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match }) =>
         <Grid>
           <Grid.Column width={10}>
             <VisitDetailedHeader visit={visit} />
-            <VisitDetailedInfo />
-            <VisitDetailedChat />
+            <VisitDetailedInfo visit={visit} />
+            <VisitDetailedChat visit={visit} />
           </Grid.Column>
           <Grid.Column width={6}>
             <VisitDetailedSidebar />
