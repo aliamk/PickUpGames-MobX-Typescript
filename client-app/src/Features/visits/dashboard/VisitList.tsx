@@ -17,14 +17,14 @@ const VisitList: React.FC = () => {
                 <Fragment key={group} >
                     <Label size='large' color='blue' >
                         {group}
-                    </Label>            
-                    <Segment clearing>
-                        <Item.Group divided>
-                            {visits.map(visit => (
-                                <VisitListItem key={visit.id} visit={visit} />
-                            ))}
-                        </Item.Group>
-                    </Segment>
+                    </Label>        
+   
+                    <Item.Group divided>
+                        {visits.map(visit => (
+                            <VisitListItem key={visit.id} visit={visit} />
+                        ))}
+                    </Item.Group>
+
                 </Fragment>
             ))}
         </Fragment>
