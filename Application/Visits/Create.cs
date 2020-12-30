@@ -2,6 +2,7 @@ using System;                   // Guid + DateTime
 using System.Threading;         // IRequestHandler
 using System.Threading.Tasks;   // IRequestHandler
 using Domain;                   // Visit
+using FluentValidation;         // AbstractValidator
 using MediatR;                  // IRequest
 using Persistence;              // DataContext
 
@@ -19,6 +20,15 @@ namespace Application.Visits
             public DateTime Date { get; set; }
             public String Location { get; set; }
         }
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Title).NotEmpty();
+            }
+        }
+
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
