@@ -1,6 +1,7 @@
 using System;                   // Exception
 using System.Threading;         // CancellationToken
 using System.Threading.Tasks;   // Task
+using FluentValidation;
 using MediatR;                  // IRequest
 using Persistence;              // DataContext
 
@@ -16,6 +17,17 @@ namespace Application.Visits
             public string Description { get; set; }
             public DateTime? Date { get; set; }     // Question mark added because it's optional
             public string Location { get; set; }
+        }
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Title).NotEmpty();
+                RuleFor(x => x.Description).NotEmpty();
+                RuleFor(x => x.Date).NotEmpty();
+                RuleFor(x => x.Location).NotEmpty();
+            }
         }
         public class Handler : IRequestHandler<Command>
         {
