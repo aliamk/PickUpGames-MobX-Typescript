@@ -53,10 +53,10 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
         console.log(values)
       };
 
-    const handleInputChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const {name, value} = event.currentTarget
-        setVisit({ ...visit, [name]: value})
-    }
+    // const handleInputChange = (event: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    //     const {name, value} = event.currentTarget
+    //     setVisit({ ...visit, [name]: value})
+    // }
 
     return (
         <Grid>
@@ -67,9 +67,9 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                         render={({ handleSubmit }) => (
                             <Form onSubmit={handleSubmit}>
                                 <Field name='title' placeholder='Title' value={visit.title} component={TextInput} />
-                                <Form.TextArea onChange={handleInputChange} name='description' rows={2} placeholder='Description'  value={visit.description} />
-                                <Form.Input onChange={handleInputChange} name='date' type='datetime-local' placeholder='Date'  value={visit.date}/>
-                                <Form.Input onChange={handleInputChange} name='location' placeholder='Location' value={visit.location} />
+                                <Field name='description' placeholder='Description' value={visit.description} component={TextInput} />
+                                <Field name='date' placeholder='Date' value={visit.date} component={TextInput}/>
+                                <Field name='location' placeholder='Location' value={visit.location} component={TextInput} />
                                 <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
                                 <Button onClick={() => history.push('/visits')}  floated='right' type='button' content='Cancel' />
                             </Form>  
