@@ -5,6 +5,7 @@ import { IVisit } from '../../../App/models/visit_interface'
 import {v4 as uuid} from 'uuid'
 import { RouteComponentProps } from 'react-router-dom'
 import { Form as FinalForm, Field } from 'react-final-form';
+import TextInput from '../../../App/common/form/TextInput'
 
 import VisitStore from '../../../App/stores/visitStore'
 
@@ -65,7 +66,7 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                         onSubmit={handleFinalFormSubmit}
                         render={({ handleSubmit }) => (
                             <Form onSubmit={handleSubmit}>
-                                <Field name='title' placeholder='Title' value={visit.title} component='input' />
+                                <Field name='title' placeholder='Title' value={visit.title} component={TextInput} />
                                 <Form.TextArea onChange={handleInputChange} name='description' rows={2} placeholder='Description'  value={visit.description} />
                                 <Form.Input onChange={handleInputChange} name='date' type='datetime-local' placeholder='Date'  value={visit.date}/>
                                 <Form.Input onChange={handleInputChange} name='location' placeholder='Location' value={visit.location} />
