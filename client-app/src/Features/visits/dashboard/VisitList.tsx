@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Item, Label, Segment } from 'semantic-ui-react'
+import { Item, Label } from 'semantic-ui-react'
 
 import VisitStore from '../../../App/stores/visitStore'
 import VisitListItem from './VisitListItem'

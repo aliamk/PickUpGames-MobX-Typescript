@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Item, Label, Button, Segment, Icon } from 'semantic-ui-react'
+import { Item, Button, Segment, Icon } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
 
 
