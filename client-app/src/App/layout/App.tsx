@@ -9,6 +9,7 @@ import VisitDashboard from '../../Features/visits/dashboard/VisitDashboard'
 import VisitForm from '../../Features/visits/form/VisitForm'
 import VisitDetails from '../../Features/visits/details/VisitDetails'
 import NotFound from './NotFound'
+import { ToastContainer } from 'react-toastify'
 
 
 const App:React.FC<RouteComponentProps> = ({ location }) => {  
@@ -16,6 +17,7 @@ const App:React.FC<RouteComponentProps> = ({ location }) => {
   // ======== DISPLAY DOM ======== //
   return (
     <Fragment>
+      <ToastContainer position='bottom-right' />
         <Route exact path='/' component={HomePage} />
         <Route path={'/(.+)'} render={() => (
           <Fragment>

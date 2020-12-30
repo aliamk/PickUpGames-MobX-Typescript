@@ -27,6 +27,7 @@ namespace Application.Visits
             public async Task<Visit> Handle(Query request,
                 CancellationToken cancellationToken)
             {
+                throw new Exception("Computer says no");
                 var visit = await _context.Visits.FindAsync(request.Id);
 
                 if (visit == null)

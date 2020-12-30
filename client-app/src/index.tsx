@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
+import 'react-toastify/dist/ReactToastify.min.css'
 import './App/layout/styles.css';
 import App from './App/layout/App';
 import reportWebVitals from './reportWebVitals';
