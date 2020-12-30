@@ -1,5 +1,6 @@
   
 import axios, { AxiosResponse } from 'axios';
+import { toast } from 'react-toastify';
 import { history } from '../..';
 import { IVisit } from '../models/visit_interface';
 
@@ -13,6 +14,9 @@ axios.interceptors.response.use(undefined, error => {
     console.log(error.response)
     if (status === 400 && config.method === 'get' && data.errors.hasOwnProperty('id')) {
         history.push('/notfound')
+    }
+    if (status === 500) {
+        toast.error('Server error - check the terminal fo more info!')
     }
 })
 
