@@ -1,12 +1,13 @@
   
 import axios, { AxiosResponse } from 'axios';
+import { history } from '../..';
 import { IVisit } from '../models/visit_interface';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
 axios.interceptors.response.use(undefined, error => {
     if (error.response.status === 404) {
-        throw error.response
+        history.push('/notfound')
     }
 })
 
