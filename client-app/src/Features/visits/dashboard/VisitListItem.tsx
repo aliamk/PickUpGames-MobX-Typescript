@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Item, Button, Segment, Icon } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
+import {format} from 'date-fns'
 
 
 const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
@@ -22,7 +23,7 @@ const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
             </Segment>
 
             <Segment>
-                <Icon name='clock' />{visit.date}
+                <Icon name='clock' />{format(visit.date!, 'h:mm a')} {/* AM/PM */}
                 <Icon name='marker' />{visit.venue}, {visit.city}
             </Segment>
 
