@@ -7,6 +7,8 @@ import { RouteComponentProps } from 'react-router-dom'
 import { Form as FinalForm, Field } from 'react-final-form';
 import TextInput from '../../../App/common/form/TextInput'
 import TextAreaInput from '../../../App/common/form/TextAreaInput'
+import SelectInput from '../../../App/common/form/SelectInput' 
+import { category } from '../../../App/common/options/categoryOptions';
 
 import VisitStore from '../../../App/stores/visitStore'
 
@@ -65,7 +67,7 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                             <Form onSubmit={handleSubmit}>
                                 <Field name='title' placeholder='Title' value={visit.title} component={TextInput} />
                                 <Field name='description' rows={3} placeholder='Description' value={visit.description} component={TextAreaInput} />
-                                <Field name='category' placeholder='category' value={visit.category} component={TextInput} />
+                                <Field name='category' placeholder='category' value={visit.category} component={SelectInput} options={category} />
                                 <Field name='date' placeholder='Date' value={visit.date} component={TextInput}/>
                                 <Field name='venue' placeholder='venue' value={visit.venue} component={TextInput} />
                                 <Field name='city' placeholder='city' value={visit.city} component={TextInput} />
