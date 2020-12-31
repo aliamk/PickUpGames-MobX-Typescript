@@ -1,4 +1,3 @@
-// import { format } from 'path'
 import { format } from 'date-fns';
 import { observer } from 'mobx-react-lite';
 import React from 'react'

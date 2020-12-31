@@ -3,6 +3,8 @@ import { observable, action, computed, configure, runInAction } from 'mobx'
 
 import agent from '../api/agent'
 import { IVisit } from '../models/visit_interface'
+import { history } from '../..'
+import { toast } from 'react-toastify'
 
 
 // Enables strict mode - state mutations must be confined to within @actions
@@ -67,8 +69,9 @@ class VisitStore {
            try {                                    // Whilst the try/catch block fetches the visit from the API (Visits.details - see SRC > APP > API > AGENT.TS)
                visit = await agent.Visits.details(id)
                runInAction('getting visit', () => {
-                visit.date = new Date(visit.date)
+                   visit.date = new Date(visit.date)
                    this.visit = visit
+                   this.visitRegistry.set(visit.id, visit);
                    this.loadingInitial = false
                })
                return visit
@@ -102,11 +105,13 @@ class VisitStore {
                 this.visitRegistry.set(visit.id, visit);
                 this.submitting = false
             })
+            history.push(`/visits/${visit.id}`)
         } catch (error) {
             runInAction('creating visit error', () => {
                 this.submitting = false
             })
-            console.log(error)
+            toast.error('Problem submitting data')
+            console.log(error.response)
         }
     }
 
@@ -119,12 +124,14 @@ class VisitStore {
                 this.visitRegistry.set(visit.id, visit);
                 this.visit = visit
                 this.submitting = false
-            })          
+            })
+            history.push(`/visits/${visit.id}`)         
         } catch (error) {                   
             runInAction('editing visit error', () => {
                 this.submitting = false
             })
-            console.log(error)
+            toast.error('Problem submitting data')
+            console.log(error.response)
         }
     }
 

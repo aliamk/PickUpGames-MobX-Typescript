@@ -13,9 +13,9 @@ const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
             <Segment>
                 <Item.Group>
                     <Item>
-                        <Item.Image size='tiny' circular src='assets/user.png' />        
+                        <Item.Image size='tiny' circular src='assets/user.png' style={{ marginBottom: 3 }} />        
                     <Item.Content>
-                        <Item.Header as='a'>{visit.title}</Item.Header>
+                        <Item.Header  as={Link} to={`/visits/${visit.id}`}>{visit.title}</Item.Header>
                         <Item.Description>Hosted by Bob</Item.Description>
                     </Item.Content>
                     </Item>
@@ -23,13 +23,11 @@ const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
             </Segment>
 
             <Segment>
-                <Icon name='clock' />{format(visit.date, 'h:mm a')} {/* AM/PM */}
+                <Icon name='clock' />{format(visit.date!, 'h:mm a')} {/* AM/PM */}
                 <Icon name='marker' />{visit.venue}, {visit.city}
             </Segment>
 
-            <Segment secondary>
-                Attendees will go here
-            </Segment>
+            <Segment secondary>Attendees will go here</Segment>
 
             <Segment clearing>
                 <span>{visit.description}</span>
