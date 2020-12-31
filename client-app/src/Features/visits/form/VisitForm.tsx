@@ -9,6 +9,7 @@ import TextInput from '../../../App/common/form/TextInput'
 import TextAreaInput from '../../../App/common/form/TextAreaInput'
 import SelectInput from '../../../App/common/form/SelectInput' 
 import { category } from '../../../App/common/options/categoryOptions';
+import { combineDateAndTime } from '../../../App/common/util/util';
 
 import VisitStore from '../../../App/stores/visitStore'
 import DateInput from '../../../App/common/form/DateInput'
@@ -56,7 +57,10 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
     // }
 
     const handleFinalFormSubmit = (values: any) => {
-        console.log(values)
+        const dateAndTime = combineDateAndTime(values.date, values.time)
+        const {date, time, ...visit} = values
+        visit.date = dateAndTime
+        console.log(visit)
       };
 
      return (
