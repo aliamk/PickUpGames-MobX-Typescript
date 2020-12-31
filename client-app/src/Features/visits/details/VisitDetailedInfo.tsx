@@ -34,7 +34,7 @@ const VisitDetailedInfo: React.FC<{visit: IVisit}> = ({ visit }) => {
             </Grid.Column>
             <Grid.Column width={11}>
               <span>
-                {visit.location}
+                {visit.venue}, {visit.city}
               </span>
             </Grid.Column>
           </Grid>

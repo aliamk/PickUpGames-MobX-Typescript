@@ -23,7 +23,7 @@ const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
 
             <Segment>
                 <Icon name='clock' />{visit.date}
-                <Icon name='marker' />{visit.location}
+                <Icon name='marker' />{visit.venue}, {visit.city}
             </Segment>
 
             <Segment secondary>

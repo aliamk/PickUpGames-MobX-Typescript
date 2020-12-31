@@ -9,7 +9,7 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201228230825_VisitEntityAdded")]
+    [Migration("20201231004911_VisitEntityAdded")]
     partial class VisitEntityAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,16 +55,22 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Category")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Location")
+                    b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Venue")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

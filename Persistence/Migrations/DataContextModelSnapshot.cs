@@ -53,16 +53,22 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Category")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Location")
+                    b.Property<string>("Title")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("Venue")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

@@ -23,7 +23,7 @@ const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
     return (
         <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
-                <Image src={`/assets/locationImages/${visit.location}.jpg`} fluid style={visitImageStyle}/> 
+                <Image src={`/assets/locationImages/${visit.venue}.jpg`} fluid style={visitImageStyle}/> 
                 <Segment style={visitImageTextStyle} basic>
                     <Item.Group>
                         <Item>

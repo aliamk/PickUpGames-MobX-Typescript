@@ -24,8 +24,10 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
         id: '',
         title: '',
         description: '',
+        category: '',
         date: '',
-        location: ''
+        venue: '',
+        city: '',
     })
 
     useEffect(() => {
@@ -63,8 +65,10 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                             <Form onSubmit={handleSubmit}>
                                 <Field name='title' placeholder='Title' value={visit.title} component={TextInput} />
                                 <Field name='description' rows={3} placeholder='Description' value={visit.description} component={TextAreaInput} />
+                                <Field name='category' placeholder='category' value={visit.category} component={TextInput} />
                                 <Field name='date' placeholder='Date' value={visit.date} component={TextInput}/>
-                                <Field name='location' placeholder='Location' value={visit.location} component={TextInput} />
+                                <Field name='venue' placeholder='venue' value={visit.venue} component={TextInput} />
+                                <Field name='city' placeholder='city' value={visit.city} component={TextInput} />
                                 <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
                                 <Button onClick={() => history.push('/visits')}  floated='right' type='button' content='Cancel' />
                             </Form>  

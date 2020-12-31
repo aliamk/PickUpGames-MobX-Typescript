@@ -7,6 +7,8 @@ export interface IVisit
     id: string;
     title: string;
     description: string;
+    category: string;
     date: string;       // Temporarily set to string instead of Date to avoid errors in the ActivityForm Submit button
-    location: string;
+    city: string;
+    venue: string;
 }
