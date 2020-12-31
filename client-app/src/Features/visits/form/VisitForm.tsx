@@ -1,8 +1,8 @@
-import React, { FormEvent, useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Form, Segment, Button, Grid } from 'semantic-ui-react'
 import { IVisit } from '../../../App/models/visit_interface'
-import {v4 as uuid} from 'uuid'
+// import {v4 as uuid} from 'uuid'
 import { RouteComponentProps } from 'react-router-dom'
 import { Form as FinalForm, Field } from 'react-final-form';
 import TextInput from '../../../App/common/form/TextInput'
@@ -22,7 +22,7 @@ interface DetailParams {
 const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history }) => {
 
     const visitStore = useContext(VisitStore)
-    const {createVisit, editVisit, submitting, visit: initialFormState, loadVisit, clearVisit} = visitStore
+    const {/*createVisit, editVisit,*/ submitting, visit: initialFormState, loadVisit, clearVisit} = visitStore
     const [ visit, setVisit ] = useState<IVisit>({
         id: '',
         title: '',
