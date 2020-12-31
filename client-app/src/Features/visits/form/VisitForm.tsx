@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Form, Segment, Button, Grid } from 'semantic-ui-react'
-import { IVisitFormValues } from '../../../App/models/visit_interface'
+import { VisitFormValues } from '../../../App/models/visit_interface'
 // import {v4 as uuid} from 'uuid'
 import { RouteComponentProps } from 'react-router-dom'
 import { Form as FinalForm, Field } from 'react-final-form';
@@ -23,26 +23,21 @@ interface DetailParams {
 const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history }) => {
 
     const visitStore = useContext(VisitStore)
+
     const {/*createVisit, editVisit,*/ submitting, visit: initialFormState, loadVisit, clearVisit} = visitStore
-    const [ visit, setVisit ] = useState<IVisitFormValues>({
-        id: undefined,
-        title: '',
-        description: '',
-        category: '',
-        date: undefined,
-        time: undefined,
-        venue: '',
-        city: '',
-    })
+
+    const [ visit, setVisit ] = useState(new VisitFormValues())
+
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (match.params.id && visit.id) {
-            loadVisit(match.params.id).then(() => initialFormState && setVisit(initialFormState))
+        if (match.params.id) {
+            setLoading(true)
+            loadVisit(match.params.id)
+                .then((visit) => setVisit(new VisitFormValues(visit))
+            ).finally(() => setLoading(false))
         }
-        return () => {
-            clearVisit()
-        }
-    }, [loadVisit, clearVisit, match.params.id, initialFormState, visit.id])
+    }, [loadVisit, match.params.id])
 
     // const handleSubmit = () => {
     //     if (visit.id.length === 0) {
@@ -68,9 +63,10 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
             <Grid.Column width={10}>
                 <Segment clearing>
                     <FinalForm 
+                        initialValues={visit}
                         onSubmit={handleFinalFormSubmit}
                         render={({ handleSubmit }) => (
-                            <Form onSubmit={handleSubmit}>
+                            <Form onSubmit={handleSubmit} loading={loading}>
                                 <Field name='title' placeholder='Title' value={visit.title} component={TextInput} />
                                 <Field name='description' rows={3} placeholder='Description' value={visit.description} component={TextAreaInput} />
                                 <Field name='category' placeholder='category' value={visit.category} component={SelectInput} options={category} />
@@ -80,8 +76,8 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                                 </Form.Group>
                                 <Field name='venue' placeholder='venue' value={visit.venue} component={TextInput} />
                                 <Field name='city' placeholder='city' value={visit.city} component={TextInput} />
-                                <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
-                                <Button onClick={() => history.push('/visits')}  floated='right' type='button' content='Cancel' />
+                                <Button loading={submitting} disabled={loading} floated='right' positive type='submit' content='Submit' />
+                                <Button onClick={() => history.push('/visits')} disabled={loading}  floated='right' type='button' content='Cancel' />
                             </Form>  
                         )}
                     />          

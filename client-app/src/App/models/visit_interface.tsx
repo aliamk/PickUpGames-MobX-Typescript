@@ -13,8 +13,26 @@ export interface IVisit
     venue: string;
 }
 
+// Partial and ? means optional
 export interface IVisitFormValues extends Partial<IVisit> {
     time?: Date;
   }
 
-  // Partial means optional
+// Initialise our form properties
+export class VisitFormValues implements IVisitFormValues {
+    id?: string = undefined;
+    title: string = '';
+    category: string = '';
+    description: string = '';
+    date?: Date = undefined;
+    time?: Date = undefined;
+    city: string = '';
+    venue: string = '';
+
+    constructor(init?: IVisitFormValues) {
+        if (init && init.date) {
+        init.time = init.date;
+        }
+        Object.assign(this, init);
+    }
+}

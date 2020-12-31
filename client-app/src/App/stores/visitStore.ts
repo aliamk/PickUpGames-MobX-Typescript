@@ -61,6 +61,7 @@ class VisitStore {
        let visit = this.getVisit(id)                // Call the helper method GETVISIT and pass in the ID from the View button
        if (visit) {                                 // If getVisit finds a visit with that ID in the visitRegistry, return the visit
            this.visit = visit
+           return visit
        } else {           
            this.loadingInitial = true               // Else, show the loading spinner            
            try {                                    // Whilst the try/catch block fetches the visit from the API (Visits.details - see SRC > APP > API > AGENT.TS)
@@ -70,6 +71,7 @@ class VisitStore {
                    this.visit = visit
                    this.loadingInitial = false
                })
+               return visit
            } catch (error) {
                runInAction('getting visit error', () => {
                    this.loadingInitial = false
