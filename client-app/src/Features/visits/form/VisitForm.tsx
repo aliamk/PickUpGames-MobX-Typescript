@@ -11,6 +11,7 @@ import SelectInput from '../../../App/common/form/SelectInput'
 import { category } from '../../../App/common/options/categoryOptions';
 
 import VisitStore from '../../../App/stores/visitStore'
+import DateInput from '../../../App/common/form/DateInput'
 
 
 // Need the interface to set typeface of ID for match.params.id
@@ -27,7 +28,7 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
         title: '',
         description: '',
         category: '',
-        date: '',
+        date: null,
         venue: '',
         city: '',
     })
@@ -68,7 +69,7 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                                 <Field name='title' placeholder='Title' value={visit.title} component={TextInput} />
                                 <Field name='description' rows={3} placeholder='Description' value={visit.description} component={TextAreaInput} />
                                 <Field name='category' placeholder='category' value={visit.category} component={SelectInput} options={category} />
-                                <Field name='date' placeholder='Date' value={visit.date} component={TextInput}/>
+                                <Field name='date' placeholder='Date' value={visit.date!} component={DateInput}/>
                                 <Field name='venue' placeholder='venue' value={visit.venue} component={TextInput} />
                                 <Field name='city' placeholder='city' value={visit.city} component={TextInput} />
                                 <Button loading={submitting} floated='right' positive type='submit' content='Submit' />
