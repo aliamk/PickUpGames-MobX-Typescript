@@ -12,6 +12,7 @@
     "@types/react-dom": "^16.9.10",
     "@types/react-router-dom": "^4.3.4",
     "@types/react-widgets": "^4.3.3",
+    "@types/revalidate": "^1.1.2",
     "@types/uuid": "^8.3.0",
     "axios": "^0.21.1",
     "date-fns": "^2.0.0-alpha.13",

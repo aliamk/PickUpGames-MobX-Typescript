@@ -10,10 +10,25 @@ import TextAreaInput from '../../../App/common/form/TextAreaInput'
 import SelectInput from '../../../App/common/form/SelectInput' 
 import { category } from '../../../App/common/options/categoryOptions';
 import { combineDateAndTime } from '../../../App/common/util/util';
+import { combineValidators, isRequired, composeValidators, hasLengthGreaterThan } from 'revalidate'
 
 import VisitStore from '../../../App/stores/visitStore'
 import DateInput from '../../../App/common/form/DateInput'
 
+const validate = combineValidators({
+ title: isRequired({ message: 'The event title is required' }),
+  category: isRequired('Category'),
+  description: composeValidators(
+    isRequired('Description'),
+    hasLengthGreaterThan(4)({
+      message: 'Description needs to be at least 5 characters'
+    })
+  )(),
+  city: isRequired('City'),
+  venue: isRequired('Venue'),
+  date: isRequired('Date'),
+  time: isRequired('Time')
+});
 
 // Need the interface to set typeface of ID for match.params.id
 interface DetailParams {
@@ -58,6 +73,7 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
             <Grid.Column width={10}>
                 <Segment clearing>
                     <FinalForm 
+                        validate={validate}
                         initialValues={visit}
                         onSubmit={handleFinalFormSubmit}
                         render={({ handleSubmit }) => (
