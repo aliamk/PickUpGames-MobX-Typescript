@@ -24,11 +24,11 @@ class VisitStore {
     groupVisitsByDate(visits: IVisit[]) {
         // Sort all visits in date order
         const sortedVisits = visits.sort(
-            (a, b) => a.date!.getTime() - b.date!.getTime()
+            (a, b) => a.date.getTime() - b.date.getTime()
         )
         // Take the DATE property of the sortedVisits array, and go through each item...
         return Object.entries(sortedVisits.reduce((visits, visit) => {
-            const date = visit.date!.toISOString().split('T')[0]
+            const date = visit.date.toISOString().split('T')[0]
             // If items have matching dates, add the visit to the visits array; if they don't match, just return the visit in its own array
             visits[date] = visits[date] ? [ ...visits[date], visit] : [visit]
             return visits
@@ -43,7 +43,7 @@ class VisitStore {
             const visits = await agent.Visits.list()    
             runInAction('loading visits', () => {
                 visits.forEach((visit) => {
-                    visit.date = new Date(visit.date!)
+                    visit.date = new Date(visit.date)
                     this.visitRegistry.set(visit.id, visit);
                 })
                 this.loadingInitial = false
@@ -66,7 +66,7 @@ class VisitStore {
            try {                                    // Whilst the try/catch block fetches the visit from the API (Visits.details - see SRC > APP > API > AGENT.TS)
                visit = await agent.Visits.details(id)
                runInAction('getting visit', () => {
-                visit.date = new Date(visit.date!)
+                visit.date = new Date(visit.date)
                    this.visit = visit
                    this.loadingInitial = false
                })

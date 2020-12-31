@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Form, Segment, Button, Grid } from 'semantic-ui-react'
-import { IVisit } from '../../../App/models/visit_interface'
+import { IVisitFormValues } from '../../../App/models/visit_interface'
 // import {v4 as uuid} from 'uuid'
 import { RouteComponentProps } from 'react-router-dom'
 import { Form as FinalForm, Field } from 'react-final-form';
@@ -23,24 +23,25 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
 
     const visitStore = useContext(VisitStore)
     const {/*createVisit, editVisit,*/ submitting, visit: initialFormState, loadVisit, clearVisit} = visitStore
-    const [ visit, setVisit ] = useState<IVisit>({
-        id: '',
+    const [ visit, setVisit ] = useState<IVisitFormValues>({
+        id: undefined,
         title: '',
         description: '',
         category: '',
-        date: null,
+        date: undefined,
+        time: undefined,
         venue: '',
         city: '',
     })
 
     useEffect(() => {
-        if (match.params.id && visit.id.length === 0) {
+        if (match.params.id && visit.id) {
             loadVisit(match.params.id).then(() => initialFormState && setVisit(initialFormState))
         }
         return () => {
             clearVisit()
         }
-    }, [loadVisit, clearVisit, match.params.id, initialFormState, visit.id.length])
+    }, [loadVisit, clearVisit, match.params.id, initialFormState, visit.id])
 
     // const handleSubmit = () => {
     //     if (visit.id.length === 0) {
@@ -69,7 +70,10 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                                 <Field name='title' placeholder='Title' value={visit.title} component={TextInput} />
                                 <Field name='description' rows={3} placeholder='Description' value={visit.description} component={TextAreaInput} />
                                 <Field name='category' placeholder='category' value={visit.category} component={SelectInput} options={category} />
-                                <Field name='date' placeholder='Date' value={visit.date!} component={DateInput}/>
+                                <Form.Group>
+                                <Field name='date' date={true} placeholder='Date' value={visit.date} component={DateInput}/>
+                                <Field name='time' time={true} placeholder='Time' value={visit.date} component={DateInput}/>
+                                </Form.Group>
                                 <Field name='venue' placeholder='venue' value={visit.venue} component={TextInput} />
                                 <Field name='city' placeholder='city' value={visit.city} component={TextInput} />
                                 <Button loading={submitting} floated='right' positive type='submit' content='Submit' />

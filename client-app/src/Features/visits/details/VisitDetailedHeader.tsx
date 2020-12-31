@@ -30,7 +30,7 @@ const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
                         <Item>
                             <Item.Content>
                                 <Header size='huge' content={visit.title} style={{ color: 'white' }} />
-                                <p>{format(visit.date!, 'eeee do MMMM')}</p>
+                                <p>{format(visit.date, 'eeee do MMMM')}</p>
                                 <p>Hosted by{' '}<strong>Bob</strong></p>
                             </Item.Content>
                         </Item>

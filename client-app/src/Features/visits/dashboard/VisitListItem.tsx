@@ -23,7 +23,7 @@ const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
             </Segment>
 
             <Segment>
-                <Icon name='clock' />{format(visit.date!, 'h:mm a')} {/* AM/PM */}
+                <Icon name='clock' />{format(visit.date, 'h:mm a')} {/* AM/PM */}
                 <Icon name='marker' />{visit.venue}, {visit.city}
             </Segment>
 

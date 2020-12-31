@@ -8,7 +8,13 @@ export interface IVisit
     title: string;
     description: string;
     category: string;
-    date: Date | null;       // Temporarily set to string instead of Date to avoid errors in the ActivityForm Submit button
+    date: Date;       // Temporarily set to string instead of Date to avoid errors in the ActivityForm Submit button
     city: string;
     venue: string;
 }
+
+export interface IVisitFormValues extends Partial<IVisit> {
+    time?: Date;
+  }
+
+  // Partial means optional

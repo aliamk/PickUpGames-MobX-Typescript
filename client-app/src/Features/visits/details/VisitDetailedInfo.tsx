@@ -1,8 +1,7 @@
-import { format } from 'date-fns';
 import React from 'react'
 import { Segment, Grid, Icon } from 'semantic-ui-react';
 import { IVisit } from '../../../App/models/visit_interface';
-// import {format} from 'date-fns';
+import {format} from 'date-fns';
 
 const VisitDetailedInfo: React.FC<{visit: IVisit}> = ({ visit }) => {
 
@@ -24,7 +23,7 @@ const VisitDetailedInfo: React.FC<{visit: IVisit}> = ({ visit }) => {
               <Icon name='calendar' size='large' color='teal' />
             </Grid.Column>
             <Grid.Column width={15}>
-              <span>{format(visit.date!, 'eeee do MMMM')} at {format(visit.date!, 'h:mm a')}</span>
+              <span>{format(visit.date, 'eeee do MMMM')} at {format(visit.date, 'h:mm a')}</span>
             </Grid.Column>
           </Grid>
         </Segment>
