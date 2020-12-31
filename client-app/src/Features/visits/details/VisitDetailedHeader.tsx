@@ -1,4 +1,5 @@
 // import { format } from 'path'
+import { format } from 'date-fns';
 import { observer } from 'mobx-react-lite';
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -29,7 +30,7 @@ const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
                         <Item>
                             <Item.Content>
                                 <Header size='huge' content={visit.title} style={{ color: 'white' }} />
-                                <p>{visit.date}</p>
+                                <p>{format(visit.date!, 'eeee do MMMM')}</p>
                                 <p>Hosted by{' '}<strong>Bob</strong></p>
                             </Item.Content>
                         </Item>
