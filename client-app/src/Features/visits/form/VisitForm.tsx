@@ -39,8 +39,9 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
 
     const visitStore = useContext(VisitStore)
     const {createVisit, editVisit, submitting, loadVisit} = visitStore
+    
     const [ visit, setVisit ] = useState(new VisitFormValues())
-    const [loading, setLoading] = useState(false)
+    const [ loading, setLoading ] = useState(false)
 
     useEffect(() => {
         if (match.params.id) {
