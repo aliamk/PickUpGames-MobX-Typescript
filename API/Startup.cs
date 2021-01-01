@@ -52,6 +52,8 @@ namespace API
             var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
             identityBuilder.AddEntityFrameworkStores<DataContext>();
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
+
+            services.AddAuthentication(); // temporarily added this to get around the system IClock error 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
