@@ -7,6 +7,7 @@ const VisitDetailedInfo: React.FC<{visit: IVisit}> = ({ visit }) => {
 
     return (
         <Segment.Group>
+
         <Segment attached='top'>
           <Grid>
             <Grid.Column width={1}>
@@ -17,16 +18,18 @@ const VisitDetailedInfo: React.FC<{visit: IVisit}> = ({ visit }) => {
             </Grid.Column>
           </Grid>
         </Segment>
+
         <Segment attached>
           <Grid verticalAlign='middle'>
             <Grid.Column width={1}>
               <Icon name='calendar' size='large' color='teal' />
             </Grid.Column>
             <Grid.Column width={15}>
-              <span>{format(visit.date, 'eeee do MMMM')} at {format(visit.date, 'h:mm a')}</span>
+              <span>{format(visit.date!, 'eeee do MMMM')} at {format(visit.date!, 'h:mm a')}</span>
             </Grid.Column>
           </Grid>
         </Segment>
+
         <Segment attached>
           <Grid verticalAlign='middle'>
             <Grid.Column width={1}>
@@ -39,6 +42,7 @@ const VisitDetailedInfo: React.FC<{visit: IVisit}> = ({ visit }) => {
             </Grid.Column>
           </Grid>
         </Segment>
+        
       </Segment.Group>
     )
 }

@@ -7,7 +7,6 @@ import VisitStore from '../../../App/stores/visitStore'
 import LoadingComponent from '../../../App/layout/LoadingComponent'
 import VisitDetailedHeader from './VisitDetailedHeader'
 import VisitDetailedInfo from './VisitDetailedInfo'
-import VisitDetailedChat from './VisitDetailedChat'
 import VisitDetailedSidebar from './VisitDetailedSidebar'
 
 
@@ -34,7 +33,6 @@ const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match, hist
           <Grid.Column width={10}>
             <VisitDetailedHeader visit={visit} />
             <VisitDetailedInfo visit={visit} />
-            <VisitDetailedChat visit={visit} />
           </Grid.Column>
           <Grid.Column width={6}>
             <VisitDetailedSidebar />

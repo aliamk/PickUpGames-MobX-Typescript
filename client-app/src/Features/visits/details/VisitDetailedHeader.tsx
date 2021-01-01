@@ -1,8 +1,9 @@
-import { format } from 'date-fns';
-import { observer } from 'mobx-react-lite';
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Header, Item, Segment, Image } from 'semantic-ui-react'
+import { observer } from 'mobx-react-lite';
+import { format } from 'date-fns';
 import { IVisit } from '../../../App/models/visit_interface';
 
 
@@ -29,7 +30,7 @@ const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
                         <Item>
                             <Item.Content>
                                 <Header size='huge' content={visit.title} style={{ color: 'white' }} />
-                                <p>{format(visit.date, 'eeee do MMMM')}</p>
+                                <p>{format(visit.date!, 'eeee do MMMM')}</p>  {/*  long form */}
                                 <p>Hosted by{' '}<strong>Bob</strong></p>
                             </Item.Content>
                         </Item>
