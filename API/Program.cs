@@ -1,5 +1,7 @@
 using System;
+using Domain;                                       // AppUser
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;                // UserManager
 using Microsoft.EntityFrameworkCore;                // Migrate
 using Microsoft.Extensions.DependencyInjection;     // CreateScope
 using Microsoft.Extensions.Hosting;
@@ -19,8 +21,9 @@ namespace API
                 try
                 {
                     var context = services.GetRequiredService<DataContext>();
+                    var userManager = services.GetRequiredService<UserManager<AppUser>>();
                     context.Database.Migrate();
-                    Seed.SeedData(context);
+                    Seed.SeedData(context, userManager).Wait();
                 }
                 catch (Exception ex)
                 {
