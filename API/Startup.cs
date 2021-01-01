@@ -1,18 +1,21 @@
-using API.Middleware;                               // ErrorHandlingMiddleware
-using Application.Interfaces;                       // IJwtGenerator
-using Application.Visits;                           // (typeof(List))
-using Domain;                                       // AppUser
-using FluentValidation.AspNetCore;                  // AddFluentValidation
-using Infrastructure.Security;                      // JwtGenerator
-using MediatR;                                      // AddMediatR
+using System.Text;                                      // Encoding
+using API.Middleware;                                   // ErrorHandlingMiddleware
+using Application.Interfaces;                           // IJwtGenerator
+using Application.Visits;                               // (typeof(List))
+using Domain;                                           // AppUser
+using FluentValidation.AspNetCore;                      // AddFluentValidation
+using Infrastructure.Security;                          // JwtGenerator
+using MediatR;                                          // AddMediatR
+using Microsoft.AspNetCore.Authentication.JwtBearer;    // JwtBearerDefaults
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;                // IdentityBuilder
-using Microsoft.EntityFrameworkCore;                // UseSqlite
+using Microsoft.AspNetCore.Identity;                    // IdentityBuilder
+using Microsoft.EntityFrameworkCore;                    // UseSqlite
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Persistence;                                  // DbContext
+using Microsoft.IdentityModel.Tokens;                   // SymmetricSecurityKey
+using Persistence;                                      // DbContext
 
 
 namespace API
@@ -55,7 +58,22 @@ namespace API
             identityBuilder.AddEntityFrameworkStores<DataContext>();
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
 
-            services.AddAuthentication(); // temporarily added this to get around the system IClock error 
+            // JWT TOKEN GENERATOR
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Super secret key"]));
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = key,
+                        ValidateAudience = false,
+                        ValidateIssuer = false
+                        // ValidateLifetime = true,
+                        // ClockSkew = TimeSpan.Zero
+                    };
+                });
+
             services.AddScoped<IJwtGenerator, JwtGenerator>()
 ;
         }
@@ -73,9 +91,11 @@ namespace API
 
             app.UseRouting();
 
-            app.UseAuthorization();
-
             app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
