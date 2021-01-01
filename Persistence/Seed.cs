@@ -53,7 +53,7 @@ namespace Persistence
                     {
                         Title = "First appointment with Dr Krull",
                         Description = "Nervous first meeting with Dr Krull",
-                        Category = "Appointment",
+                        // Category = "Appointment",
                         Date = DateTime.Now.AddMonths(-7),
                         Venue = "St Thomas' Hospital",
                         City = "London",
@@ -62,7 +62,7 @@ namespace Persistence
                     {
                         Title = "Second appointment with Dr Krull",
                         Description = "Had to wait forever but had some good news so happy",
-                        Category = "Appointment",
+                        // Category = "Appointment",
                         Date = DateTime.Now.AddMonths(-6),
                         Venue = "St Thomas' Hospital",
                         City = "London",
@@ -71,7 +71,7 @@ namespace Persistence
                     {
                         Title = "Third appointment with Dr Krull",
                         Description = "Changing medications today",
-                        Category = "Appointment",
+                        // Category = "Appointment",
                         Date = DateTime.Now.AddMonths(-5),
                         Venue = "St Thomas' Hospital",
                         City = "London",
@@ -80,7 +80,7 @@ namespace Persistence
                     {
                         Title = "Last Day with Dr Kelly",
                         Description = "Got used to coming here - being transferred to St Thomas' Hospital",
-                        Category = "Leaving",
+                        // Category = "Leaving",
                         Date = DateTime.Now.AddMonths(-8),
                         Venue = "St Bart's Hospital",
                         City = "London",
@@ -89,16 +89,16 @@ namespace Persistence
                     {
                         Title = "Lots of changes",
                         Description = "Some good and bad news in today's medical report...",
-                        Category = "Results Day",
+                        // Category = "Results Day",
                         Date = DateTime.Now.AddMonths(-9),
-                        Venue = "St Bart's Hospital",
+                        Venue = "StBartsHospital",
                         City = "London",
                     },
                     new Visit
                     {
                         Title = "Road Trip! (Sort of) ",
                         Description = "Referred to a specialist for the first time",
-                        Category = "Appointment",
+                        // Category = "Appointment",
                         Date = DateTime.Now.AddMonths(-11),
                         Venue = "Manchester Royal Infirmary",
                         City = "Manchester",

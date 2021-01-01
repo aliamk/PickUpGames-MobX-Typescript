@@ -7,7 +7,7 @@ export interface IVisit
     id: string;
     title: string;
     description: string;
-    category: string;
+    // category: string;
     date: Date;       // Temporarily set to string instead of Date to avoid errors in the ActivityForm Submit button
     city: string;
     venue: string;
@@ -22,7 +22,7 @@ export interface IVisitFormValues extends Partial<IVisit> {
 export class VisitFormValues implements IVisitFormValues {
     id?: string = undefined;
     title: string = '';
-    category: string = '';
+    // category: string = '';
     description: string = '';
     date?: Date = undefined;
     time?: Date = undefined;

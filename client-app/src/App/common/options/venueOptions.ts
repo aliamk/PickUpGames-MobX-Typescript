@@ -1,8 +1,7 @@
 export const venue = [
-    { key: 'StBartsHospital', text: "St Bart's Hospital", value: "St Bart's Hospital" },
-    { key: 'StThomasHospital', text: "St Thomas' Hospital", value: "St Thomas' Hospital" },
-    { key: 'WhippsCrossHospital', text: "Whipps Cross Hospital", value: "Whipps Cross Hospital" },
-    { key: 'StBartsHospital', text: "St Bart's Hospital", value: 'StBartsHospital' },
-    { key: 'ManchesterRoyalInfirmary', text: "Manchester Royal Infirmary", value: "Manchester Royal Infirmary" },
+    { key: "St Bart's Hospital", text: "St Bart's Hospital", value: "StBartsHospital" },
+    { key: "St Thomas' Hospital", text: "St Thomas' Hospital", value: "StThomasHospital" },
+    { key: 'Whipps Cross Hospital', text: "Whipps Cross Hospital", value: "WhippsCrossHospital" },
+    { key: 'Manchester Royal Infirmary', text: "Manchester Royal Infirmary", value: "ManchesterRoyalInfirmary" },
 
 ]

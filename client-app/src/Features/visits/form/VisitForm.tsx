@@ -8,7 +8,7 @@ import { Form as FinalForm, Field } from 'react-final-form';
 import TextInput from '../../../App/common/form/TextInput'
 import TextAreaInput from '../../../App/common/form/TextAreaInput'
 import SelectInput from '../../../App/common/form/SelectInput' 
-import { category } from '../../../App/common/options/categoryOptions';
+// import { category } from '../../../App/common/options/categoryOptions';
 import { venue } from '../../../App/common/options/venueOptions';
 import { combineDateAndTime } from '../../../App/common/util/util';
 import { combineValidators, isRequired, composeValidators, hasLengthGreaterThan } from 'revalidate'
@@ -18,7 +18,6 @@ import DateInput from '../../../App/common/form/DateInput'
 
 const validate = combineValidators({
  title: isRequired({ message: 'The event title is required' }),
-  category: isRequired('Category'),
   description: composeValidators(
     isRequired('Description'),
     hasLengthGreaterThan(4)({
@@ -82,12 +81,12 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                             <Form onSubmit={handleSubmit} loading={loading}>
                                 <Field name='title' placeholder='Title' value={visit.title} component={TextInput} />
                                 <Field name='description' rows={3} placeholder='Description' value={visit.description} component={TextAreaInput} />
-                                <Field name='category' placeholder='category' value={visit.category} component={SelectInput} options={category} />
+                                {/* <Field name='category' placeholder='category' value={visit.category} component={SelectInput} options={category} /> */}
                                 <Form.Group>
                                 <Field name='date' date={true} placeholder='Date' value={visit.date!} component={DateInput}/>
                                 <Field name='time' time={true} placeholder='Time' value={visit.date!} component={DateInput}/>
                                 </Form.Group>
-                                <Field name='venue' placeholder='venue' value={visit.venue} component={TextInput}/*component={SelectInput} options={venue}*/ />
+                                <Field name='venue' placeholder='venue' value={visit.venue} /*component={TextInput}*/component={SelectInput} options={venue} />
                                 <Field name='city' placeholder='city' value={visit.city} component={TextInput} />
                                 <Button loading={submitting} disabled={loading || invalid || pristine} floated='right' positive type='submit' content='Submit' />
                                 <Button onClick={visit.id ? () => history.push(`/visits/${visit.id}`) : () => history.push('/visits')} disabled={loading}  floated='right' type='button' content='Cancel' />
