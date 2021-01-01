@@ -76,7 +76,7 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                         validate={validate}
                         initialValues={visit}
                         onSubmit={handleFinalFormSubmit}
-                        render={({ handleSubmit }) => (
+                        render={({ handleSubmit, invalid, pristine }) => (
                             <Form onSubmit={handleSubmit} loading={loading}>
                                 <Field name='title' placeholder='Title' value={visit.title} component={TextInput} />
                                 <Field name='description' rows={3} placeholder='Description' value={visit.description} component={TextAreaInput} />
@@ -87,7 +87,7 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                                 </Form.Group>
                                 <Field name='venue' placeholder='venue' value={visit.venue} component={TextInput} />
                                 <Field name='city' placeholder='city' value={visit.city} component={TextInput} />
-                                <Button loading={submitting} disabled={loading} floated='right' positive type='submit' content='Submit' />
+                                <Button loading={submitting} disabled={loading || invalid || pristine} floated='right' positive type='submit' content='Submit' />
                                 <Button onClick={visit.id ? () => history.push(`/visits/${visit.id}`) : () => history.push('/visits')} disabled={loading}  floated='right' type='button' content='Cancel' />
                             </Form>  
                         )}
