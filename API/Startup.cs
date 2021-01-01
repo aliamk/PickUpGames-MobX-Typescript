@@ -3,7 +3,7 @@ using Application.Interfaces;                       // IJwtGenerator
 using Application.Visits;                           // (typeof(List))
 using Domain;                                       // AppUser
 using FluentValidation.AspNetCore;                  // AddFluentValidation
-
+using Infrastructure.Security;                      // JwtGenerator
 using MediatR;                                      // AddMediatR
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

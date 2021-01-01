@@ -2,6 +2,7 @@ using System.Net;                       // HttpStatusCode
 using System.Threading;                 // CancellationToken
 using System.Threading.Tasks;           // Task
 using Application.Errors;               // RestException
+using Application.Interfaces;           // IJwtGenerator
 using Domain;                           // User
 using FluentValidation;                 // AbstractValidator
 using MediatR;                          // IRequest
@@ -28,10 +29,13 @@ namespace Application.User
 
         public class Handler : IRequestHandler<Query, User>
         {
+            // Initialise field from parameter
             private readonly UserManager<AppUser> _userManager;
             private readonly SignInManager<AppUser> _signInManager;
-            public Handler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+            private readonly IJwtGenerator _jwtGenerator;
+            public Handler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtGenerator jwtGenerator)
             {
+                _jwtGenerator = jwtGenerator;
                 _signInManager = signInManager;
                 _userManager = userManager;
             }
@@ -52,6 +56,7 @@ namespace Application.User
                     return new User
                     {
                         DisplayName = user.DisplayName,
+                        Token = _jwtGenerator.CreateToken(user),
                         Username = user.UserName,
                         Image = null
                     };
