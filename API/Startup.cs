@@ -1,7 +1,9 @@
 using API.Middleware;                               // ErrorHandlingMiddleware
+using Application.Interfaces;                       // IJwtGenerator
 using Application.Visits;                           // (typeof(List))
 using Domain;                                       // AppUser
 using FluentValidation.AspNetCore;                  // AddFluentValidation
+using Infrastructure.Security;                      // JwtGenerator
 using MediatR;                                      // AddMediatR
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -54,6 +56,8 @@ namespace API
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
 
             services.AddAuthentication(); // temporarily added this to get around the system IClock error 
+            services.AddScoped<IJwtGenerator, JwtGenerator>()
+;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
