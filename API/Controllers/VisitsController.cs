@@ -1,10 +1,11 @@
-using System;                       // Guid
-using System.Collections.Generic;   // List
-using System.Threading.Tasks;       // Task
-using Application.Visits;           // new List.Query
-using Domain;                       // Visit
-using MediatR;                      // Mediator
-using Microsoft.AspNetCore.Mvc;     // Route + ApiController
+using System;                               // Guid
+using System.Collections.Generic;           // List
+using System.Threading.Tasks;               // Task
+using Application.Visits;                   // new List.Query
+using Domain;                               // Visit
+using MediatR;                              // Mediator
+using Microsoft.AspNetCore.Authorization;   // Authorize
+using Microsoft.AspNetCore.Mvc;             // Route + ApiController
 
 
 namespace API.Controllers
@@ -18,9 +19,9 @@ namespace API.Controllers
             return await Mediator.Send(new List.Query());
         }
 
-
         // Request for a single item  - see the Details Handler in Details.cs
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<Visit>> Details(Guid id)
         {
             return await Mediator.Send(new Details.Query { Id = id }); // initialise Id 
