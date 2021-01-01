@@ -87,7 +87,7 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                                 <Field name='date' date={true} placeholder='Date' value={visit.date!} component={DateInput}/>
                                 <Field name='time' time={true} placeholder='Time' value={visit.date!} component={DateInput}/>
                                 </Form.Group>
-                                <Field name='venue' placeholder='venue' value={visit.venue} component={SelectInput} options={venue} />
+                                <Field name='venue' placeholder='venue' value={visit.venue} component={TextInput}/*component={SelectInput} options={venue}*/ />
                                 <Field name='city' placeholder='city' value={visit.city} component={TextInput} />
                                 <Button loading={submitting} disabled={loading || invalid || pristine} floated='right' positive type='submit' content='Submit' />
                                 <Button onClick={visit.id ? () => history.push(`/visits/${visit.id}`) : () => history.push('/visits')} disabled={loading}  floated='right' type='button' content='Cancel' />
