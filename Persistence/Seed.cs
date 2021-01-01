@@ -1,14 +1,50 @@
-using System.Collections.Generic;   // List
-using System.Linq;                  // Any
-using Domain;                       // Visit
-using System;                       // DateTime
+using System.Collections.Generic;       // List
+using System.Linq;                      // Any
+using Domain;                           // Visit
+using System;                           // DateTime
+using Microsoft.AspNetCore.Identity;    // UserManager
+using System.Threading.Tasks;           // Task
 
 namespace Persistence
 {
     public class Seed
     {
-        public static void SeedData(DataContext context)
+        public static /*void*/ async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
+            // Seed data for Users
+            if (!userManager.Users.Any())
+            {
+                var users = new List<AppUser>
+                {
+                    new AppUser
+                    {
+                        // Id = "a",
+                        DisplayName = "Bob",
+                        UserName = "bob",
+                        Email = "bob@test.com"
+                    },
+                    new AppUser
+                    {
+                        // Id = "b",
+                        DisplayName = "Jane",
+                        UserName = "jane",
+                        Email = "jane@test.com"
+                    },
+                    new AppUser
+                    {
+                        // Id = "c",
+                        DisplayName = "Tom",
+                        UserName = "tom",
+                        Email = "tom@test.com"
+                    },
+                };
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+            }
+
+            // Seed data for Visits
             if (!context.Visits.Any())
             {
                 var visits = new List<Visit>
