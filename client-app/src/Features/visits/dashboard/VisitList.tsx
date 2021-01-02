@@ -3,14 +3,14 @@ import { observer } from 'mobx-react-lite'
 import { Item, Label } from 'semantic-ui-react'
 import {format} from 'date-fns';
 
-import VisitStore from '../../../App/stores/visitStore'
+import { RootStoreContext } from '../../../App/stores/rootStore'
 import VisitListItem from './VisitListItem'
 
 
 const VisitList: React.FC = () => {
     
-    const visitStore = useContext(VisitStore)
-    const {visitsByDate} = visitStore
+    const rootStore = useContext(RootStoreContext)
+    const {visitsByDate} = rootStore.visitStore
 
     return (
         <Fragment>
