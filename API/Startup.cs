@@ -7,9 +7,11 @@ using FluentValidation.AspNetCore;                      // AddFluentValidation
 using Infrastructure.Security;                          // JwtGenerator
 using MediatR;                                          // AddMediatR
 using Microsoft.AspNetCore.Authentication.JwtBearer;    // JwtBearerDefaults
+using Microsoft.AspNetCore.Authorization;               // AuthorizationPolicyBuilder
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;                    // IdentityBuilder
+using Microsoft.AspNetCore.Mvc.Authorization;           // AuthorizeFilter
 using Microsoft.EntityFrameworkCore;                    // UseSqlite
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,7 +49,11 @@ namespace API
             // For decoupling asnyc handlers from requests
             services.AddMediatR(typeof(List.Handler).Assembly);
             // Fluid Validation for checks before sending data to command handlers
-            services.AddControllers()
+            services.AddControllers(opt =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                opt.Filters.Add(new AuthorizeFilter(policy));
+            })
                 .AddFluentValidation(cfg =>
             {
                 cfg.RegisterValidatorsFromAssemblyContaining<Create>();
