@@ -1,3 +1,5 @@
+// What should be returned when user logins
+
 namespace Application.User
 {
     public class User
