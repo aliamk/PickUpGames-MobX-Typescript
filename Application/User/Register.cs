@@ -4,6 +4,7 @@ using System.Threading;                 // CancellationToken
 using System.Threading.Tasks;           // Task
 using Application.Errors;               // RestException
 using Application.Interfaces;           // IJwtGenerator
+using Application.Validators;           // Password
 using Domain;                           // AppUser
 using FluentValidation;                 // AbstractValidator
 using MediatR;                          // IRequest
@@ -29,8 +30,8 @@ namespace Application.User
             {
                 RuleFor(x => x.DisplayName).NotEmpty();
                 RuleFor(x => x.Username).NotEmpty();
-                RuleFor(x => x.Email).NotEmpty();
-                RuleFor(x => x.Password).NotEmpty();
+                RuleFor(x => x.Email).NotEmpty().EmailAddress();
+                RuleFor(x => x.Password).Password();
             }
         }
 
