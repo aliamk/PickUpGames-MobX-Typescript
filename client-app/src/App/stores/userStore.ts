@@ -27,11 +27,23 @@ export default class UserStore {
         this.user = user;        
       });
       this.rootStore.commonStore.setToken(user.token);
+      this.rootStore.modalStore.closeModal();
       history.push('/visits')
     } catch (error) {
         throw error;
     }
   };
+
+  @action register = async (values: IUserFormValues) => {
+    try {
+      const user = await agent.User.register(values);
+      this.rootStore.commonStore.setToken(user.token);
+      this.rootStore.modalStore.closeModal();
+      history.push('/activities')
+    } catch (error) {
+      throw error;
+    }
+  }
 
   // Method for getting the current user associated with a particular token (send to App.tsx's getUser())
   @action getUser = async () => {
@@ -50,19 +62,4 @@ export default class UserStore {
     this.user = null; 
     history.push('/')   
   };
-
-  /*@action register = async (values: IUserFormValues) => {
-    try {
-      const user = await agent.User.register(values);
-      this.rootStore.commonStore.setToken(user.token);
-      this.rootStore.modalStore.closeModal();
-      history.push('/activities')
-    } catch (error) {
-      throw error;
-    }
-  }*/
-
-
-
-
 }
