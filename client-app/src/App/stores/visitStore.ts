@@ -5,12 +5,19 @@ import agent from '../api/agent'
 import { IVisit } from '../models/visit_interface'
 import { history } from '../..'
 import { toast } from 'react-toastify'
+import { RootStore } from './rootStore';
 
 
 // Enables strict mode - state mutations must be confined to within @actions
 configure({ enforceActions: 'always' })
 
 export default class VisitStore {
+
+    rootStore: RootStore;
+    constructor(rootStore: RootStore) {
+      this.rootStore = rootStore; 
+
+    }
 
     @observable visitRegistry = new Map()
     @observable visit: IVisit | null = null;

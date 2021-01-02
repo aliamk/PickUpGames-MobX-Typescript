@@ -14,7 +14,8 @@ export default class UserStore {
   @observable user: IUser | null = null;
 
   // See whether a user is logged-in
-  @computed get isLoggedIn() { return !!this.user; }
+  @computed get isLoggedIn() { return !!this.user;
+  }
 
   // Method for users to log-in with
   @action login = async (values: IUserFormValues) => {
