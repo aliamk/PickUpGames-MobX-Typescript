@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 // Enables strict mode - state mutations must be confined to within @actions
 configure({ enforceActions: 'always' })
 
-class VisitStore {
+export default class VisitStore {
 
     @observable visitRegistry = new Map()
     @observable visit: IVisit | null = null;
@@ -156,4 +156,3 @@ class VisitStore {
     }
 }
 
-export default createContext(new VisitStore())
