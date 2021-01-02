@@ -1,4 +1,4 @@
-// Creating a Typescript interface that's controlling what the activities' parameters are - this is for type-checking
+// Creating a Typescript interface that's controlling what the visits' parameters are - this is for type-checking
 // Not using a class to do this because Interfaces don't get generated into Javascript the way classes do
 // so the final code output will be less this way
 

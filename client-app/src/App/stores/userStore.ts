@@ -39,7 +39,7 @@ export default class UserStore {
       const user = await agent.User.register(values);
       this.rootStore.commonStore.setToken(user.token);
       this.rootStore.modalStore.closeModal();
-      history.push('/activities')
+      history.push('/visits')
     } catch (error) {
       throw error;
     }

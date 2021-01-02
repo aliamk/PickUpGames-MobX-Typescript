@@ -41,7 +41,7 @@ const LoginForm = () => {
                     <ErrorMessage error={submitError} text='Invalid email or password' />
                 )}
                 
-                <Button  disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} color='teal' content='Login' fluid />
+                <Button disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} color='teal' content='Login' fluid />
                 </Form>
             )}
         />

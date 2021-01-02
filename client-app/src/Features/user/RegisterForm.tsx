@@ -16,8 +16,10 @@ const validate = combineValidators({
 });
 
 const RegisterForm = () => {
+
   const rootStore = useContext(RootStoreContext);
   const { register } = rootStore.userStore;
+  
   return (
     <FinalForm
       onSubmit={(values: IUserFormValues) =>
@@ -35,37 +37,17 @@ const RegisterForm = () => {
         dirtySinceLastSubmit
       }) => (
         <Form onSubmit={handleSubmit} error>
-          <Header
-            as='h2'
-            content='Sign up to Pinga'
-            color='teal'
-            textAlign='center'
-          />
+          <Header as='h2' content='Sign up to Pinga' color='teal' textAlign='center' />
           <Field name='username' component={TextInput} placeholder='Username' />
-          <Field
-            name='displayName'
-            component={TextInput}
-            placeholder='Display Name'
-          />
+          <Field name='displayName' component={TextInput} placeholder='Display Name' />
           <Field name='email' component={TextInput} placeholder='Email' />
-          <Field
-            name='password'
-            component={TextInput}
-            placeholder='Password'
-            type='password'
-          />
+          <Field name='password' component={TextInput} placeholder='Password' type='password' />
+
           {submitError && !dirtySinceLastSubmit && (
-            <ErrorMessage
-              error={submitError}
-            />
+            <ErrorMessage error={submitError} />
           )}
-          <Button
-            disabled={(invalid && !dirtySinceLastSubmit) || pristine}
-            loading={submitting}
-            color='teal'
-            content='Register'
-            fluid
-          />
+
+          <Button disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} color='teal' content='Register' fluid />
         </Form>
       )}
     />
