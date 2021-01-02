@@ -3,11 +3,11 @@ import { observer } from 'mobx-react-lite'
 import { Grid } from 'semantic-ui-react'
 import { RouteComponentProps } from 'react-router-dom'
 
-import VisitStore from '../../../App/stores/visitStore'
 import LoadingComponent from '../../../App/layout/LoadingComponent'
 import VisitDetailedHeader from './VisitDetailedHeader'
 import VisitDetailedInfo from './VisitDetailedInfo'
 import VisitDetailedSidebar from './VisitDetailedSidebar'
+import { RootStoreContext } from '../../../App/stores/rootStore'
 
 
 // Need the interface to set typeface of ID for match.params.id
@@ -17,8 +17,8 @@ interface DetailParams {
 
 const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match, history }) => {
 
-  const visitStore = useContext(VisitStore)
-  const { visit, loadVisit, loadingInitial } = visitStore
+  const rootStore = useContext(RootStoreContext)
+  const { visit, loadVisit, loadingInitial } = rootStore.visitStore
 
   useEffect(() => {
     loadVisit(match.params.id)
