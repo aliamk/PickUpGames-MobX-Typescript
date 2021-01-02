@@ -10,7 +10,8 @@ import { configure } from 'mobx';
 // Initialise the stores accessible via RootStore
 // 'this' represents the rootstore
 
-configure({enforceActions: 'always'});
+// Enables strict mode - state mutations must be confined to within @actions
+configure({ enforceActions: 'always' })
 
 export class RootStore {
     visitStore: VisitStore;
