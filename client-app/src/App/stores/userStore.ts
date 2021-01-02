@@ -33,7 +33,7 @@ export default class UserStore {
     }
   };
 
-  // Method for getting the user associated with a token (send to App.tsx's getUser())
+  // Method for getting the current user associated with a particular token (send to App.tsx's getUser())
   @action getUser = async () => {
     try {
       const user = await agent.User.current();

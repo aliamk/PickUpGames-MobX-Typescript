@@ -2,7 +2,7 @@ import { FORM_ERROR } from 'final-form';
 import React, { useContext } from 'react';
 import { Form as FinalForm, Field } from 'react-final-form';
 import { combineValidators, isRequired } from 'revalidate';
-import { Form, Button, Label } from 'semantic-ui-react';
+import { Form, Button, Label, Header } from 'semantic-ui-react';
 import TextInput from '../../App/common/form/TextInput';
 import { IUserFormValues } from '../../App/models/user';
 import { RootStoreContext } from '../../App/stores/rootStore';
@@ -28,6 +28,7 @@ const LoginForm = () => {
             validate={validate}
             render={({ handleSubmit, submitting, form, submitError, invalid, pristine, dirtySinceLastSubmit }) => (
                 <Form onSubmit={handleSubmit}>
+                <Header as='h2' content='Login to Pinga' color='teal' textAlign='center' />
                 <Field name='email' component={TextInput} placeholder='Email' />
                 <Field
                     name='password'
@@ -38,8 +39,8 @@ const LoginForm = () => {
                 {submitError && !dirtySinceLastSubmit && (
                     <Label content={submitError.statusText} color='red' />
                 )}
-                <br />
-                <Button  disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} positive content='Login' />
+                
+                <Button  disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} positive content='Login' fluid />
                 </Form>
             )}
         />
