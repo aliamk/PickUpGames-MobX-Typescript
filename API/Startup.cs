@@ -59,11 +59,11 @@ namespace API
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
 
             // JWT TOKEN GENERATOR
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Super secret key"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Super secret key"));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
                 {
-                    opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    opt.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = key,
@@ -74,8 +74,7 @@ namespace API
                     };
                 });
 
-            services.AddScoped<IJwtGenerator, JwtGenerator>()
-;
+            services.AddScoped<IJwtGenerator, JwtGenerator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
