@@ -35,7 +35,8 @@ export default class UserStore {
 
   @action logout = () => {
     this.rootStore.commonStore.setToken(null);
-    this.user = null;    
+    this.user = null; 
+    history.push('/')   
   };
 
   /*@action register = async (values: IUserFormValues) => {

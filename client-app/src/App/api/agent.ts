@@ -7,6 +7,17 @@ import { IVisit } from '../models/visit_interface';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
+// Check if there's a token; if yes, attach to the authorization header; if no, return error 
+axios.interceptors.request.use(config => {
+      const token = window.localStorage.getItem('jwt');
+      if (token) config.headers.Authorization = `Bearer ${token}`;
+      return config;
+    },
+    error => {
+      return Promise.reject(error);
+    }
+  );
+
 axios.interceptors.response.use(undefined, error => {
     if (error.message === 'Network Error' && !error.response) {
         toast.error('Network error - make sure API is running!')
