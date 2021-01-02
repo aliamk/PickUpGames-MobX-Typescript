@@ -1,14 +1,15 @@
 import { observable, computed, action, runInAction } from 'mobx';
 import { IUser, IUserFormValues } from '../models/user';
 import agent from '../api/agent';
-// import { RootStore } from './rootStore';
+import { RootStore } from './rootStore';
 // import { history } from '../..';
 
 export default class UserStore {
-//   rootStore: RootStore;
-//   constructor(rootStore: RootStore) {
-//     this.rootStore = rootStore;
-//   }
+    
+  rootStore: RootStore;
+  constructor(rootStore: RootStore) {
+    this.rootStore = rootStore;
+  }
 
   // Create an observable for state changes
   @observable user: IUser | null = null;

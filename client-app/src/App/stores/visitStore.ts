@@ -1,4 +1,4 @@
-import { createContext, SyntheticEvent } from 'react'
+import { SyntheticEvent } from 'react'
 import { observable, action, computed, configure, runInAction } from 'mobx'
 
 import agent from '../api/agent'
@@ -15,8 +15,16 @@ export default class VisitStore {
 
     rootStore: RootStore;
     constructor(rootStore: RootStore) {
-      this.rootStore = rootStore; 
-
+      this.rootStore = rootStore;
+  
+    //   reaction(
+    //     () => this.predicate.keys(),
+    //     () => {
+    //       this.page = 0;
+    //       this.visitRegistry.clear();
+    //       this.loadVisits();
+    //     }
+    //   )
     }
 
     @observable visitRegistry = new Map()
