@@ -10,12 +10,11 @@ export default class UserStore {
 //     this.rootStore = rootStore;
 //   }
 
-  // Create an observable
+  // Create an observable for state changes
   @observable user: IUser | null = null;
 
-  @computed get isLoggedIn() {
-    return !!this.user;
-  }
+  // See whether a user is logged-in
+  @computed get isLoggedIn() { return !!this.user; }
 
   // Method for users to log-in with
   @action login = async (values: IUserFormValues) => {
