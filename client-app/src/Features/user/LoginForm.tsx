@@ -6,6 +6,7 @@ import { Form, Button, Label, Header } from 'semantic-ui-react';
 import TextInput from '../../App/common/form/TextInput';
 import { IUserFormValues } from '../../App/models/user';
 import { RootStoreContext } from '../../App/stores/rootStore';
+import ErrorMessage from '../../App/common/form/ErrorMessage'
 
 // Revalidate package for checking user has filled required form fields
 const validate = combineValidators({
@@ -26,8 +27,8 @@ const LoginForm = () => {
                 }))
             }
             validate={validate}
-            render={({ handleSubmit, submitting, form, submitError, invalid, pristine, dirtySinceLastSubmit }) => (
-                <Form onSubmit={handleSubmit}>
+            render={({ handleSubmit, submitting, submitError, invalid, pristine, dirtySinceLastSubmit }) => (
+                <Form onSubmit={handleSubmit} error>
                 <Header as='h2' content='Login to Pinga' color='teal' textAlign='center' />
                 <Field name='email' component={TextInput} placeholder='Email' />
                 <Field
@@ -37,10 +38,10 @@ const LoginForm = () => {
                     type='password'
                 />
                 {submitError && !dirtySinceLastSubmit && (
-                    <Label content={submitError.statusText} color='red' />
+                    <ErrorMessage error={submitError} text='Invalid email or password' />
                 )}
                 
-                <Button  disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} positive content='Login' fluid />
+                <Button  disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} color='teal' content='Login' fluid />
                 </Form>
             )}
         />
