@@ -33,6 +33,18 @@ export default class UserStore {
     }
   };
 
+  // Method for getting the user associated with a token (send to App.tsx's getUser())
+  @action getUser = async () => {
+    try {
+      const user = await agent.User.current();
+      runInAction(() => {
+        this.user = user;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   @action logout = () => {
     this.rootStore.commonStore.setToken(null);
     this.user = null; 
@@ -48,18 +60,9 @@ export default class UserStore {
     } catch (error) {
       throw error;
     }
-  }
+  }*/
 
-  @action getUser = async () => {
-    try {
-      const user = await agent.User.current();
-      runInAction(() => {
-        this.user = user;
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };*/
+
 
 
 }

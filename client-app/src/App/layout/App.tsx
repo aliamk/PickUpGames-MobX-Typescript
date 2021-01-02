@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext, useEffect } from 'react'
 import { Container } from 'semantic-ui-react'
 import { observer } from 'mobx-react-lite'
 import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom'
@@ -11,9 +11,25 @@ import VisitDetails from '../../Features/visits/details/VisitDetails'
 import LoginForm from '../../Features/user/LoginForm'
 import NotFound from './NotFound'
 import { ToastContainer } from 'react-toastify'
+import { RootStoreContext } from '../stores/rootStore'
+import LoadingComponent from './LoadingComponent'
 
 
 const App:React.FC<RouteComponentProps> = ({ location }) => {  
+
+  const rootStore = useContext(RootStoreContext);
+  const {setAppLoaded, token, appLoaded} = rootStore.commonStore;
+  const {getUser} = rootStore.userStore;
+
+  useEffect(() => {
+    if (token) {
+      getUser().finally(() => setAppLoaded())
+    } else {
+      setAppLoaded();
+    }
+  }, [getUser, setAppLoaded, token])
+
+  if (!appLoaded) return <LoadingComponent content='Loading app...' />
   
   // ======== DISPLAY DOM ======== //
   return (
