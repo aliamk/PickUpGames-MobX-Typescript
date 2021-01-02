@@ -23,7 +23,7 @@ export default class CommonStore {
 
     // Method to set the token
     @action setToken = (token: string | null) => {
-        window.localStorage.getItem('jwt')
+        window.localStorage.setItem('jwt', token!)
         this.token = token;
     }
 

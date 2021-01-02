@@ -26,11 +26,16 @@ export default class UserStore {
       runInAction(() => {
         this.user = user;        
       });
-      console.log(user)
+      this.rootStore.commonStore.setToken(user.token);
       history.push('/visits')
     } catch (error) {
         throw error;
     }
+  };
+
+  @action logout = () => {
+    this.rootStore.commonStore.setToken(null);
+    this.user = null;    
   };
 
   /*@action register = async (values: IUserFormValues) => {
@@ -53,11 +58,7 @@ export default class UserStore {
     } catch (error) {
       console.log(error);
     }
-  };
-
-  @action logout = () => {
-    this.rootStore.commonStore.setToken(null);
-    this.user = null;
-    history.push('/');
   };*/
+
+
 }
