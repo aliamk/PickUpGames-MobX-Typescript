@@ -18,8 +18,8 @@ const HomePage = () => {
          
             <Fragment>
               {/* <Header as='h2' inverted content='Welcome back' /> */}
-              <Button as={Link} to='/visits' size='huge' inverted>
-                Catchup on Visits!
+              <Button as={Link} to='/login' size='huge' inverted>
+                Log-In
               </Button>
             </Fragment>
 
