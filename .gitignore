@@ -8,6 +8,7 @@ appsettings.json
 appsettings.Development.json
 *.db
 demo.ts
+.eslintcache
 
 # dependencies
 /node_modules
@@ -30,3 +31,5 @@ demo.ts
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+client-app/.eslintcache
+client-app/.eslintcache
