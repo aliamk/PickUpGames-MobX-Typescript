@@ -59,7 +59,7 @@ namespace API
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
 
             // JWT TOKEN GENERATOR
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Super secret key"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
                 {
