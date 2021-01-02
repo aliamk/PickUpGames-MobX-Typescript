@@ -3,22 +3,22 @@ import { observer } from 'mobx-react-lite'
 import { Grid } from 'semantic-ui-react'
 
 import VisitList from './VisitList'
-import VisitStore from '../../../App/stores/visitStore'
 import LoadingComponent from '../../../App/layout/LoadingComponent'
-
+import { RootStoreContext } from '../../../App/stores/rootStore'
 
 const VisitDashboard: React.FC = () => {
 
-    // ======== MobX's VisitStore for state management ======== //
-    const visitStore = useContext(VisitStore)
+    // ======== MobX's VisitStore for state management - now RootStore ======== //
+    const rootStore = useContext(RootStoreContext)
+    const {loadVisits, loadingInitial} = rootStore.visitStore;
 
     // ========  API Calls (see @action loadVisits in visitStore.ts) ======== //
     useEffect(() => {
-        visitStore.loadVisits()
-    }, [visitStore])
+        loadVisits()
+    }, [loadVisits])
 
     // ========  LOADING SPINNER ======== //
-    if (visitStore.loadingInitial) return <LoadingComponent content='Loading Visits...' />
+    if (loadingInitial) return <LoadingComponent content='Loading Visits...' />
     
     // ======== DOM Display ======== //
     return (

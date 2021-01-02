@@ -1,11 +1,11 @@
-import { observable, computed, action, runInAction } from 'mobx';
+import { observable, computed, action } from 'mobx';
 import { IUser, IUserFormValues } from '../models/user';
 import agent from '../api/agent';
 import { RootStore } from './rootStore';
 // import { history } from '../..';
 
 export default class UserStore {
-    
+
   rootStore: RootStore;
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
@@ -15,7 +15,8 @@ export default class UserStore {
   @observable user: IUser | null = null;
 
   // See whether a user is logged-in
-  @computed get isLoggedIn() { return !!this.user;
+  @computed get isLoggedIn() { 
+      return !!this.user;
   }
 
   // Method for users to log-in with
@@ -60,5 +61,5 @@ export default class UserStore {
     this.rootStore.commonStore.setToken(null);
     this.user = null;
     history.push('/');
-  };
-}*/
+  };*/
+}
