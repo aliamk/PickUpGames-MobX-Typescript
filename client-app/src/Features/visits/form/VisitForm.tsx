@@ -13,8 +13,8 @@ import { venue } from '../../../App/common/options/venueOptions';
 import { combineDateAndTime } from '../../../App/common/util/util';
 import { combineValidators, isRequired, composeValidators, hasLengthGreaterThan } from 'revalidate'
 
-import VisitStore from '../../../App/stores/visitStore'
 import DateInput from '../../../App/common/form/DateInput'
+import { RootStoreContext } from '../../../App/stores/rootStore'
 
 const validate = combineValidators({
  title: isRequired({ message: 'The event title is required' }),
@@ -37,8 +37,8 @@ interface DetailParams {
 
 const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history }) => {
 
-    const visitStore = useContext(VisitStore)
-    const {createVisit, editVisit, submitting, loadVisit} = visitStore
+    const rootStore = useContext(RootStoreContext)
+    const {createVisit, editVisit, submitting, loadVisit} = rootStore.visitStore
     
     const [ visit, setVisit ] = useState(new VisitFormValues())
     const [ loading, setLoading ] = useState(false)
