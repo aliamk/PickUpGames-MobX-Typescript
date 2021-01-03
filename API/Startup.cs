@@ -37,6 +37,7 @@ namespace API
             // Connect to the database
             services.AddDbContext<DataContext>(opt =>
             {
+                opt.UseLazyLoadingProxies();
                 opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
             // Solve cross-origin problems
