@@ -1,8 +1,10 @@
-using System;               // Guid
+using System;                           // Guid
+using System.Collections.Generic;       // ICollection
+using System.Text.Json.Serialization;   //JsonProperty
 
 namespace Application.Visits
 {
-    public class VisitDTO
+    public class VisitDto
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -10,5 +12,9 @@ namespace Application.Visits
         public DateTime Date { get; set; }
         public string Venue { get; set; }
         public string City { get; set; }
+
+        [JsonPropertyName("attendees")]
+        public ICollection<AttendeeDto> UserVisits { get; set; }
+
     }
 }

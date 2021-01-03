@@ -14,7 +14,7 @@ namespace API.Controllers
     {
         // Request to see all Visit items in the database - see the List Handler in List.cs
         [HttpGet]
-        public async Task<ActionResult<List<Visit>>> List()
+        public async Task<ActionResult<List<VisitDto>>> List()
         {
             return await Mediator.Send(new List.Query());
         }
@@ -22,7 +22,7 @@ namespace API.Controllers
         // Request for a single item  - see the Details Handler in Details.cs
         [HttpGet("{id}")]
         [Authorize]
-        public async Task<ActionResult<Visit>> Details(Guid id)
+        public async Task<ActionResult<VisitDto>> Details(Guid id)
         {
             return await Mediator.Send(new Details.Query { Id = id }); // initialise Id 
         }
