@@ -22,7 +22,11 @@ namespace Application.Visits
             public async Task<List<Visit>> Handle(Query request,
                 CancellationToken cancellationToken)
             {
-                var visits = await _context.Visits.ToListAsync();
+                var visits = await _context.Visits
+                    .Include(x => x.UserVisits)
+                    .ThenInclude(x => x.AppUser)
+                    .ToListAsync();
+
                 return visits;
             }
         }
