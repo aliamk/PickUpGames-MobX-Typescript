@@ -44,7 +44,7 @@ namespace Application.Visits
                 if (attendance == null)                                                         // If user is already not attending, exit the handler
                     return Unit.Value;
 
-                if (attendance.IsHost)                                                          // If user is host, alert user thye can't unattend
+                if (attendance.IsHost)                                                          // If user is host, alert user they can't unattend
                     throw new RestException(HttpStatusCode.BadRequest, new { Attendance = "You cannot remove yourself as host" });
 
                 _context.UserVisits.Remove(attendance);                                         // Remove 'attendance' from UserVisits
