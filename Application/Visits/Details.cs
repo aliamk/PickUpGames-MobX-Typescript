@@ -33,9 +33,7 @@ namespace Application.Visits
                 CancellationToken cancellationToken)
             {
                 var visit = await _context.Visits
-                    .Include(x => x.UserVisits)
-                    .ThenInclude(x => x.AppUser)
-                    .SingleOrDefaultAsync(x => x.Id == request.Id);
+                    .FindAsync(request.Id);
 
                 if (visit == null)
                     throw new RestException(HttpStatusCode.NotFound, new { visit = "Not found" });
