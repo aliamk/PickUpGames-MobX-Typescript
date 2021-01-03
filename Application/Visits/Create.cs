@@ -1,10 +1,12 @@
-using System;                   // Guid + DateTime
-using System.Threading;         // IRequestHandler
-using System.Threading.Tasks;   // IRequestHandler
-using Domain;                   // Visit
-using FluentValidation;         // AbstractValidator
-using MediatR;                  // IRequest
-using Persistence;              // DataContext
+using System;                           // Guid + DateTime
+using System.Threading;                 // IRequestHandler
+using System.Threading.Tasks;           // IRequestHandler
+using Application.Interfaces;           // IUserAccessor
+using Domain;                           // Visit
+using FluentValidation;                 // AbstractValidator
+using MediatR;                          // IRequest
+using Microsoft.EntityFrameworkCore;    // SingleOrDefaultAsync
+using Persistence;                      // DataContext
 
 // FOR USERS TO ADD A VISIT ITEM TO THE DATABASE
 
@@ -39,8 +41,10 @@ namespace Application.Visits
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
-            public Handler(DataContext context)
+            private readonly IUserAccessor _userAccessor;
+            public Handler(DataContext context, IUserAccessor userAccessor)
             {
+                _userAccessor = userAccessor;
                 _context = context;
             }
 
@@ -57,6 +61,18 @@ namespace Application.Visits
                     City = request.City
                 };
                 _context.Visits.Add(visit);
+
+                var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == _userAccessor.GetCurrentUsername());
+
+                var attendee = new UserVisit
+                {
+                    AppUser = user,
+                    Visit = visit,
+                    IsHost = true,
+                    DateJoined = DateTime.Now
+                };
+
+                _context.UserVisits.Add(attendee);
 
                 // If SaveChangesAsync returns a value more than 0, this means user has 
                 // successfully added an item to the database and we just want to return that value
