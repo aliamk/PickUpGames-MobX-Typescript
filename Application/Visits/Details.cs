@@ -14,18 +14,18 @@ namespace Application.Visits
 {
     public class Details
     {
-        public class Query : IRequest<Visit>
+        public class Query : IRequest<VisitDTO>
         {
             public Guid Id { get; set; }
         }
-        public class Handler : IRequestHandler<Query, Visit>
+        public class Handler : IRequestHandler<Query, VisitDTO>
         {
             private readonly DataContext _context; // Initialise field from parameter (on context)
             public Handler(DataContext context)
             {
                 _context = context;
             }
-            public async Task<Visit> Handle(Query request,
+            public async Task<VisitDTO> Handle(Query request,
                 CancellationToken cancellationToken)
             {
                 var visit = await _context.Visits

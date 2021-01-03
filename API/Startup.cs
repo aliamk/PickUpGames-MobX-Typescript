@@ -2,6 +2,7 @@ using System.Text;                                      // Encoding
 using API.Middleware;                                   // ErrorHandlingMiddleware
 using Application.Interfaces;                           // IJwtGenerator
 using Application.Visits;                               // (typeof(List))
+using AutoMapper;                                       // AddAutoMapper
 using Domain;                                           // AppUser
 using FluentValidation.AspNetCore;                      // AddFluentValidation
 using Infrastructure.Security;                          // JwtGenerator
@@ -48,6 +49,8 @@ namespace API
             });
             // For decoupling asnyc handlers from requests
             services.AddMediatR(typeof(List.Handler).Assembly);
+            // For mapping to DTOs
+            services.AddAutoMapper(typeof(List.Handler));
             // Fluid Validation for checks before sending data to command handlers
             services.AddControllers(opt =>
             {
