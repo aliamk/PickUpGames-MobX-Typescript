@@ -15,7 +15,7 @@ namespace Application.Visits
     {
         public class Command : IRequest
         {
-            public Guid Id { get; set; }
+            public Guid Id { get; set; }                                                                        // Visit ID
         }
 
         public class Handler : IRequestHandler<Command>
@@ -24,28 +24,28 @@ namespace Application.Visits
             private readonly IUserAccessor _userAccessor;
             public Handler(DataContext context, IUserAccessor userAccessor)
             {
-                _userAccessor = userAccessor;
+                _userAccessor = userAccessor;                                                                   // User's user ID
                 _context = context;
             }
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var visit = await _context.Visits.FindAsync(request.Id);
+                var visit = await _context.Visits.FindAsync(request.Id);                                        // Get the specific visit
 
                 if (visit == null)
-                    throw new RestException(HttpStatusCode.NotFound, new { Visit = "Cound not find visit" });
+                    throw new RestException(HttpStatusCode.NotFound, new { Visit = "Cound not find visit" });   // Visit not found
 
                 var user = await _context.Users.SingleOrDefaultAsync(x =>
-                    x.UserName == _userAccessor.GetCurrentUsername());
+                    x.UserName == _userAccessor.GetCurrentUsername());                                          // Get the user object
 
                 var attendance = await _context.UserVisits
-                    .SingleOrDefaultAsync(x => x.VisitId == visit.Id && x.AppUserId == user.Id);
+                    .SingleOrDefaultAsync(x => x.VisitId == visit.Id && x.AppUserId == user.Id);                // Get the attendance object
 
-                if (attendance != null)
-                    throw new RestException(HttpStatusCode.BadRequest,
-                        new { Attendance = "Already attending this visit" });
+                if (attendance != null)                                                                         //  If attendance already exists
+                    throw new RestException(HttpStatusCode.BadRequest,                                          //  throw an error bc user is
+                        new { Attendance = "Already attending this visit" });                                   //  already attending this visit                              
 
-                attendance = new UserVisit
+                attendance = new UserVisit                                                                      // Otherwise create a new attendance
                 {
                     Visit = visit,
                     AppUser = user,
@@ -53,8 +53,9 @@ namespace Application.Visits
                     DateJoined = DateTime.Now
                 };
 
-                _context.UserVisits.Add(attendance);
+                _context.UserVisits.Add(attendance);                                                            // Pass in the new attendance
 
+                // Save to database
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if (success) return Unit.Value;

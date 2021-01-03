@@ -32,11 +32,10 @@ namespace Application.Visits
             public async Task<VisitDto> Handle(Query request,
                 CancellationToken cancellationToken)
             {
-                var visit = await _context.Visits
-                    .FindAsync(request.Id);
+                var visit = await _context.Visits.FindAsync(request.Id);
 
                 if (visit == null)
-                    throw new RestException(HttpStatusCode.NotFound, new { visit = "Not found" });
+                    throw new RestException(HttpStatusCode.NotFound, new { Visit = "Not found" });
 
                 var visitToReturn = _mapper.Map<Visit, VisitDto>(visit);
 

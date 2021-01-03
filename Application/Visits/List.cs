@@ -25,8 +25,7 @@ namespace Application.Visits
             public async Task<List<VisitDto>> Handle(Query request,
                 CancellationToken cancellationToken)
             {
-                var visits = await _context.Visits
-                    .ToListAsync();
+                var visits = await _context.Visits.ToListAsync();
 
                 return _mapper.Map<List<Visit>, List<VisitDto>>(visits);
             }
