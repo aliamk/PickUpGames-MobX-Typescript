@@ -24,7 +24,7 @@ namespace Application.Visits
             private readonly IUserAccessor _userAccessor;
             public Handler(DataContext context, IUserAccessor userAccessor)
             {
-                _userAccessor = userAccessor;                                                                   // User's user ID
+                _userAccessor = userAccessor;                                                                   // User's userId
                 _context = context;
             }
 
