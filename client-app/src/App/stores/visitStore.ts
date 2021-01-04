@@ -59,8 +59,13 @@ export default class VisitStore {
             runInAction('loading visits', () => {
                 visits.forEach((visit) => {
                     visit.date = new Date(visit.date!)
+                    // does userStore.user match attendee.username?
                     visit.isGoing = visit.attendees.some(
-                        v => v.username === user.username
+                        v => v.username === user.username       
+                    )
+                    // does userStore.user match attendee.username and is isHost true?
+                    visit.isHost = visit.attendees.some(
+                        v => v.username === user.username && v.isHost 
                     )
                     this.visitRegistry.set(visit.id, visit);
                 })
