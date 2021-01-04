@@ -5,6 +5,7 @@ import {format} from 'date-fns';
 
 import { RootStoreContext } from '../../../App/stores/rootStore'
 import VisitListItem from './VisitListItem'
+// import { IVisit } from '../../../App/models/visit_interface';
 
 
 const VisitList: React.FC = () => {

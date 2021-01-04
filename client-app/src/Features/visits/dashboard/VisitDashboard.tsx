@@ -5,8 +5,9 @@ import { Grid } from 'semantic-ui-react'
 import VisitList from './VisitList'
 import LoadingComponent from '../../../App/layout/LoadingComponent'
 import { RootStoreContext } from '../../../App/stores/rootStore'
+import { IVisit } from '../../../App/models/visit_interface'
 
-const VisitDashboard: React.FC = () => {
+const VisitDashboard: React.FC<{ visit: IVisit }> = ({visit}) => {
 
     // ======== MobX's VisitStore for state management - now RootStore ======== //
     const rootStore = useContext(RootStoreContext)
