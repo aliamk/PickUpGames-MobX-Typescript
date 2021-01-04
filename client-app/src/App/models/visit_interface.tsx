@@ -11,6 +11,8 @@ export interface IVisit
     date: Date;       // Temporarily set to string instead of Date to avoid errors in the VisitForm Submit button
     city: string;
     venue: string;
+    isGoing: boolean;
+    isHost: boolean;
     attendees: IAttendee[];
 }
 
