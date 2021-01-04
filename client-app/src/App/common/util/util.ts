@@ -1,4 +1,4 @@
-// import { IActivity, IAttendee } from "../../models/activity";
+// import { IVisit, IAttendee } from "../../models/visit";
 // import { IUser } from "../../models/user";
 
 export const combineDateAndTime = (date: Date, time: Date) => {
@@ -15,15 +15,15 @@ export const combineDateAndTime = (date: Date, time: Date) => {
     return new Date(dateString + ' ' + timeString);
 }
 
-// export const setActivityProps = (activity: IActivity, user: IUser) => {
-//     activity.date = new Date(activity.date);
-//     activity.isGoing = activity.attendees.some(
+// export const setVisitProps = (visit: IVisit, user: IUser) => {
+//     visit.date = new Date(visit.date);
+//     visit.isGoing = visit.attendees.some(
 //       a => a. === user.username
 //     )
-//     activity.isHost = activity.attendees.some(
+//     visit.isHost = visit.attendees.some(
 //       a => a.username === user.username && a.isHost
 //     )
-//     return activity;
+//     return visit;
 // }
 
 // export const createAttendee = (user: IUser): IAttendee => {

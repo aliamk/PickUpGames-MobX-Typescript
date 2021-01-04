@@ -96,7 +96,7 @@ export default class VisitStore {
        }
    }
 
-    // Clearing/Unmounting an activity from the edit form with useEffect in ActivityForm
+    // Clearing/Unmounting an visit from the edit form with useEffect in VisitForm
     @action clearVisit = () => {
         this.visit = null
     }

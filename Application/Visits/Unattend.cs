@@ -30,16 +30,16 @@ namespace Application.Visits
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                var activity = await _context.Visits.FindAsync(request.Id);                                          // Get the specific visit
+                var visit = await _context.Visits.FindAsync(request.Id);                                          // Get the specific visit
 
-                if (activity == null)
-                    throw new RestException(HttpStatusCode.NotFound, new { Visit = "Cound not find activity" });
+                if (visit == null)
+                    throw new RestException(HttpStatusCode.NotFound, new { Visit = "Cound not find visit" });
 
                 var user = await _context.Users.SingleOrDefaultAsync(x =>
                     x.UserName == _userAccessor.GetCurrentUsername());                                               // Get the user object
 
                 var attendance = await _context.UserVisits
-                    .SingleOrDefaultAsync(x => x.VisitId == activity.Id && x.AppUserId == user.Id);                  // Get the attendance object
+                    .SingleOrDefaultAsync(x => x.VisitId == visit.Id && x.AppUserId == user.Id);                  // Get the attendance object
 
                 if (attendance == null)                                                         // If user is already not attending, exit the handler
                     return Unit.Value;

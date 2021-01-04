@@ -24,7 +24,7 @@ const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match, hist
     loadVisit(match.params.id)
   }, [loadVisit, match.params.id, history])
 
-  if (loadingInitial) return <LoadingComponent content='Loading activity...' />
+  if (loadingInitial) return <LoadingComponent content='Loading visit...' />
 
   if (!visit) return <h1>Visit Not Found</h1>
 
