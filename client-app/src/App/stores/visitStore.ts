@@ -52,12 +52,16 @@ export default class VisitStore {
     // ========  API CALLS (see useEffect in App.tsx) ======== //
     // Method for loading all visit posts
     @action loadVisits = async () => {
-        this.loadingInitial = true      // mutating state with MobX
+        this.loadingInitial = true                      // mutating state with MobX
+        const user = this.rootStore.userStore.user!      // Access the user
         try {
             const visits = await agent.Visits.list()    
             runInAction('loading visits', () => {
                 visits.forEach((visit) => {
                     visit.date = new Date(visit.date!)
+                    visit.isGoing = visit.attendees.some(
+                        v => v.username === user.username
+                    )
                     this.visitRegistry.set(visit.id, visit);
                 })
                 this.loadingInitial = false
