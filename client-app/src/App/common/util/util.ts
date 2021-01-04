@@ -1,5 +1,5 @@
-// import { IVisit, IAttendee } from "../../models/visit";
-// import { IUser } from "../../models/user";
+import { IVisit, IAttendee } from "../../models/visit_interface";
+import { IUser } from "../../models/user";
 
 export const combineDateAndTime = (date: Date, time: Date) => {
     const timeString = time.getHours() + ':' + time.getMinutes() + ':00';
@@ -15,22 +15,22 @@ export const combineDateAndTime = (date: Date, time: Date) => {
     return new Date(dateString + ' ' + timeString);
 }
 
-// export const setVisitProps = (visit: IVisit, user: IUser) => {
-//     visit.date = new Date(visit.date);
-//     visit.isGoing = visit.attendees.some(
-//       a => a. === user.username
-//     )
-//     visit.isHost = visit.attendees.some(
-//       a => a.username === user.username && a.isHost
-//     )
-//     return visit;
-// }
+export const setVisitProps = (visit: IVisit, user: IUser) => {
+    visit.date = new Date(visit.date);
+    visit.isGoing = visit.attendees.some(
+      v => v.username === user.username
+    )
+    visit.isHost = visit.attendees.some(
+      v => v.username === user.username && v.isHost
+    )
+    return visit;
+}
 
-// export const createAttendee = (user: IUser): IAttendee => {
-//     return {
-//         displayName: user.displayName,
-//         isHost: false,
-//         username: user.username,
-//         image: user.image!
-//     }
-// }
+export const createAttendee = (user: IUser): IAttendee => {
+    return {
+        displayName: user.displayName,
+        isHost: false,
+        username: user.username,
+        image: user.image!
+    }
+}
