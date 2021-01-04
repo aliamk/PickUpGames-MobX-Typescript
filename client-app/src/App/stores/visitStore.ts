@@ -6,7 +6,7 @@ import { IVisit } from '../models/visit_interface'
 import { history } from '../..'
 import { toast } from 'react-toastify'
 import { RootStore } from './rootStore';
-import { setVisitProps } from '../common/util/util'
+import { createAttendee, setVisitProps } from '../common/util/util'
 
 
 export default class VisitStore {
@@ -167,5 +167,28 @@ export default class VisitStore {
             console.log(error)
         }
     }
-}
 
+    @action attendVisit = () => {
+        const attendee = createAttendee(this.rootStore.userStore.user!);
+
+        if (this.visit) {
+        this.visit.attendees.push(attendee);
+        this.visit.isGoing = true;
+        this.visitRegistry.set(this.visit.id, this.visit);
+
+        }     
+    };
+
+    @action cancelAttendance = () => {
+        
+        if (this.visit) {
+            this.visit.attendees = this.visit.attendees.filter(
+            v => v.username !== this.rootStore.userStore.user!.username
+            );
+            this.visit.isGoing = false;
+            this.visitRegistry.set(this.visit.id, this.visit);
+        
+        } 
+    };
+
+};

@@ -1,10 +1,11 @@
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Header, Item, Segment, Image } from 'semantic-ui-react'
 import { observer } from 'mobx-react-lite';
 import { format } from 'date-fns';
 import { IVisit } from '../../../App/models/visit_interface';
+import { RootStoreContext } from '../../../App/stores/rootStore';
 
 
 const visitImageStyle = {
@@ -21,6 +22,8 @@ const visitImageStyle = {
   };
 
 const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
+    const rootStore = useContext(RootStoreContext);
+    const {attendVisit, cancelAttendance} = rootStore.visitStore
     return (
         <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
@@ -42,9 +45,9 @@ const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
                 {visit.isHost ? (
                     <Button as={Link} to={`/manage/${visit.id}`} color='orange' floated='right'>Manage Visit</Button>
                 ) : visit.isGoing ? (
-                    <Button>Cancel Attendance</Button> 
+                    <Button onClick={cancelAttendance}>Cancel Attendance</Button> 
                 ) : (
-                    <Button color='teal'>Join Visit</Button>
+                    <Button onClick={attendVisit} color='teal'>Join Visit</Button>
                 )}             
             </Segment>
 
