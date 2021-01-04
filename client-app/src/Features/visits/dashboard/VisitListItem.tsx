@@ -7,19 +7,19 @@ import VisitListItemAttendees from './VisitListItemAttendees'
 
 
 const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
-    
+    const host = visit.attendees.filter(x => x.isHost)[0];      // is the user the host?
     return (
         <Segment.Group>
 
             <Segment>
                 <Item.Group>
                     <Item>
-                        <Item.Image size='tiny' circular src='assets/user.png' style={{ marginBottom: 3 }} />        
+                        <Item.Image size='tiny' circular src={host.image || 'assets/user.png'} style={{ marginBottom: 3 }} />        
                     <Item.Content>
                         <Item.Header as={Link} to={`/visits/${visit.id}`}>
                             {visit.title}
                         </Item.Header>
-                        <Item.Description>Hosted by Bob</Item.Description>
+                        <Item.Description>{host.displayName}</Item.Description>
                         {visit.isHost && 
                             <Item.Description>
                             <Label
