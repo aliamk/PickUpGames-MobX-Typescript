@@ -18,21 +18,21 @@ namespace Persistence
                 {
                     new AppUser
                     {
-                        // Id = "a",
+                        Id = "a",
                         DisplayName = "Bob",
                         UserName = "bob",
                         Email = "bob@test.com"
                     },
                     new AppUser
                     {
-                        // Id = "b",
+                        Id = "b",
                         DisplayName = "Jane",
                         UserName = "jane",
                         Email = "jane@test.com"
                     },
                     new AppUser
                     {
-                        // Id = "c",
+                        Id = "c",
                         DisplayName = "Tom",
                         UserName = "tom",
                         Email = "tom@test.com"
@@ -57,6 +57,15 @@ namespace Persistence
                         Date = DateTime.Now.AddMonths(-7),
                         Venue = "St Thomas' Hospital",
                         City = "London",
+                        UserVisits = new List<UserVisit>
+                        {
+                            new UserVisit
+                            {
+                                AppUserId = "a",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(-2)
+                            }
+                        }
                     },
                     new Visit
                     {
@@ -66,6 +75,21 @@ namespace Persistence
                         Date = DateTime.Now.AddMonths(-6),
                         Venue = "St Thomas' Hospital",
                         City = "London",
+                        UserVisits = new List<UserVisit>
+                        {
+                            new UserVisit
+                            {
+                                AppUserId = "b",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(-1)
+                            },
+                            new UserVisit
+                            {
+                                AppUserId = "a",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(-1)
+                            },
+                        }
                     },
                     new Visit
                     {
@@ -75,6 +99,21 @@ namespace Persistence
                         Date = DateTime.Now.AddMonths(-5),
                         Venue = "St Thomas' Hospital",
                         City = "London",
+                        UserVisits = new List<UserVisit>
+                        {
+                            new UserVisit
+                            {
+                                AppUserId = "b",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(1)
+                            },
+                            new UserVisit
+                            {
+                                AppUserId = "a",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(1)
+                            },
+                        }
                     },
                     new Visit
                     {
@@ -84,6 +123,21 @@ namespace Persistence
                         Date = DateTime.Now.AddMonths(-8),
                         Venue = "St Bart's Hospital",
                         City = "London",
+                        UserVisits = new List<UserVisit>
+                        {
+                            new UserVisit
+                            {
+                                AppUserId = "c",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(2)
+                            },
+                            new UserVisit
+                            {
+                                AppUserId = "a",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(2)
+                            },
+                        }
                     },
                     new Visit
                     {
@@ -93,6 +147,21 @@ namespace Persistence
                         Date = DateTime.Now.AddMonths(-9),
                         Venue = "StBartsHospital",
                         City = "London",
+                        UserVisits = new List<UserVisit>
+                        {
+                            new UserVisit
+                            {
+                                AppUserId = "b",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(3)
+                            },
+                            new UserVisit
+                            {
+                                AppUserId = "c",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(3)
+                            },
+                        }
                     },
                     new Visit
                     {
@@ -102,6 +171,15 @@ namespace Persistence
                         Date = DateTime.Now.AddMonths(-11),
                         Venue = "Manchester Royal Infirmary",
                         City = "Manchester",
+                         UserVisits = new List<UserVisit>
+                        {
+                            new UserVisit
+                            {
+                                AppUserId = "a",
+                                IsHost = true,
+                                DateJoined = DateTime.Now.AddMonths(4)
+                            }
+                        }
                     }
                 };
                 context.Visits.AddRange(visits);

@@ -77,7 +77,7 @@ namespace API
                 });
             });
 
-            services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();               // AddTransient = for only the lifetime of the operation (not complete request)
+            services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>(); // AddTransient = for only the lifetime of the operation (not complete request)
 
             // JWT TOKEN GENERATOR
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["TokenKey"]));
