@@ -6,6 +6,7 @@ import { IVisit } from '../models/visit_interface'
 import { history } from '../..'
 import { toast } from 'react-toastify'
 import { RootStore } from './rootStore';
+import { setVisitProps } from '../common/util/util'
 
 
 export default class VisitStore {
@@ -52,21 +53,12 @@ export default class VisitStore {
     // ========  API CALLS (see useEffect in App.tsx) ======== //
     // Method for loading all visit posts
     @action loadVisits = async () => {
-        this.loadingInitial = true                      // mutating state with MobX
-        const user = this.rootStore.userStore.user!      // Access the user
+        this.loadingInitial = true                      // mutating state with MobX        
         try {
             const visits = await agent.Visits.list()    
             runInAction('loading visits', () => {
                 visits.forEach((visit) => {
-                    visit.date = new Date(visit.date!)
-                    // does userStore.user match attendee.username?
-                    visit.isGoing = visit.attendees.some(
-                        v => v.username === user.username       
-                    )
-                    // does userStore.user match attendee.username and is isHost true?
-                    visit.isHost = visit.attendees.some(
-                        v => v.username === user.username && v.isHost 
-                    )
+                   setVisitProps(visit, this.rootStore.userStore.user!)
                     this.visitRegistry.set(visit.id, visit);
                 })
                 this.loadingInitial = false
@@ -90,7 +82,7 @@ export default class VisitStore {
            try {                                    // Whilst the try/catch block fetches the visit from the API (Visits.details - see SRC > APP > API > AGENT.TS)
                visit = await agent.Visits.details(id)
                runInAction('getting visit', () => {
-                   visit.date = new Date(visit.date!)
+                   setVisitProps(visit, this.rootStore.userStore.user!) 
                    this.visit = visit
                    this.visitRegistry.set(visit.id, visit);
                    this.loadingInitial = false
