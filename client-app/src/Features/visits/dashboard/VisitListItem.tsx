@@ -25,7 +25,7 @@ const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
                             <Label
                                 basic
                                 color='orange'
-                                content='You are hosting this visit'
+                                content='You created this visit'
                             />
                             </Item.Description>
                         }
@@ -34,7 +34,7 @@ const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
                             <Label
                                 basic
                                 color='green'
-                                content='You are going to this visit'
+                                content='You are going!'
                             />
                             </Item.Description>
                         }
