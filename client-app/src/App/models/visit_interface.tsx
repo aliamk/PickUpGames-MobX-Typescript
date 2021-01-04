@@ -11,6 +11,7 @@ export interface IVisit
     date: Date;       // Temporarily set to string instead of Date to avoid errors in the VisitForm Submit button
     city: string;
     venue: string;
+    attendees: IAttendee[];
 }
 
 // Partial and ? means optional
@@ -36,3 +37,11 @@ export class VisitFormValues implements IVisitFormValues {
         Object.assign(this, init);
     }
 }
+
+export interface IAttendee {
+    username: string;
+    displayName: string;
+    image: string;
+    isHost: boolean;
+    following?: boolean;
+  }
