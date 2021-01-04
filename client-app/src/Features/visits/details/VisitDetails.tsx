@@ -35,7 +35,7 @@ const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match, hist
             <VisitDetailedInfo visit={visit} />
           </Grid.Column>
           <Grid.Column width={6}>
-            <VisitDetailedSidebar />
+            <VisitDetailedSidebar attendees={visit.attendees}/>
           </Grid.Column>
         </Grid>
     )
