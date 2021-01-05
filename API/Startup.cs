@@ -5,6 +5,7 @@ using Application.Visits;                               // (typeof(List))
 using AutoMapper;                                       // AddAutoMapper
 using Domain;                                           // AppUser
 using FluentValidation.AspNetCore;                      // AddFluentValidation
+using Infrastructure.Photos;                            // CloudinarySettings
 using Infrastructure.Security;                          // JwtGenerator
 using MediatR;                                          // AddMediatR
 using Microsoft.AspNetCore.Authentication.JwtBearer;    // JwtBearerDefaults
@@ -97,6 +98,7 @@ namespace API
 
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
