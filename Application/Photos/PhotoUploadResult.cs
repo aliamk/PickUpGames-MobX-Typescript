@@ -1,6 +1,6 @@
-namespace Infrastructure
+namespace Application.Photos
 {
-    internal class PhotoUploadResult
+    public class PhotoUploadResult
     {
         public string PublicId { get; set; }
         public string Url { get; set; }

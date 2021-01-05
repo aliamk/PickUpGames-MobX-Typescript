@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Http;                // IFormFile
+using Application.Photos;
 
-namespace Infrastructure
+namespace Application.Interfaces
 {
-    public class IPhotoAccessor
+    public interface IPhotoAccessor
     {
         PhotoUploadResult AddPhoto(IFormFile file);
         string DeletePhoto(string publicId);
