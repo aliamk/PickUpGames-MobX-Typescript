@@ -34,7 +34,7 @@ namespace Infrastructure.Photos
                     var uploadParams = new ImageUploadParams
                     {
                         File = new FileDescription(file.FileName, stream),
-                        Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face")
+                        Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face")  // Crop to a square and keep faces centered
                     };
                     uploadResult = _cloudinary.Upload(uploadParams);
                 }
