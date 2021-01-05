@@ -28,6 +28,7 @@ export default class VisitStore {
     @observable visitRegistry = new Map()
     @observable visit: IVisit | null = null;
     @observable loadingInitial = false  // the loading icon for the whole app
+    @observable loading = false         
     @observable submitting = false      // the loading icon within buttons
     @observable target = ''             // created for the deleteVisit action
 
@@ -113,7 +114,12 @@ export default class VisitStore {
     @action createVisit = async (visit: IVisit) => {
         this.submitting = true
         try {
-            await agent.Visits.create(visit)       
+            await agent.Visits.create(visit)  
+            const attendee = createAttendee(this.rootStore.userStore.user!)
+            let attendees = []
+            attendees.push(attendee)    
+            visit.attendees = attendees
+            visit.isHost = true
             runInAction('creating visit', () => {
                 this.visitRegistry.set(visit.id, visit);
                 this.submitting = false
@@ -168,27 +174,46 @@ export default class VisitStore {
         }
     }
 
-    @action attendVisit = () => {
+    @action attendVisit = async () => {
         const attendee = createAttendee(this.rootStore.userStore.user!);
-
-        if (this.visit) {
-        this.visit.attendees.push(attendee);
-        this.visit.isGoing = true;
-        this.visitRegistry.set(this.visit.id, this.visit);
-
-        }     
-    };
-
-    @action cancelAttendance = () => {
-        
-        if (this.visit) {
-            this.visit.attendees = this.visit.attendees.filter(
-            v => v.username !== this.rootStore.userStore.user!.username
-            );
-            this.visit.isGoing = false;
-            this.visitRegistry.set(this.visit.id, this.visit);
-        
-        } 
-    };
-
+        this.loading = true;
+        try {
+          await agent.Visits.attend(this.visit!.id);
+          runInAction(() => {
+            if (this.visit) {
+              this.visit.attendees.push(attendee);
+              this.visit.isGoing = true;
+              this.visitRegistry.set(this.visit.id, this.visit);
+              this.loading = false;
+            }
+          });
+        } catch (error) {
+          runInAction(() => {
+            this.loading = false;
+          });
+          toast.error('Problem signing up to visit');
+        }
+      };
+    
+      @action cancelAttendance = async () => {
+        this.loading = true;
+        try {
+          await agent.Visits.unattend(this.visit!.id);
+          runInAction(() => {
+            if (this.visit) {
+              this.visit.attendees = this.visit.attendees.filter(
+                a => a.username !== this.rootStore.userStore.user!.username
+              );
+              this.visit.isGoing = false;
+              this.visitRegistry.set(this.visit.id, this.visit);
+              this.loading = false;
+            }
+          });
+        } catch (error) {
+          runInAction(() => {
+            this.loading = false;
+          });
+          toast.error('Problem cancelling attendance');
+        }
+      };
 };
