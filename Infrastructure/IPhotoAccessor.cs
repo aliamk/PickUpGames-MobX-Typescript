@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Http;                // IFormFile
-using Application.Photos;
+using Application.Photos;                       // PhotoUploadResult
 
 namespace Application.Interfaces
 {
