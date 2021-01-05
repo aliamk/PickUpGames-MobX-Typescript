@@ -96,6 +96,7 @@ namespace API
                     };
                 });
 
+            // Strongly typing the settings
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
