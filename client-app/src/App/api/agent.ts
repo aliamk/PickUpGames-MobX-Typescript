@@ -56,7 +56,9 @@ const Visits = {
     details: (id: string) => requests.get(`/visits/${id}`),
     create: (visit: IVisit) => requests.post('/visits', visit),
     update: (visit: IVisit) => requests.put(`/visits/${visit.id}`, visit),
-    delete: (id: string) => requests.del(`/visits/${id}`)
+    delete: (id: string) => requests.del(`/visits/${id}`),
+    attend: (id: string) => requests.post(`/visits/${id}/attend`, {}),
+    unattend: (id: string) => requests.del(`/visits/${id}/attend`)
 }
 
 const User = {
