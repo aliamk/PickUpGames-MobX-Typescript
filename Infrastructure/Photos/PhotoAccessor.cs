@@ -40,8 +40,8 @@ namespace Infrastructure.Photos
                 }
             }
 
-            // if (uploadResult.Error != null)
-            //     throw new Exception(uploadResult.Error.Message);
+            if (uploadResult.Error != null)
+                throw new Exception(uploadResult.Error.Message);
 
             return new PhotoUploadResult
             {
