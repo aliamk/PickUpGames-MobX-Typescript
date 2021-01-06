@@ -1,3 +1,4 @@
+using System.Linq;                      // FirstOrDefault
 using System.Threading;                 // CancellationToken
 using System.Threading.Tasks;           // Task
 using Application.Interfaces;           // IJwtGenerator
@@ -33,7 +34,7 @@ namespace Application.User
                     DisplayName = user.DisplayName,
                     Username = user.UserName,
                     Token = _jwtGenerator.CreateToken(user),
-                    Image = null
+                    Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
                 };
             }
         }
