@@ -1,3 +1,4 @@
+using System.Linq;                      // FirstOrDefault
 using System.Net;                       // HttpStatusCode
 using System.Threading;                 // CancellationToken
 using System.Threading.Tasks;           // Task
@@ -58,7 +59,7 @@ namespace Application.User
                         DisplayName = user.DisplayName,
                         Token = _jwtGenerator.CreateToken(user),
                         Username = user.UserName,
-                        Image = null
+                        Image = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
                     };
                 }
 
