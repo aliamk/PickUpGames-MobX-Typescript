@@ -1,4 +1,4 @@
-using System.Linq;
+using System.Linq;          // FirstOrDefault
 using AutoMapper;           // Profile
 using Domain;               // Visit
 
@@ -14,13 +14,13 @@ namespace Application.Visits
             CreateMap<Visit, VisitDto>();               // First map (from Visit to VisitDto)
             CreateMap<UserVisit, AttendeeDto>()         // Second map (from UserVisit to AttendeeDto) 
                 .ForMember(d => d.Username, o => o.MapFrom(s => s.AppUser.UserName))
-                .ForMember(d => d.DisplayName, o => o.MapFrom(s => s.AppUser.DisplayName));
-
+                .ForMember(d => d.DisplayName, o => o.MapFrom(s => s.AppUser.DisplayName))
+                .ForMember(d => d.Image, o => o.MapFrom(s => s.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url));
         }
     }
 }
 
-//.ForMember(d => d.Image, o => o.MapFrom(s => s.AppUser.Photos.FirstOrDefault(x => x.IsMain).Url))
+
 //.ForMember(d => d.Following, o => o.MapFrom<FollowingResolver>());
 
 // destination => destination.Username
