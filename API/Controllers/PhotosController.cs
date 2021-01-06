@@ -1,7 +1,7 @@
 using System.Threading.Tasks;               // Task
 using Application.Photos;                   // Add
 using Domain;                               // Photo
-using MediatR;
+using MediatR;                              // Send
 using Microsoft.AspNetCore.Mvc;             // HttpPost
 
 namespace API.Controllers
