@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { history } from '../..';
 import { IUser, IUserFormValues } from '../models/user';
 import { IVisit } from '../models/visit_interface';
+import { IProfile, IPhoto } from '../models/profile';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
@@ -16,7 +17,7 @@ axios.interceptors.request.use(config => {
     error => {
       return Promise.reject(error);
     }
-  );
+);
 
 axios.interceptors.response.use(undefined, error => {
     if (error.message === 'Network Error' && !error.response) {
@@ -65,11 +66,27 @@ const User = {
     current: (): Promise<IUser> => requests.get('/user'),
     login: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/login`, user),
     register: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/register`, user)
-  };
+};
 
+  const Profiles = {
+    get: (username: string): Promise<IProfile> => requests.get(`/profiles/${username}`)
+};
 
 
 export default {
     Visits,
-    User
+    User,
+    Profiles
 }
+
+
+
+
+//     uploadPhoto: (photo: Blob): Promise<IPhoto> => requests.postForm(`/photos`, photo),
+//     setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
+//     deletePhoto: (id: string) => requests.del(`/photos/${id}`),
+//     updateProfile: (profile: Partial<IProfile>) => requests.put(`/profiles`, profile),
+//     follow: (username: string) => requests.post(`/profiles/${username}/follow`, {}),
+//     unfollow: (username: string) => requests.del(`/profiles/${username}/follow`),
+//     listFollowings: (username: string, predicate: string) => requests.get(`/profiles/${username}/follow?predicate=${predicate}`),
+//     listActivities: (username: string, predicate: string) => requests.get(`/profiles/${username}/activities?predicate=${predicate}`)
