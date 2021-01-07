@@ -8,7 +8,7 @@ const ProfilePhotos = () => {
     // the profileStore from it
     const rootStore = useContext(RootStoreContext);
     const { profile, isCurrentUser } = rootStore.profileStore
-    const [addPhotoMode, setAddPhotoMode] = useState(false);
+    const [addPhotoMode, setAddPhotoMode] = useState(true);
 
     return (
         <Tab.Pane>
