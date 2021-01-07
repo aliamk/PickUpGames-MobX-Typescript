@@ -1,12 +1,20 @@
 import React, { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 
+interface IProps {
+    setFiles: (files: object[]) => void;
+  }
 
-const PhotoWidgetDropzone = () => {
+const PhotoWidgetDropzone: React.FC<IProps> = ({ setFiles }) => {
 
   const onDrop = useCallback(acceptedFiles => {
-      console.log(acceptedFiles)  
-  }, []);
+
+    setFiles(
+        acceptedFiles.map((file: object) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          })));
+    }, [setFiles]);
   
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
