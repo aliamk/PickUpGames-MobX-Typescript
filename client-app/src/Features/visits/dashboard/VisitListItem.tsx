@@ -19,7 +19,7 @@ const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
                         <Item.Header as={Link} to={`/visits/${visit.id}`}>
                             {visit.title}
                         </Item.Header>
-                        <Item.Description>{host.displayName}</Item.Description>
+                        <Item.Description>Hosted by <Link to={`/profile/${host.username}`}>{host.displayName}</Link></Item.Description>
                         {visit.isHost && 
                             <Item.Description>
                             <Label
