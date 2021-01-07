@@ -5,6 +5,7 @@ import ProfileContent from './ProfileContent'
 import { RootStoreContext } from '../../App/stores/rootStore'
 import { RouteComponentProps } from 'react-router-dom'
 import LoadingComponent from '../../App/layout/LoadingComponent'
+import { observer } from 'mobx-react-lite'
 
 interface RouteParams {
     username: string;
@@ -32,4 +33,4 @@ const ProfilePage: React.FC<IProps> = ({ match }) => {
     )
 }
 
-export default ProfilePage
+export default observer(ProfilePage)

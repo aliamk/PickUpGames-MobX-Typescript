@@ -1,14 +1,10 @@
 import React from 'react';
 import { Segment, Item, Header, Button, Grid, Statistic, Divider, Reveal } from 'semantic-ui-react';
 import { IProfile } from '../../App/models/profile';
-// import { observer } from 'mobx-react-lite';
+import { observer } from 'mobx-react-lite';
 
 interface IProps {
   profile: IProfile;
-  // isCurrentUser: boolean;
-  // loading: boolean;
-  // follow: (username: string) => void;
-  // unfollow: (username: string) => void;
 }
 
 const ProfileHeader: React.FC<IProps> = ({ profile }) => {
@@ -45,4 +41,9 @@ const ProfileHeader: React.FC<IProps> = ({ profile }) => {
   );
 };
 
-export default ProfileHeader;
+export default observer(ProfileHeader);
+
+  // isCurrentUser: boolean;
+  // loading: boolean;
+  // follow: (username: string) => void;
+  // unfollow: (username: string) => void;
