@@ -48,9 +48,7 @@ namespace Application.Visits
             {
                 var visit = await _context.Visits.FindAsync(request.Id);
                 if (visit == null)
-                    throw new RestException(HttpStatusCode.NotFound, new { visit = "Not found" });
-                //  Else, delete the visit
-                _context.Remove(visit);
+                    throw new RestException(HttpStatusCode.NotFound, new { Visit = "Not found" });
 
                 // User can edit all of these files.  If user doesn't enter a Title field, just leave it as Title
                 visit.Title = request.Title ?? visit.Title;
