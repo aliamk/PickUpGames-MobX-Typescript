@@ -14,6 +14,7 @@ import { ToastContainer } from 'react-toastify'
 import { RootStoreContext } from '../stores/rootStore'
 import LoadingComponent from './LoadingComponent'
 import ModalContainer from '../common/modals/ModalContainer'
+import ProfilePage from '../../Features/profiles/ProfilePage'
 
 
 const App:React.FC<RouteComponentProps> = ({ location }) => {  
@@ -48,7 +49,8 @@ const App:React.FC<RouteComponentProps> = ({ location }) => {
                 <Route exact path='/visits/:id' component={VisitDetails} />
                 {/* Using location:key to create a new instance of the loaded component when a prop changes  */}
                 <Route key={location.key} path={['/createVisit', '/manage/:id']} component={VisitForm} />  
-                <Route path='/login' component={LoginForm} />
+                <Route path='/profile/:username' component={ProfilePage} />
+                {/* <Route path='/login' component={LoginForm} /> */}
                 <Route component={NotFound} />    
               </Switch>
             </Container>
