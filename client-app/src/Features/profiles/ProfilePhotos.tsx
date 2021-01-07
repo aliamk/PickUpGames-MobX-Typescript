@@ -26,7 +26,7 @@ const ProfilePhotos = () => {
             </Grid.Column>
             <Grid.Column width={16}>
                 <Card.Group itemsPerRow={5}>
-                    {/* If profile is not null... */}
+                    {/* If profile is not null, show the photos */}
                     {profile &&
                         profile.photos.map(photo => (
                             <Card key={photo.id}>
