@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import {Tab, Grid, Header, Button, Card, Image} from 'semantic-ui-react'
 import { RootStoreContext } from '../../App/stores/rootStore';
-// import PhotoUploadWidget from '../../app/common/photoUpload/PhotoUploadWidget';
+import PhotoUploadWidget from '../../App/common/photoUpload/PhotoUploadWidget';
 
 const ProfilePhotos = () => {
     // Access the profile by bringing in the RootStoreContext and destructuring
@@ -30,7 +30,7 @@ const ProfilePhotos = () => {
             <Grid.Column width={16}>
                 {/* If addPhotoMode is true, show the paragraph, else show photos */}
                 {addPhotoMode ? (
-                    <p>Photo widget will go here</p>
+                    <PhotoUploadWidget />
                 ) : (
                 <Card.Group itemsPerRow={5}>
                     {/* If profile is not null, show the photos */}
