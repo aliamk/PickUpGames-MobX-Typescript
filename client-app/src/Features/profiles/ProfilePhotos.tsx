@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import {Tab, Grid, Header, Button, Card, Image} from 'semantic-ui-react'
-import { RootStoreContext } from '../../app/stores/rootStore';
+import { RootStoreContext } from '../../App/stores/rootStore';
 
 
 const ProfilePhotos = () => {
