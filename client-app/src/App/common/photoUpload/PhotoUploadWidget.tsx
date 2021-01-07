@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { Header, Grid, Button } from 'semantic-ui-react';
 import { observer } from 'mobx-react-lite';
+import PhotoWidgetDropzone from './PhotoWidgetDropZone'
 
 
 const PhotoUploadWidget = () => {
@@ -11,7 +12,8 @@ const PhotoUploadWidget = () => {
       <Grid>
         {/* SECTION ONE */}
         <Grid.Column width={4}>
-          <Header color='teal' sub content='Step 1 - Add Photo' />          
+          <Header color='teal' sub content='Step 1 - Add Photo' />  
+        <PhotoWidgetDropzone />        
         </Grid.Column>
         {/* SECTION TWO */}
         <Grid.Column width={1} />
