@@ -13,7 +13,7 @@ const PhotoUploadWidget = () => {
         {/* SECTION ONE */}
         <Grid.Column width={4}>
           <Header color='teal' sub content='Step 1 - Add Photo' />  
-        <PhotoWidgetDropzone />        
+        <PhotoWidgetDropzone setFiles={setFiles} />        
         </Grid.Column>
         {/* SECTION TWO */}
         <Grid.Column width={1} />
