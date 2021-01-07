@@ -7,6 +7,13 @@ import PhotoWidgetDropzone from './PhotoWidgetDropZone'
 const PhotoUploadWidget = () => {
   const [files, setFiles] = useState<any[]>([]);
 
+  // Unmount the photo object added via drag'n'drop in PhotoWidgetDropZone
+  useEffect(() => {
+    return () => {
+      files.forEach(file => URL.revokeObjectURL(file.preview));
+    };
+  })
+
   return (
     <Fragment>
       <Grid>
