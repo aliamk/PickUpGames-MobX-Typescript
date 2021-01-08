@@ -1,82 +1,59 @@
-using System;                           // Exception
-using System.Threading;                 // CancellationToken
-using System.Threading.Tasks;           // Task
-using Application.Interfaces;
+using System;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+using Application.Errors;
+using AutoMapper;
 using Domain;
-using FluentValidation;
-using MediatR;                          // IRequest
+using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Persistence;                      // DataContext
+using Persistence;
 
-namespace Application.Visits
+namespace Application.Comments
 {
     public class Create
     {
-        public class Command : IRequest
+        public class Command : IRequest<CommentDto>
         {
-            public Guid Id { get; set; }
-            public string Title { get; set; }
-            public string Description { get; set; }
-            // public string Category { get; set; }
-            public DateTime Date { get; set; }
-            public string City { get; set; }
-            public string Venue { get; set; }
+            public string Body { get; set; }
+            public Guid VisitId { get; set; }
+            public string Username { get; set; }
         }
 
-        public class CommandValidator : AbstractValidator<Command>
-        {
-            public CommandValidator()
-            {
-                RuleFor(x => x.Title).NotEmpty();
-                RuleFor(x => x.Description).NotEmpty();
-                // RuleFor(x => x.Category).NotEmpty();
-                RuleFor(x => x.Date).NotEmpty();
-                RuleFor(x => x.City).NotEmpty();
-                RuleFor(x => x.Venue).NotEmpty();
-            }
-        }
-
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, CommentDto>
         {
             private readonly DataContext _context;
-            private readonly IUserAccessor _userAccessor;
-            public Handler(DataContext context, IUserAccessor userAccessor)
+            private readonly IMapper _mapper;
+            public Handler(DataContext context, IMapper mapper)
             {
-                _userAccessor = userAccessor;
+                _mapper = mapper;
                 _context = context;
             }
 
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public IMapper Mapper => _mapper;
+
+            public async Task<CommentDto> Handle(Command request, CancellationToken cancellationToken)
             {
-                var visit = new Visit
+                var visit = await _context.Visits.FindAsync(request.VisitId);
+
+                if (visit == null)
+                    throw new RestException(HttpStatusCode.NotFound, new { Visit = "Not found" });
+
+                var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == request.Username);
+
+                var comment = new Comment
                 {
-                    Id = request.Id,
-                    Title = request.Title,
-                    Description = request.Description,
-                    // Category = request.Category,
-                    Date = request.Date,
-                    City = request.City,
-                    Venue = request.Venue
-                };
-
-                _context.Visits.Add(visit);
-
-                var user = await _context.Users.SingleOrDefaultAsync(x =>
-                    x.UserName == _userAccessor.GetCurrentUsername());
-
-                var attendee = new UserVisit
-                {
-                    AppUser = user,
+                    Author = user,
                     Visit = visit,
-                    IsHost = true,
-                    DateJoined = DateTime.Now
+                    Body = request.Body,
+                    CreatedAt = DateTime.Now
                 };
 
-                _context.UserVisits.Add(attendee);
+                visit.Comments.Add(comment);
 
                 var success = await _context.SaveChangesAsync() > 0;
 
-                if (success) return Unit.Value;
+                if (success) return _mapper.Map<CommentDto>(comment);
 
                 throw new Exception("Problem saving changes");
             }
