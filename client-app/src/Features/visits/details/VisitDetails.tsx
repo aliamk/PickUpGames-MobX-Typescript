@@ -7,6 +7,7 @@ import LoadingComponent from '../../../App/layout/LoadingComponent'
 import VisitDetailedHeader from './VisitDetailedHeader'
 import VisitDetailedInfo from './VisitDetailedInfo'
 import VisitDetailedSidebar from './VisitDetailedSidebar'
+import VisitDetailedChat from './VisitDetailedChat'
 import { RootStoreContext } from '../../../App/stores/rootStore'
 
 
@@ -33,6 +34,7 @@ const VisitDetails: React.FC<RouteComponentProps<DetailParams>> = ({ match, hist
           <Grid.Column width={10}>
             <VisitDetailedHeader visit={visit} />
             <VisitDetailedInfo visit={visit} />
+            <VisitDetailedChat />
           </Grid.Column>
           <Grid.Column width={6}>
             <VisitDetailedSidebar attendees={visit.attendees}/>
