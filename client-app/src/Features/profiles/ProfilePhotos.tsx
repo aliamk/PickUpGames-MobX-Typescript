@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import {Tab, Grid, Header, Button, Card, Image} from 'semantic-ui-react'
 import { RootStoreContext } from '../../App/stores/rootStore';
 import PhotoUploadWidget from '../../App/common/photoUpload/PhotoUploadWidget';
+import { observer } from 'mobx-react-lite';
 
 const ProfilePhotos = () => {
     // Access the profile by bringing in the RootStoreContext and destructuring
@@ -9,6 +10,11 @@ const ProfilePhotos = () => {
     const rootStore = useContext(RootStoreContext);
     const { profile, isCurrentUser, uploadPhoto, uploadingPhoto  } = rootStore.profileStore
     const [addPhotoMode, setAddPhotoMode] = useState(true);
+
+    // Once photo is uploaded, setState to false so the widget goes away
+    const handleUploadImage = (photo: Blob) => {
+        uploadPhoto(photo).then(() => setAddPhotoMode(false));
+      };
 
     return (
         <Tab.Pane>
@@ -30,7 +36,7 @@ const ProfilePhotos = () => {
             <Grid.Column width={16}>
                 {/* If addPhotoMode is true, show the paragraph, else show photos */}
                 {addPhotoMode ? (
-                    <PhotoUploadWidget uploadPhoto={uploadPhoto} uploadingPhoto={uploadingPhoto} />
+                    <PhotoUploadWidget uploadPhoto={handleUploadImage} loading={uploadingPhoto} />
                 ) : (
                 <Card.Group itemsPerRow={5}>
                     {/* If profile is not null, show the photos */}
@@ -68,4 +74,4 @@ const ProfilePhotos = () => {
     )
 }
 
-export default ProfilePhotos
+export default observer(ProfilePhotos);
