@@ -65,6 +65,5 @@ export default class ProfileStore {
     }
   };
 
-
 } // End ProfileStore
 
