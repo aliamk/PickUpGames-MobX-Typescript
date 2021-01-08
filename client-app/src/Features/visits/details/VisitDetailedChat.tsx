@@ -15,11 +15,11 @@ const VisitDetailedChat = () => {
 
   // Call the hub action in visitStore
   useEffect(() => {
-    createHubConnection();                              
+    createHubConnection(visit!.id);                              
     return () => {
       stopHubConnection();                              
     }
-  }, [createHubConnection, stopHubConnection])
+  }, [createHubConnection, stopHubConnection, visit])
 
   return (
     <Fragment>

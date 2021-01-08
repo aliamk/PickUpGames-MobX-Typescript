@@ -36,7 +36,7 @@ export default class VisitStore {
     @observable.ref hubConnection: HubConnection | null = null;     // SignalR - use ref so we're not observing the whole of the chathub 
 
     // ======== SignalR - ChatHub Create ======== //
-    @action createHubConnection = () => {
+    @action createHubConnection = (visitId: string) => {
         this.hubConnection = new HubConnectionBuilder()
           .withUrl('http://localhost:5000/chat', {
             accessTokenFactory: () => this.rootStore.commonStore.token!     // Sending the token as a query string bc not using the http protocol
@@ -47,6 +47,12 @@ export default class VisitStore {
         this.hubConnection
           .start()
           .then(() => console.log(this.hubConnection!.state))
+          .then(() => {
+            console.log("Attempting to join group");
+            if (this.hubConnection!.state === 'Connected') {
+              this.hubConnection!.invoke('AddToGroup', visitId)
+            }
+          })
           .catch(error => console.log('Error establishing connection: ', error));
         // Pass comment to the comments array
         this.hubConnection.on('ReceiveComment', comment => {
@@ -54,11 +60,19 @@ export default class VisitStore {
             this.visit!.comments.push(comment)
           })
         })
+        this.hubConnection.on('Send', message => {
+          toast.info(message)
+        })
       };
     
     // ======== SignalR - ChatHub Stop ======== //
     @action stopHubConnection = () => {
-    this.hubConnection!.stop()
+      this.hubConnection!.invoke('RemoveFromGroup', this.visit!.id)
+        .then(() => {
+        this.hubConnection!.stop()
+      })
+      .then(() => console.log('Connection stopped'))    
+      .catch(err => console.log(err))
     }
 
     // ======== SignalR - ChatHub - ADD COMMENT VIA FORM ======== //
@@ -158,6 +172,7 @@ export default class VisitStore {
             let attendees = []
             attendees.push(attendee)    
             visit.attendees = attendees
+            visit.comments = [];
             visit.isHost = true
             runInAction('creating visit', () => {
                 this.visitRegistry.set(visit.id, visit);
