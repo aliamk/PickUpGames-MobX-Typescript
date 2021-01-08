@@ -12,5 +12,6 @@ namespace Domain
         public string Venue { get; set; }
         public string City { get; set; }
         public virtual ICollection<UserVisit> UserVisits { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }
