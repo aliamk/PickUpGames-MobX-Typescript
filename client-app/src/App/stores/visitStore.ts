@@ -7,6 +7,8 @@ import { history } from '../..'
 import { toast } from 'react-toastify'
 import { RootStore } from './rootStore';
 import { createAttendee, setVisitProps } from '../common/util/util'
+import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+
 
 
 export default class VisitStore {
@@ -27,10 +29,37 @@ export default class VisitStore {
 
     @observable visitRegistry = new Map()
     @observable visit: IVisit | null = null;
-    @observable loadingInitial = false  // the loading icon for the whole app
+    @observable loadingInitial = false                              // the loading icon for the whole app
     @observable loading = false         
-    @observable submitting = false      // the loading icon within buttons
-    @observable target = ''             // created for the deleteVisit action
+    @observable submitting = false                                  // the loading icon within buttons
+    @observable target = ''                                         // created for the deleteVisit action
+    @observable.ref hubConnection: HubConnection | null = null;     // SignalR - use ref so we're not observing the whole of the chathub 
+
+    // ======== SignalR - ChatHub Create ======== //
+    @action createHubConnection = () => {
+        this.hubConnection = new HubConnectionBuilder()
+          .withUrl('http://localhost:5000/chat', {
+            accessTokenFactory: () => this.rootStore.commonStore.token!     // Sending the token as a query string bc not using the http protocol
+          })
+          .configureLogging(LogLevel.Information)
+          .build();
+        // Start the connection
+        this.hubConnection
+          .start()
+          .then(() => console.log(this.hubConnection!.state))
+          .catch(error => console.log('Error establishing connection: ', error));
+        // Pass comment to the comments array
+        this.hubConnection.on('ReceiveComment', comment => {
+          runInAction(() => {
+            this.visit!.comments.push(comment)
+          })
+        })
+      };
+    
+    // ======== SignalR - ChatHub Stop ======== //
+    @action stopHubConnection = () => {
+    this.hubConnection!.stop()
+    }
 
     // ========  Sorting Visit posts by date order ======== //
     @computed get visitsByDate() {
