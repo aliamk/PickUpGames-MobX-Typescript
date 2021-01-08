@@ -1,6 +1,6 @@
 import { RootStore } from './rootStore';
 import { observable, action, runInAction, computed } from 'mobx';
-import { IProfile } from '../models/profile';
+import { IPhoto, IProfile } from '../models/profile';
 import agent from '../api/agent';
 import { toast } from 'react-toastify';
 
@@ -12,8 +12,10 @@ export default class ProfileStore {
     }
 
   @observable profile: IProfile | null = null;
-  @observable loadingProfile = true;
-  @observable uploadingPhoto = false;
+  @observable loadingProfile = true;            // loadProfile
+  @observable uploadingPhoto = false;           // uploadPhoto
+  @observable loading = false;                  // setMainPhoto
+
 
 
   @computed get isCurrentUser() {
@@ -64,6 +66,27 @@ export default class ProfileStore {
       });
     }
   };
+
+  @action setMainPhoto = async (photo: IPhoto) => {
+    this.loading = true;
+    try {
+      await agent.Profiles.setMainPhoto(photo.id);
+      runInAction(() => {
+        this.rootStore.userStore.user!.image = photo.url;                   // update userStore's user object
+        this.profile!.photos.find(v => v.isMain)!.isMain = false;           // remove old main photo in profile's photo array
+        this.profile!.photos.find(v => v.id === photo.id)!.isMain = true;   // add new main photo in profile's photo array
+        this.profile!.image = photo.url;                                    // update profile image with new the main photo
+        this.loading = false;
+      });
+    } catch (error) {
+      toast.error('Problem setting photo as main');
+      runInAction(() => {
+        this.loading = false;
+      });
+    }
+  };
+
+
 
 } // End ProfileStore
 
