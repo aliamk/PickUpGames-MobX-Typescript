@@ -9,6 +9,7 @@
     "@types/jest": "^26.0.19",
     "@types/node": "^12.19.11",
     "@types/react": "^16.14.2",
+    "@types/react-cropper": "^0.10.6",
     "@types/react-dom": "^16.9.10",
     "@types/react-router-dom": "^4.3.4",
     "@types/react-widgets": "^4.3.3",
