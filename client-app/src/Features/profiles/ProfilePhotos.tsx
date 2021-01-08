@@ -9,6 +9,8 @@ const ProfilePhotos = () => {
     const rootStore = useContext(RootStoreContext);
     const { profile, isCurrentUser, uploadPhoto, uploadingPhoto, setMainPhoto, loading  } = rootStore.profileStore
     const [addPhotoMode, setAddPhotoMode] = useState(false);
+    const [target, setTarget] = useState<string | undefined>(undefined);
+
 
     // Once photo is uploaded, setState to false so the widget goes away
     const handleUploadImage = (photo: Blob) => {
@@ -47,9 +49,12 @@ const ProfilePhotos = () => {
                                 <Button.Group fluid widths={2}>
                                     {/* ADD MAIN PHOTO */}
                                     <Button
-                                        onClick={() => setMainPhoto(photo)} 
-                                        loading={loading}
                                         name={photo.id}
+                                        onClick={e => {
+                                            setMainPhoto(photo);
+                                            setTarget(e.currentTarget.name);
+                                        }} 
+                                        loading={loading && target === photo.id}                                        
                                         disabled={photo.isMain}
                                         basic
                                         positive
