@@ -1,6 +1,7 @@
 using System;                           // Guid
 using System.Collections.Generic;       // ICollection
 using System.Text.Json.Serialization;   //JsonProperty
+using Application.Comments;             // CommentDto
 
 namespace Application.Visits
 {
@@ -15,6 +16,7 @@ namespace Application.Visits
 
         [JsonPropertyName("attendees")]
         public ICollection<AttendeeDto> UserVisits { get; set; }
+        public ICollection<CommentDto> Comments { get; set; }
 
     }
 }
