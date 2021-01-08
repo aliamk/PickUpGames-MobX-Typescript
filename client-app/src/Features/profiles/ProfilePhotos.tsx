@@ -7,7 +7,7 @@ const ProfilePhotos = () => {
     // Access the profile by bringing in the RootStoreContext and destructuring
     // the profileStore from it
     const rootStore = useContext(RootStoreContext);
-    const { profile, isCurrentUser } = rootStore.profileStore
+    const { profile, isCurrentUser, uploadPhoto, uploadingPhoto  } = rootStore.profileStore
     const [addPhotoMode, setAddPhotoMode] = useState(true);
 
     return (
@@ -30,7 +30,7 @@ const ProfilePhotos = () => {
             <Grid.Column width={16}>
                 {/* If addPhotoMode is true, show the paragraph, else show photos */}
                 {addPhotoMode ? (
-                    <PhotoUploadWidget />
+                    <PhotoUploadWidget uploadPhoto={uploadPhoto} uploadingPhoto={uploadingPhoto} />
                 ) : (
                 <Card.Group itemsPerRow={5}>
                     {/* If profile is not null, show the photos */}
