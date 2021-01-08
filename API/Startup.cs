@@ -1,4 +1,5 @@
 using System.Text;                                      // Encoding
+using System.Threading.Tasks;                           // Task
 using API.Middleware;                                   // ErrorHandlingMiddleware
 using API.SignalR;                                      // ChatHub
 using Application.Interfaces;                           // IJwtGenerator
@@ -96,6 +97,21 @@ namespace API
                         ValidateIssuer = false
                         // ValidateLifetime = true,
                         // ClockSkew = TimeSpan.Zero
+                    };
+                    // SIGNALR - GET TOKEN FOR THE HUB CONTEXT
+                    opt.Events = new JwtBearerEvents
+                    {
+                        OnMessageReceived = context =>
+                        {
+                            var accessToken = context.Request.Query["access_token"];
+                            var path = context.HttpContext.Request.Path;                  // Get reference to path the request comes on
+                            if (!string.IsNullOrEmpty(accessToken) && (path.StartsWithSegments("/chat")))
+                            {
+                                context.Token = accessToken;
+                            }
+
+                            return Task.CompletedTask;
+                        }
                     };
                 });
 
