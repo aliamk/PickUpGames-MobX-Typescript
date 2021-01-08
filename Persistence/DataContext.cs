@@ -13,6 +13,7 @@ namespace Persistence
         public DbSet<Visit> Visits { get; set; }
         public DbSet<UserVisit> UserVisits { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         // Seed the database with initial values
         protected override void OnModelCreating(ModelBuilder builder)
