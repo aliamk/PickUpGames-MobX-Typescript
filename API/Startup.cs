@@ -1,5 +1,6 @@
 using System.Text;                                      // Encoding
 using API.Middleware;                                   // ErrorHandlingMiddleware
+using API.SignalR;                                      // ChatHub
 using Application.Interfaces;                           // IJwtGenerator
 using Application.Visits;                               // (typeof(List))
 using AutoMapper;                                       // AddAutoMapper
