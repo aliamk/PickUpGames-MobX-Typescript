@@ -5,11 +5,10 @@ import PhotoUploadWidget from '../../App/common/photoUpload/PhotoUploadWidget';
 import { observer } from 'mobx-react-lite';
 
 const ProfilePhotos = () => {
-    // Access the profile by bringing in the RootStoreContext and destructuring
-    // the profileStore from it
+    // Access the profile by bringing in the RootStoreContext and destructuring the profileStore from it
     const rootStore = useContext(RootStoreContext);
-    const { profile, isCurrentUser, uploadPhoto, uploadingPhoto  } = rootStore.profileStore
-    const [addPhotoMode, setAddPhotoMode] = useState(true);
+    const { profile, isCurrentUser, uploadPhoto, uploadingPhoto, setMainPhoto, loading  } = rootStore.profileStore
+    const [addPhotoMode, setAddPhotoMode] = useState(false);
 
     // Once photo is uploaded, setState to false so the widget goes away
     const handleUploadImage = (photo: Blob) => {
@@ -46,14 +45,17 @@ const ProfilePhotos = () => {
                             <Image src={photo.url} />  
                             {isCurrentUser && (
                                 <Button.Group fluid widths={2}>
+                                    {/* ADD MAIN PHOTO */}
                                     <Button
-                                        onClick={() => setAddPhotoMode(!addPhotoMode)} 
+                                        onClick={() => setMainPhoto(photo)} 
+                                        loading={loading}
                                         name={photo.id}
                                         disabled={photo.isMain}
                                         basic
                                         positive
                                         content='Main'
                                     />
+                                    {/* DELETE PHOTO */}
                                     <Button
                                         name={photo.id}
                                         disabled={photo.isMain}
