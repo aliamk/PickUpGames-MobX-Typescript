@@ -79,7 +79,8 @@ const User = {
     get: (username: string): Promise<IProfile> => requests.get(`/profiles/${username}`),
     uploadPhoto: (photo: Blob): Promise<IPhoto> => requests.postForm(`/photos`, photo),
     setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
-    deletePhoto: (id: string) => requests.del(`/photos/${id}`)
+    deletePhoto: (id: string) => requests.del(`/photos/${id}`),
+    updateProfile: (profile: Partial<IProfile>) => requests.put(`/profiles`, profile)
 };
 
 
@@ -93,7 +94,6 @@ export default {
 
 
 //     uploadPhoto: (photo: Blob): Promise<IPhoto> => requests.postForm(`/photos`, photo),
-//     updateProfile: (profile: Partial<IProfile>) => requests.put(`/profiles`, profile),
 //     follow: (username: string) => requests.post(`/profiles/${username}/follow`, {}),
 //     unfollow: (username: string) => requests.del(`/profiles/${username}/follow`),
 //     listFollowings: (username: string, predicate: string) => requests.get(`/profiles/${username}/follow?predicate=${predicate}`),
