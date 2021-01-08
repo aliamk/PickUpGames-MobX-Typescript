@@ -104,6 +104,23 @@ export default class ProfileStore {
     }
   };
 
+  // Updating the user bios
+  @action updateProfile = async (profile: Partial<IProfile>) => {
+    try {
+      await agent.Profiles.updateProfile(profile);    // call the request in agent.ts
+      runInAction(() => {
+        if (
+          profile.displayName !== this.rootStore.userStore.user!.displayName // check: has displayName been updated
+        ) {
+          this.rootStore.userStore.user!.displayName = profile.displayName!; // if yes, update userStore's user displayName
+        }
+        this.profile = { ...this.profile!, ...profile };  // overwrite old profile properties with new profile properties
+      });
+    } catch (error) {
+      toast.error('Problem updating profile');
+    }
+  };
+
 
 
 } // End ProfileStore
