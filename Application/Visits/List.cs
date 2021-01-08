@@ -1,4 +1,5 @@
 using System.Collections.Generic;       // List
+using System.Linq;                      // AsQueryable
 using System.Threading;                 // IRequestHandler (Implement Interface)
 using System.Threading.Tasks;           // IRequestHandler (Implement Interface)
 using AutoMapper;                       // IMapper
@@ -11,8 +12,22 @@ namespace Application.Visits
 {
     public class List
     {
-        public class Query : IRequest<List<VisitDto>> { }
-        public class Handler : IRequestHandler<Query, List<VisitDto>>
+        public class VisitsEnvelope
+        {
+            public List<VisitDto> Visits { get; set; }
+            public int VisitCount { get; set; }
+        }
+        public class Query : IRequest<VisitsEnvelope>
+        {
+            public Query(int? limit, int? offset)
+            {
+                Limit = limit;
+                Offset = offset;
+            }
+            public int? Limit { get; set; }
+            public int? Offset { get; set; }
+        }
+        public class Handler : IRequestHandler<Query, VisitsEnvelope>
         {
             private readonly DataContext _context;
             private readonly IMapper _mapper;
@@ -22,12 +37,19 @@ namespace Application.Visits
                 _context = context;
             }
 
-            public async Task<List<VisitDto>> Handle(Query request,
+            public async Task<VisitsEnvelope> Handle(Query request,
                 CancellationToken cancellationToken)
             {
-                var visits = await _context.Visits.ToListAsync();
+                var queryable = _context.Visits.AsQueryable();
+                var visits = await queryable
+                    .Skip(request.Offset ?? 0)
+                    .Take(request.Limit ?? 3).ToListAsync();
 
-                return _mapper.Map<List<Visit>, List<VisitDto>>(visits);
+                return new VisitsEnvelope
+                {
+                    Visits = _mapper.Map<List<Visit>, List<VisitDto>>(visits),
+                    VisitCount = queryable.Count()
+                };
             }
         }
     }
