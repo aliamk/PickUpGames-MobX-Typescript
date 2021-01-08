@@ -53,6 +53,8 @@ namespace API
             services.AddMediatR(typeof(List.Handler).Assembly);
             // For mapping to DTOs
             services.AddAutoMapper(typeof(List.Handler));
+            // For the chat component using SignalR and websockets
+            services.AddSignalR();
             // Fluid Validation for checks before sending data to command handlers
             services.AddControllers(opt =>
             {
@@ -118,7 +120,6 @@ namespace API
 
             app.UseCors("CorsPolicy");
 
-
             app.UseAuthentication();
 
             app.UseAuthorization();
@@ -126,6 +127,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
             });
         }
     }
