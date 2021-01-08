@@ -7,10 +7,10 @@ import { observer } from 'mobx-react-lite';
 const ProfilePhotos = () => {
     // Access the profile by bringing in the RootStoreContext and destructuring the profileStore from it
     const rootStore = useContext(RootStoreContext);
-    const { profile, isCurrentUser, uploadPhoto, uploadingPhoto, setMainPhoto, loading  } = rootStore.profileStore
+    const { profile, isCurrentUser, uploadPhoto, uploadingPhoto, setMainPhoto, loading, deletePhoto } = rootStore.profileStore
     const [addPhotoMode, setAddPhotoMode] = useState(false);
     const [target, setTarget] = useState<string | undefined>(undefined);
-
+    const [deleteTarget, setDeleteTarget] = useState<string | undefined>(undefined);
 
     // Once photo is uploaded, setState to false so the widget goes away
     const handleUploadImage = (photo: Blob) => {
@@ -63,6 +63,11 @@ const ProfilePhotos = () => {
                                     {/* DELETE PHOTO */}
                                     <Button
                                         name={photo.id}
+                                        onClick={(e) => {
+                                            deletePhoto(photo);
+                                            setDeleteTarget(e.currentTarget.name)
+                                        }}
+                                        loading={loading && deleteTarget === photo.id}
                                         disabled={photo.isMain}
                                         basic
                                         negative
