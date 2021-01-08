@@ -15,7 +15,7 @@ export interface IProfile {
     isMain: boolean;
   }
   
-  export interface IUserActivity {
+  export interface IUserVisit {
     id: string;
     title: string;
     category: string;

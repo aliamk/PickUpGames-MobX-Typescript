@@ -61,6 +61,16 @@ export default class VisitStore {
     this.hubConnection!.stop()
     }
 
+    // ======== SignalR - ChatHub - ADD COMMENT VIA FORM ======== //
+    @action addComment = async (values: any) => {
+      values.visitId = this.visit!.id;
+      try {
+        await this.hubConnection!.invoke('SendComment', values)
+      } catch (error) {
+        console.log(error);
+      }
+    } 
+
     // ========  Sorting Visit posts by date order ======== //
     @computed get visitsByDate() {
         return this.groupVisitsByDate(Array.from(this.visitRegistry.values()))
