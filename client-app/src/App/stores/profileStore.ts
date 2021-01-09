@@ -1,6 +1,6 @@
 import { RootStore } from './rootStore';
 import { observable, action, runInAction, computed } from 'mobx';
-import { IPhoto, IProfile } from '../models/profile';
+import { IPhoto, IProfile, IUserVisit } from '../models/profile';
 import agent from '../api/agent';
 import { toast } from 'react-toastify';
 
@@ -15,6 +15,9 @@ export default class ProfileStore {
   @observable loadingProfile = true;            // loadProfile
   @observable uploadingPhoto = false;           // uploadPhoto
   @observable loading = false;                  // setMainPhoto
+  @observable userVisits: IUserVisit[] = [];    // User + Visits Attended
+  @observable loadingVisits = false;
+
 
 
 
