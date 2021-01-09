@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { history } from '../..';
 import { IUser, IUserFormValues } from '../models/user';
-import { IVisit } from '../models/visit_interface';
+import { IVisit, IVisitsEnvelope } from '../models/visit_interface';
 import { IProfile, IPhoto } from '../models/profile';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
@@ -60,7 +60,7 @@ const requests = {
 };
 
 const Visits = {
-    list: (limit?: number, page?: number): Promise<IVisit[]> => 
+    list: (limit?: number, page?: number): Promise<IVisitsEnvelope> => 
         requests.get(`/visits?limit=${limit}&offset=${page ? page * limit! : 0}`),
     details: (id: string) => requests.get(`/visits/${id}`),
     create: (visit: IVisit) => requests.post('/visits', visit),
