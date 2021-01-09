@@ -60,8 +60,8 @@ const requests = {
 };
 
 const Visits = {
-    list: (limit?: number, page?: number): Promise<IVisitsEnvelope> => 
-        requests.get(`/visits?limit=${limit}&offset=${page ? page * limit! : 0}`),
+    list: (params: URLSearchParams): Promise<IVisitsEnvelope> => 
+        axios.get('/visits', {params: params}).then(sleep(1000)).then(responseBody),
     details: (id: string) => requests.get(`/visits/${id}`),
     create: (visit: IVisit) => requests.post('/visits', visit),
     update: (visit: IVisit) => requests.put(`/visits/${visit.id}`, visit),
