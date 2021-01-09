@@ -9,22 +9,13 @@ import { RootStore } from './rootStore';
 import { createAttendee, setVisitProps } from '../common/util/util'
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
-
+const LIMIT = 2;
 
 export default class VisitStore {
 
     rootStore: RootStore;
     constructor(rootStore: RootStore) {
       this.rootStore = rootStore;
-  
-    //   reaction(
-    //     () => this.predicate.keys(),
-    //     () => {
-    //       this.page = 0;
-    //       this.visitRegistry.clear();
-    //       this.loadVisits();
-    //     }
-    //   )
     }
 
     @observable visitRegistry = new Map()
@@ -34,6 +25,18 @@ export default class VisitStore {
     @observable submitting = false                                  // the loading icon within buttons
     @observable target = ''                                         // created for the deleteVisit action
     @observable.ref hubConnection: HubConnection | null = null;     // SignalR - use ref so we're not observing the whole of the chathub 
+    @observable activityCount = 0;
+    @observable page = 0;
+
+
+    @computed get totalPages() {
+      return Math.ceil(this.activityCount / LIMIT);
+    }
+
+    @action setPage = (page: number) => {
+      this.page = page;
+    }
+
 
     // ======== SignalR - ChatHub Create ======== //
     @action createHubConnection = (visitId: string) => {
@@ -109,7 +112,7 @@ export default class VisitStore {
     @action loadVisits = async () => {
         this.loadingInitial = true                      // mutating state with MobX        
         try {
-            const visits = await agent.Visits.list()    
+            const visits = await agent.Visits.list(LIMIT, this.page)    
             runInAction('loading visits', () => {
                 visits.forEach((visit) => {
                    setVisitProps(visit, this.rootStore.userStore.user!)
