@@ -80,7 +80,9 @@ const User = {
     uploadPhoto: (photo: Blob): Promise<IPhoto> => requests.postForm(`/photos`, photo),
     setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
     deletePhoto: (id: string) => requests.del(`/photos/${id}`),
-    updateProfile: (profile: Partial<IProfile>) => requests.put(`/profiles`, profile)
+    updateProfile: (profile: Partial<IProfile>) => requests.put(`/profiles`, profile),
+    listVisits: (username: string, predicate: string) => 
+        requests.get(`/profiles/${username}/visits?predicate=${predicate}`)
 };
 
 
