@@ -6,6 +6,7 @@ import { IUserVisit } from '../../app/models/profile';
 import { format } from 'date-fns';
 import { RootStoreContext } from '../../app/stores/rootStore';
 
+// Semantic-ui Tab for three menu items
 const panes = [
   { menuItem: 'Future Events', pane: { key: 'futureEvents' } },
   { menuItem: 'Past Events', pane: { key: 'pastEvents' } },
@@ -13,18 +14,16 @@ const panes = [
 ];
 
 const ProfileEvents = () => {
+    // Access rootStore and destructure profileStore
   const rootStore = useContext(RootStoreContext);
-  const {
-    loadUserVisits,
-    profile,
-    loadingVisits,
-    userVisits
-  } = rootStore.profileStore!;
+  const { loadUserVisits, profile, loadingVisits, userVisits } = rootStore.profileStore!;
 
+  // Load the loadUserVisits action
   useEffect(() => {
     loadUserVisits(profile!.username);
   }, [loadUserVisits, profile]);
 
+  // Method for changing tabs in the <Tab> in the return statement
   const handleTabChange = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     data: TabProps
