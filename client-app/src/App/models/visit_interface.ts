@@ -3,8 +3,8 @@
 // so the final code output will be less this way
 
 export interface IVisitsEnvelope {
-    activities: IVisit[];
-    activityCount: number;
+    visits: IVisit[];
+    visitCount: number;
   }
 
 export interface IVisit

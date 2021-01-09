@@ -112,12 +112,14 @@ export default class VisitStore {
     @action loadVisits = async () => {
         this.loadingInitial = true                      // mutating state with MobX        
         try {
-            const visits = await agent.Visits.list(LIMIT, this.page)    
+            const visitsEnvelope = await agent.Visits.list(LIMIT, this.page) 
+            const { visits, visitCount } = visitsEnvelope;
             runInAction('loading visits', () => {
                 visits.forEach((visit) => {
                    setVisitProps(visit, this.rootStore.userStore.user!)
                     this.visitRegistry.set(visit.id, visit);
-                })
+                });
+                this.visitCount = visitCount
                 this.loadingInitial = false
             }) 
             } catch (error) {
