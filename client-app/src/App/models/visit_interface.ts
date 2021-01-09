@@ -2,6 +2,11 @@
 // Not using a class to do this because Interfaces don't get generated into Javascript the way classes do
 // so the final code output will be less this way
 
+export interface IVisitsEnvelope {
+    activities: IVisit[];
+    activityCount: number;
+  }
+
 export interface IVisit
 {
     id: string;
