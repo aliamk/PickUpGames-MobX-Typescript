@@ -37,7 +37,6 @@ export default class VisitStore {
       this.page = page;
     }
 
-
     // ======== SignalR - ChatHub Create ======== //
     @action createHubConnection = (visitId: string) => {
         this.hubConnection = new HubConnectionBuilder()

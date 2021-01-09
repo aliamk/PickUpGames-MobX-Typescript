@@ -1,6 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Grid } from 'semantic-ui-react'
+import { Button, Grid, Loader } from 'semantic-ui-react'
+import InfiniteScroll from 'react-infinite-scroller'
 
 import VisitList from './VisitList'
 import LoadingComponent from '../../../App/layout/LoadingComponent'
@@ -11,7 +12,14 @@ const VisitDashboard: React.FC<{ visit: IVisit }> = ({visit}) => {
 
     // ======== MobX's VisitStore for state management - now RootStore ======== //
     const rootStore = useContext(RootStoreContext)
-    const {loadVisits, loadingInitial} = rootStore.visitStore;
+    const {loadVisits, loadingInitial, setPage, page, totalPages} = rootStore.visitStore;
+    const {loadingNext, setLoadingNext} = useState(false)
+
+    const handleGetNext = () => {
+        setLoadingNext(true);
+        setPage(page + 1);
+        loadVisits().then(() => setLoadingNext(false));
+    };
 
     // ========  API Calls (see @action loadVisits in visitStore.ts) ======== //
     useEffect(() => {
@@ -19,16 +27,28 @@ const VisitDashboard: React.FC<{ visit: IVisit }> = ({visit}) => {
     }, [loadVisits])
 
     // ========  LOADING SPINNER ======== //
-    if (loadingInitial) return <LoadingComponent content='Loading Visits...' />
+    if (loadingInitial && page === 0) 
+        return <LoadingComponent content='Loading Visits...' />
     
     // ======== DOM Display ======== //
     return (
         <Grid>
             <Grid.Column width={10}>
-                <VisitList />
+                <InfiniteScroll 
+                    pageStart={0} 
+                    loadMore={handleGetNext} 
+                    hasMore={!loadingNext && page + 1 < totalPages}
+                    initialLoad={false}
+                >
+                    <VisitList />
+                </InfiniteScroll>
+
             </Grid.Column>
             <Grid.Column width={6}>
                 <h2>Visit Filters</h2>
+            </Grid.Column>
+            <Grid.Column width={10}>
+                <Loader active={loadingNext} />
             </Grid.Column>
         </Grid>
     )
