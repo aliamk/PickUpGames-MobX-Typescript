@@ -1,5 +1,5 @@
 import { SyntheticEvent } from 'react'
-import { observable, action, computed, runInAction } from 'mobx'
+import { observable, action, computed, runInAction, reaction } from 'mobx'
 
 import agent from '../api/agent'
 import { IVisit } from '../models/visit_interface'
@@ -16,6 +16,17 @@ export default class VisitStore {
     rootStore: RootStore;
     constructor(rootStore: RootStore) {
       this.rootStore = rootStore;
+
+      // whenever the predicate's keys change...
+      reaction(
+        () => this.predicate.keys(),
+        // ...run this expression
+        () => {
+          this.page = 0;
+          this.visitRegistry.clear();
+          this.loadVisits();
+        }
+      )
     }
 
     @observable visitRegistry = new Map()
