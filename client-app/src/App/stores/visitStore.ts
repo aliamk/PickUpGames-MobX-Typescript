@@ -27,7 +27,33 @@ export default class VisitStore {
     @observable.ref hubConnection: HubConnection | null = null;     // SignalR - use ref so we're not observing the whole of the chathub 
     @observable visitCount = 0;
     @observable page = 0;
+    @observable predicate = new Map();
 
+    // ======== FILTERABLE PARAMS IN URL ======== //
+    @action setPredicate = (predicate: string, value: string | Date) => {
+      // clear previous predicates - if there's no predicate, return Visits
+      this.predicate.clear();               
+      if (predicate !== 'all') {
+        this.predicate.set(predicate, value);
+      }
+    }
+
+    // Pass this to the agent method via the loadVisits method
+    @computed get axiosParams() {
+      // URLSearchParams: interface that defines methods to work with query strings of a url
+      const params = new URLSearchParams();  
+      // append key-value pairs as query string parameters
+      params.append('limit', String(LIMIT)); 
+      params.append('offset', `${this.page ? this.page * LIMIT : 0}`);
+      this.predicate.forEach((value, key) => {
+        if (key === 'startDate') {
+          params.append(key, value.toISOString())
+        } else {
+          params.append(key, value)
+        }
+      })
+      return params;
+    }
 
     @computed get totalPages() {
       return Math.ceil(this.visitCount / LIMIT);
@@ -111,7 +137,7 @@ export default class VisitStore {
     @action loadVisits = async () => {
         this.loadingInitial = true                      // mutating state with MobX        
         try {
-            const visitsEnvelope = await agent.Visits.list(LIMIT, this.page) 
+            const visitsEnvelope = await agent.Visits.list(this.axiosParams) // from computed axiosParams to agent.ts
             const { visits, visitCount } = visitsEnvelope;
             runInAction('loading visits', () => {
                 visits.forEach((visit) => {
