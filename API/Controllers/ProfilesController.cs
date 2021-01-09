@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections.Generic;           // List
 using System.Threading.Tasks;               // Task
 using Application.Profiles;                 // Profile
 using MediatR;
@@ -20,10 +20,10 @@ namespace API.Controllers
             return await Mediator.Send(command);
         }
 
-        // [HttpGet("{username}/visits")]
-        // public async Task<ActionResult<List<UserVisitDto>>> GetUserVisits(string username, string predicate) 
-        // {
-        //     return await Mediator.Send(new ListVisits.Query{Username = username, Predicate = predicate});
-        // }
+        [HttpGet("{username}/visits")]
+        public async Task<ActionResult<List<UserVisitDto>>> GetUserVisits(string username, string predicate)
+        {
+            return await Mediator.Send(new ListVisits.Query { Username = username, Predicate = predicate });
+        }
     }
 }
