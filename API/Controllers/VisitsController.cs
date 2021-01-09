@@ -14,9 +14,10 @@ namespace API.Controllers
     {
         // Request to see all Visit items in the database - see the List Handler in List.cs
         [HttpGet]
-        public async Task<ActionResult<List.VisitsEnvelope>> List(int? limit, int? offset)
+        public async Task<ActionResult<List.VisitsEnvelope>> List(int? limit, int? offset, bool isGoing, bool isHost, DateTime? startDate)
         {
-            return await Mediator.Send(new List.Query(limit, offset));
+            return await Mediator.Send(new List.Query(limit,
+               offset, isGoing, isHost, startDate));
         }
 
         // Request for a single item  - see the Details Handler in Details.cs
