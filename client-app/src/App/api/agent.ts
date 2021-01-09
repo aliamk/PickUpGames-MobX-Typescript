@@ -98,4 +98,4 @@ export default {
 //     follow: (username: string) => requests.post(`/profiles/${username}/follow`, {}),
 //     unfollow: (username: string) => requests.del(`/profiles/${username}/follow`),
 //     listFollowings: (username: string, predicate: string) => requests.get(`/profiles/${username}/follow?predicate=${predicate}`),
-//     listActivities: (username: string, predicate: string) => requests.get(`/profiles/${username}/activities?predicate=${predicate}`)
+//     listVisits: (username: string, predicate: string) => requests.get(`/profiles/${username}/visits?predicate=${predicate}`)

@@ -20,7 +20,7 @@ namespace API.Controllers
             return await Mediator.Send(command);
         }
 
-        // [HttpGet("{username}/activities")]
+        // [HttpGet("{username}/visits")]
         // public async Task<ActionResult<List<UserVisitDto>>> GetUserVisits(string username, string predicate) 
         // {
         //     return await Mediator.Send(new ListVisits.Query{Username = username, Predicate = predicate});

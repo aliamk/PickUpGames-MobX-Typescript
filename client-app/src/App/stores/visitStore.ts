@@ -25,12 +25,12 @@ export default class VisitStore {
     @observable submitting = false                                  // the loading icon within buttons
     @observable target = ''                                         // created for the deleteVisit action
     @observable.ref hubConnection: HubConnection | null = null;     // SignalR - use ref so we're not observing the whole of the chathub 
-    @observable activityCount = 0;
+    @observable visitCount = 0;
     @observable page = 0;
 
 
     @computed get totalPages() {
-      return Math.ceil(this.activityCount / LIMIT);
+      return Math.ceil(this.visitCount / LIMIT);
     }
 
     @action setPage = (page: number) => {

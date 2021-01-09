@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { Button, Grid, Loader } from 'semantic-ui-react'
+import { Grid, Loader } from 'semantic-ui-react'
 import InfiniteScroll from 'react-infinite-scroller'
 
 import VisitList from './VisitList'
+import VisitFilters from './VisitFilters'
 import LoadingComponent from '../../../App/layout/LoadingComponent'
 import { RootStoreContext } from '../../../App/stores/rootStore'
 import { IVisit } from '../../../App/models/visit_interface'
@@ -13,7 +14,7 @@ const VisitDashboard: React.FC<{ visit: IVisit }> = ({visit}) => {
     // ======== MobX's VisitStore for state management - now RootStore ======== //
     const rootStore = useContext(RootStoreContext)
     const {loadVisits, loadingInitial, setPage, page, totalPages} = rootStore.visitStore;
-    const {loadingNext, setLoadingNext} = useState(false)
+    const [loadingNext, setLoadingNext] = useState(false)
 
     const handleGetNext = () => {
         setLoadingNext(true);
@@ -42,11 +43,12 @@ const VisitDashboard: React.FC<{ visit: IVisit }> = ({visit}) => {
                 >
                     <VisitList />
                 </InfiniteScroll>
+            </Grid.Column>
 
-            </Grid.Column>
             <Grid.Column width={6}>
-                <h2>Visit Filters</h2>
+                <VisitFilters />
             </Grid.Column>
+
             <Grid.Column width={10}>
                 <Loader active={loadingNext} />
             </Grid.Column>
