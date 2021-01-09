@@ -41,7 +41,6 @@ axios.interceptors.response.use(undefined, error => {
 const responseBody = (response: AxiosResponse) => response.data;
 
 // Want to slow down speed of CRUD operations to test app's behaviour on slow networks
-// Currying a function: a process where a function with multiple arguments is transformed into a sequence of nesting functions (the response)
 const sleep = (ms: number) => (response: AxiosResponse) => 
     new Promise<AxiosResponse>(resolve => setTimeout(() => resolve(response), ms));
 

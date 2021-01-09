@@ -17,10 +17,11 @@ export default class VisitStore {
     constructor(rootStore: RootStore) {
       this.rootStore = rootStore;
 
-      // whenever the predicate's keys change...
+      // URL query param filtration
       reaction(
+        //whenever the predicate's keys change...
         () => this.predicate.keys(),
-        // ...run this expression
+        // ...run this expression (clear the old params)
         () => {
           this.page = 0;
           this.visitRegistry.clear();

@@ -30,7 +30,7 @@ const VisitDetailedSidebar: React.FC<IProps> = ({ attendees }) => {
                         <Item.Header as='h3'>  
                         <Link to={`/profile/${attendee.username}`}>{attendee.displayName}</Link>                     
                         </Item.Header>                       
-                        <Item.Extra style={{ color: 'orange' }}>Following</Item.Extra>
+                        <Item.Extra style={{ color: 'orange' }}></Item.Extra>
                     </Item.Content>
                     </Item>
                 ))}  

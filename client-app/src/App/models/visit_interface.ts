@@ -1,6 +1,6 @@
-// Creating a Typescript interface that's controlling what the visits' parameters are - this is for type-checking
+// Creating a Typescript interface that's controlling what the visits' parameters are
 // Not using a class to do this because Interfaces don't get generated into Javascript the way classes do
-// so the final code output will be less this way
+// So the final code output will be smaller this way
 
 export interface IVisitsEnvelope {
     visits: IVisit[];
@@ -62,3 +62,7 @@ export interface IAttendee {
     isHost: boolean;
     following?: boolean;
   }
+
+export interface IEmojis {
+    chosenEmoji: never;
+}

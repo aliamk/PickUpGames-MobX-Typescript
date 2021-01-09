@@ -7,8 +7,8 @@ const panes = [
     { menuItem: 'About', render: () => <ProfileDescription />},
     { menuItem: 'Photos', render: () => <ProfilePhotos />},
     { menuItem: 'Visits', render: () => <Tab.Pane>Visits Content</Tab.Pane>},
-    { menuItem: 'Followers', render: () => <Tab.Pane>Followers Content</Tab.Pane>},
-    { menuItem: 'Following', render: () => <Tab.Pane>Following Content</Tab.Pane>}    
+    { menuItem: 'Attending', render: () => <Tab.Pane>Attending Content</Tab.Pane>},
+    { menuItem: 'Attended', render: () => <Tab.Pane>Attended Content</Tab.Pane>}    
 ]
 
 const ProfileContent = () => {
