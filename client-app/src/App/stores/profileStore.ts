@@ -15,10 +15,8 @@ export default class ProfileStore {
   @observable loadingProfile = true;            // loadProfile
   @observable uploadingPhoto = false;           // uploadPhoto
   @observable loading = false;                  // setMainPhoto
-  @observable userVisits: IUserVisit[] = [];    // User + Visits Attended
-  @observable loadingVisits = false;
-
-
+  @observable userVisits: IUserVisit[] = [];    // loadUserVisits
+  @observable loadingVisits = false;            // loadUserVisits
 
 
   @computed get isCurrentUser() {
@@ -27,6 +25,23 @@ export default class ProfileStore {
       return this.rootStore.userStore.user.username === this.profile.username;
     } else {
       return false;
+    }
+  }
+
+  // Action for calculating how many visits a user has attended
+  @action loadUserVisits = async (username: string, predicate?: string) => {
+    this.loadingVisits = true;
+    try {
+      const visits = await agent.Profiles.listVisits(username, predicate!);
+      runInAction(() => {
+        this.userVisits = visits;
+        this.loadingVisits = false;
+      })
+    } catch (error) {
+      toast.error('Problem loading visits')
+      runInAction(() => {
+        this.loadingVisits = false;
+      })
     }
   }
 
