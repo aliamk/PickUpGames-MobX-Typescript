@@ -60,7 +60,8 @@ const requests = {
 };
 
 const Visits = {
-    list: (): Promise<IVisit[]> => requests.get('/visits'),
+    list: (limit?: number, page?: number): Promise<IVisit[]> => 
+        requests.get(`/visits?limit=${limit}&offset=${page ? page * limit! : 0}`),
     details: (id: string) => requests.get(`/visits/${id}`),
     create: (visit: IVisit) => requests.post('/visits', visit),
     update: (visit: IVisit) => requests.put(`/visits/${visit.id}`, visit),
