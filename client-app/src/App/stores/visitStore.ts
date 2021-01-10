@@ -1,5 +1,5 @@
 import { SyntheticEvent } from 'react'
-import { observable, action, computed, runInAction, reaction } from 'mobx'
+import { observable, action, computed, runInAction, reaction, toJS } from 'mobx'
 
 import agent from '../api/agent'
 import { IVisit } from '../models/visit_interface'
@@ -169,13 +169,13 @@ export default class VisitStore {
 
     // Method for loading a single visit post
     @action loadVisit = async (id: string) => {        
-       let visit = this.getVisit(id)                // Call the helper method GETVISIT and pass in the ID from the View button
-       if (visit) {                                 // If getVisit finds a visit with that ID in the visitRegistry, return the visit
+       let visit = this.getVisit(id)                                    // Call the helper method GETVISIT and pass in the ID from the View button
+       if (visit) {                                                     // If getVisit finds a visit with that ID in the visitRegistry, return the visit
            this.visit = visit
-           return visit
+           return toJS(visit)
        } else {           
-           this.loadingInitial = true               // Else, show the loading spinner            
-           try {                                    // Whilst the try/catch block fetches the visit from the API (Visits.details - see SRC > APP > API > AGENT.TS)
+           this.loadingInitial = true                                   // Else, show the loading spinner            
+           try {                                                        // Whilst the try/catch block fetches the visit from the API (Visits.details - see SRC > APP > API > AGENT.TS)
                visit = await agent.Visits.details(id)
                runInAction('getting visit', () => {
                    setVisitProps(visit, this.rootStore.userStore.user!) 
