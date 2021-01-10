@@ -19,7 +19,6 @@ namespace Application.Visits
             public Guid Id { get; set; }
             public String Title { get; set; }
             public String Description { get; set; }
-            // public string Category { get; set; }
             public DateTime Date { get; set; }
             public string Venue { get; set; }
             public string City { get; set; }
@@ -31,7 +30,6 @@ namespace Application.Visits
             {
                 RuleFor(x => x.Title).NotEmpty();
                 RuleFor(x => x.Description).NotEmpty();
-                // RuleFor(x => x.Category).NotEmpty();
                 RuleFor(x => x.Date).NotEmpty();
                 RuleFor(x => x.Venue).NotEmpty();
                 RuleFor(x => x.City).NotEmpty();
@@ -55,7 +53,6 @@ namespace Application.Visits
                     Id = request.Id,
                     Title = request.Title,
                     Description = request.Description,
-                    // Category = request.Category,
                     Date = request.Date,
                     Venue = request.Venue,
                     City = request.City

@@ -18,6 +18,6 @@ export interface IProfile {
   export interface IUserVisit {
     id: string;
     title: string;
-    category: string;
+    venue: string;
     date: Date;
   }

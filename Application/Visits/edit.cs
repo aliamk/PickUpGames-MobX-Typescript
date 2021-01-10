@@ -17,7 +17,6 @@ namespace Application.Visits
             public Guid Id { get; set; }            // User can't edit this but it's included for identification purposes
             public string Title { get; set; }
             public string Description { get; set; }
-            // public string Category { get; set; }
             public DateTime? Date { get; set; }     // Question mark added because it's optional
             public string Venue { get; set; }
             public string City { get; set; }
@@ -30,7 +29,6 @@ namespace Application.Visits
             {
                 RuleFor(x => x.Title).NotEmpty();
                 RuleFor(x => x.Description).NotEmpty();
-                // RuleFor(x => x.Category).NotEmpty();
                 RuleFor(x => x.Date).NotEmpty();
                 RuleFor(x => x.Venue).NotEmpty();
                 RuleFor(x => x.City).NotEmpty();
@@ -53,7 +51,6 @@ namespace Application.Visits
                 // User can edit all of these files.  If user doesn't enter a Title field, just leave it as Title
                 visit.Title = request.Title ?? visit.Title;
                 visit.Description = request.Description ?? visit.Description;
-                // visit.Category = request.Category ?? visit.Category;
                 visit.Date = request.Date ?? visit.Date;
                 visit.Venue = request.Venue ?? visit.Venue;
                 visit.City = request.City ?? visit.City;

@@ -68,6 +68,7 @@ namespace Application.Profiles
                     {
                         Id = visit.Visit.Id,
                         Title = visit.Visit.Title,
+                        Venue = visit.Visit.Venue,
                         Date = visit.Visit.Date
                     };
 

@@ -8,7 +8,6 @@ import { Form as FinalForm, Field } from 'react-final-form';
 import TextInput from '../../../App/common/form/TextInput'
 import TextAreaInput from '../../../App/common/form/TextAreaInput'
 import SelectInput from '../../../App/common/form/SelectInput' 
-// import { category } from '../../../App/common/options/categoryOptions';
 import { venue } from '../../../App/common/options/venueOptions';
 import { combineDateAndTime } from '../../../App/common/util/util';
 import { combineValidators, isRequired, composeValidators, hasLengthGreaterThan } from 'revalidate'
@@ -81,7 +80,6 @@ const VisitForm:React.FC<RouteComponentProps<DetailParams>> = ({ match, history 
                             <Form onSubmit={handleSubmit} loading={loading}>
                                 <Field name='title' placeholder='Title' value={visit.title} component={TextInput} />
                                 <Field name='description' rows={3} placeholder='Description' value={visit.description} component={TextAreaInput} />
-                                {/* <Field name='category' placeholder='category' value={visit.category} component={SelectInput} options={category} /> */}
                                 <Form.Group>
                                 <Field name='date' date={true} placeholder='Date' value={visit.date!} component={DateInput}/>
                                 <Field name='time' time={true} placeholder='Time' value={visit.date!} component={DateInput}/>

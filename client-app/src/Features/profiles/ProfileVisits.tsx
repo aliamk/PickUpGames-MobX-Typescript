@@ -2,9 +2,9 @@ import React, { useEffect, useContext } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Tab, Grid, Header, Card, Image, TabProps } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import { IUserVisit } from '../../app/models/profile';
+import { IUserVisit } from '../../App/models/profile';
 import { format } from 'date-fns';
-import { RootStoreContext } from '../../app/stores/rootStore';
+import { RootStoreContext } from '../../App/stores/rootStore';
 
 // Semantic-ui Tab for three menu items
 const panes = [
@@ -64,7 +64,7 @@ const ProfileEvents = () => {
                 key={visit.id}
               >
                 <Image
-                  src={`/assets/categoryImages/${visit.category}.jpg`}
+                  src={`/assets/locationImages/${visit.venue}.jpg`}
                   style={{ minHeight: 100, objectFit: 'cover' }}
                 />
                 <Card.Content>

@@ -12,7 +12,6 @@ export interface IVisit
     id: string;
     title: string;
     description: string;
-    // category: string;
     date: Date;       
     city: string;
     venue: string;
@@ -40,7 +39,6 @@ export interface IVisitFormValues extends Partial<IVisit> {
 export class VisitFormValues implements IVisitFormValues {
     id?: string = undefined;
     title: string = '';
-    // category: string = '';
     description: string = '';
     date?: Date = undefined;
     time?: Date = undefined;
