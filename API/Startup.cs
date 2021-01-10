@@ -49,7 +49,12 @@ namespace API
             {
                 opt.AddPolicy("CorsPolicy", policy =>
                 {
-                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000").AllowCredentials();
+                    policy
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithExposedHeaders("WWW-Authenticate")
+                        .WithOrigins("http://localhost:3000")
+                        .AllowCredentials();
                 });
             });
             // For decoupling asnyc handlers from requests
