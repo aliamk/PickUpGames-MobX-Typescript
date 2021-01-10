@@ -5,7 +5,7 @@ import InfiniteScroll from 'react-infinite-scroller'
 
 import VisitList from './VisitList'
 import VisitFilters from './VisitFilters'
-import LoadingComponent from '../../../App/layout/LoadingComponent'
+import VisitListItemPlaceholder from './VisitListItemPlaceholder'
 import { RootStoreContext } from '../../../App/stores/rootStore'
 import { IVisit } from '../../../App/models/visit_interface'
 
@@ -26,15 +26,12 @@ const VisitDashboard: React.FC<{ visit: IVisit }> = ({visit}) => {
     useEffect(() => {
         loadVisits()
     }, [loadVisits])
-
-    // ========  LOADING SPINNER ======== //
-    if (loadingInitial && page === 0) 
-        return <LoadingComponent content='Loading Visits...' />
-    
+ 
     // ======== DOM Display ======== //
     return (
         <Grid>
             <Grid.Column width={10}>
+                {loadingInitial && page === 0 ? ( <VisitListItemPlaceholder /> ) : ( 
                 <InfiniteScroll 
                     pageStart={0} 
                     loadMore={handleGetNext} 
@@ -43,6 +40,7 @@ const VisitDashboard: React.FC<{ visit: IVisit }> = ({visit}) => {
                 >
                     <VisitList />
                 </InfiniteScroll>
+                )}
             </Grid.Column>
 
             <Grid.Column width={6}>

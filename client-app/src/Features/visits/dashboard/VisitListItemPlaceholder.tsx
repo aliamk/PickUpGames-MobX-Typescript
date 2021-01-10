@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { Segment, Button, Placeholder } from 'semantic-ui-react';
 
 
-const ActivityListItemPlaceholder = () => {
+const VisitListItemPlaceholder = () => {
 
 
   return (
@@ -42,4 +42,4 @@ const ActivityListItemPlaceholder = () => {
   );
 };
 
-export default ActivityListItemPlaceholder;
+export default VisitListItemPlaceholder;
