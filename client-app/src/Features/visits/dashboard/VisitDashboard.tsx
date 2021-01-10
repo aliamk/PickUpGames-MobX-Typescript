@@ -7,9 +7,9 @@ import VisitList from './VisitList'
 import VisitFilters from './VisitFilters'
 import VisitListItemPlaceholder from './VisitListItemPlaceholder'
 import { RootStoreContext } from '../../../App/stores/rootStore'
-import { IVisit } from '../../../App/models/visit_interface'
 
-const VisitDashboard: React.FC<{ visit: IVisit }> = ({visit}) => {
+
+const VisitDashboard: React.FC = () => {
 
     // ======== MobX's VisitStore for state management - now RootStore ======== //
     const rootStore = useContext(RootStoreContext)

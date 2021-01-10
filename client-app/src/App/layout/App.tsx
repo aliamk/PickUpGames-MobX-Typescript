@@ -2,7 +2,6 @@ import React, { Fragment, useContext, useEffect } from 'react'
 import { Container } from 'semantic-ui-react'
 import { observer } from 'mobx-react-lite'
 import { Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom'
-
 import HomePage from '../../Features/home/HomePage'
 import NavBar from '../../Features/nav/NavBar'
 import VisitDashboard from '../../Features/visits/dashboard/VisitDashboard'
@@ -14,9 +13,10 @@ import { RootStoreContext } from '../stores/rootStore'
 import LoadingComponent from './LoadingComponent'
 import ModalContainer from '../common/modals/ModalContainer'
 import ProfilePage from '../../Features/profiles/ProfilePage'
+import PrivateRoute from './PrivateRoute'
 
 
-const App:React.FC<RouteComponentProps> = ({ location }) => {  
+const App: React.FC<RouteComponentProps> = ({ location }) => {  
 
   const rootStore = useContext(RootStoreContext);
   const {setAppLoaded, token, appLoaded} = rootStore.commonStore;
@@ -43,12 +43,11 @@ const App:React.FC<RouteComponentProps> = ({ location }) => {
             <NavBar />
             <Container style={{marginTop: '7em'}}>
               <Switch>
-                <Route exact path='/' component={HomePage} />
-                <Route exact path='/visits' component={VisitDashboard} />
-                <Route exact path='/visits/:id' component={VisitDetails} />
+                <PrivateRoute exact path='/visits' component={VisitDashboard} />
+                <PrivateRoute  path='/visits/:id' component={VisitDetails} />
                 {/* Using location:key to create a new instance of the loaded component when a prop changes  */}
-                <Route key={location.key} path={['/createVisit', '/manage/:id']} component={VisitForm} />  
-                <Route path='/profile/:username' component={ProfilePage} />
+                <PrivateRoute key={location.key} path={['/createVisit', '/manage/:id']} component={VisitForm} />  
+                <PrivateRoute path='/profile/:username' component={ProfilePage} />
                 {/* <Route path='/login' component={LoginForm} /> */}
                 <Route component={NotFound} />    
               </Switch>
