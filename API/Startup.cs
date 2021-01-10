@@ -1,3 +1,4 @@
+using System;                                           // TimeSpan
 using System.Text;                                      // Encoding
 using System.Threading.Tasks;                           // Task
 using API.Middleware;                                   // ErrorHandlingMiddleware
@@ -94,9 +95,9 @@ namespace API
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = key,
                         ValidateAudience = false,
-                        ValidateIssuer = false
-                        // ValidateLifetime = true,
-                        // ClockSkew = TimeSpan.Zero
+                        ValidateIssuer = false,
+                        ValidateLifetime = true,
+                        ClockSkew = TimeSpan.Zero
                     };
                     // SIGNALR - GET TOKEN FOR THE HUB CONTEXT
                     opt.Events = new JwtBearerEvents
