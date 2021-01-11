@@ -9,7 +9,7 @@ import { RootStore } from './rootStore';
 import { createAttendee, setVisitProps } from '../common/util/util'
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 
-const LIMIT = 2;
+const LIMIT = 3;
 
 export default class VisitStore {
 

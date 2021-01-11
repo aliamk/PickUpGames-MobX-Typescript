@@ -23,9 +23,9 @@ const visitImageStyle = {
 
 const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
 
+    const host = visit.attendees.filter(x => x.isHost)[0];      // is the user the host?
     const rootStore = useContext(RootStoreContext);
     const {attendVisit, cancelAttendance, loading} = rootStore.visitStore
-    const host = visit.attendees.filter(x => x.isHost)[0];      // is the user the host?
 
     return (
         <Segment.Group>
@@ -36,8 +36,13 @@ const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
                         <Item>
                             <Item.Content>
                                 <Header size='huge' content={visit.title} style={{ color: 'white' }} />
-                                <p>{format(visit.date!, 'eeee do MMMM')}</p>  {/*  long form */}
-                                <p>Hosted by{' '}<Link to={`/profile/${host.username}`}><strong>{host.displayName}</strong></Link></p>
+                                <p>{format(visit.date, 'eeee do MMMM')}</p>  {/*  long form */}
+                                <p>
+                                    Hosted by{' '}
+                                    <Link to={`/profile/${host.username}`}>
+                                        <strong>{host.displayName}</strong>
+                                    </Link>
+                                </p>
                             </Item.Content>
                         </Item>
                     </Item.Group>

@@ -60,7 +60,3 @@ export interface IAttendee {
     isHost: boolean;
     following?: boolean;
   }
-
-export interface IEmojis {
-    chosenEmoji: never;
-}

@@ -33,7 +33,7 @@ namespace Application.Visits
                 var visit = await _context.Visits.FindAsync(request.Id);                                        // Get the specific visit
 
                 if (visit == null)
-                    throw new RestException(HttpStatusCode.NotFound, new { Visit = "Cound not find visit" });   // Visit not found
+                    throw new RestException(HttpStatusCode.NotFound, new { Visit = "Could not find visit" });   // Visit not found
 
                 var user = await _context.Users.SingleOrDefaultAsync(x =>
                     x.UserName == _userAccessor.GetCurrentUsername());                                          // Get the user object
