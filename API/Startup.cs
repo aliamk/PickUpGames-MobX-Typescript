@@ -8,6 +8,7 @@ using Application.Visits;                               // (typeof(List))
 using AutoMapper;                                       // AddAutoMapper
 using Domain;                                           // AppUser
 using FluentValidation.AspNetCore;                      // AddFluentValidation
+using Infrastructure.Email;                             // SendGridSettings
 using Infrastructure.Photos;                            // CloudinarySettings
 using Infrastructure.Security;                          // JwtGenerator
 using MediatR;                                          // AddMediatR
@@ -126,6 +127,7 @@ namespace API
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
+            services.Configure<SendGridSettings>(Configuration.GetSection("SendGrid"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
