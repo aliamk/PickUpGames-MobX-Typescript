@@ -24,6 +24,15 @@ namespace API.Controllers
             return Ok("Registration successful - please check your email");
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<ActionResult> VerifyEmail(ConfirmEmail.Command command)
+        {
+            var result = await Mediator.Send(command);
+            if (!result.Succeeded) return BadRequest("Problem verifying email address");
+            return Ok("Email confirmed - you can now login");
+        }
+
         [HttpGet]
         public async Task<ActionResult<User>> CurrentUser()
         {
