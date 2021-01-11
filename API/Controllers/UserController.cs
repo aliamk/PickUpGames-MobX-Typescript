@@ -17,9 +17,11 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(Register.Command command)
+        public async Task<ActionResult> Register(Register.Command command)
         {
-            return await Mediator.Send(command);
+            var command.Origin = Request.Headers["origin"];
+            await Mediator.Send(command);
+            return Ok("Registration successful - please check your email");
         }
 
         [HttpGet]
