@@ -75,10 +75,14 @@ namespace API
                 cfg.RegisterValidatorsFromAssemblyContaining<Create>();
             });
             // Identity builder
-            var builder = services.AddIdentityCore<AppUser>();
+            var builder = services.AddIdentityCore<AppUser>(options =>
+            {
+                options.SignIn.RequireConfirmedEmail = true;
+            });
             var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
             identityBuilder.AddEntityFrameworkStores<DataContext>();
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
+            identityBuilder.AddDefaultTokenProviders();
 
             // Custom auth policy for hosts of visits
             services.AddAuthorization(opt =>
@@ -128,6 +132,7 @@ namespace API
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             services.AddScoped<IEmailSender, EmailSender>();       // Concrete class: EmailSender.cs
+
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
             services.Configure<SendGridSettings>(Configuration.GetSection("SendGrid"));
         }
