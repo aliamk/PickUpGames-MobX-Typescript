@@ -123,10 +123,11 @@ namespace API
                 });
 
             // Strongly typing the settings
+            // AddScoped let's you inject interfaces where you need to
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
-            services.AddScoped<IEmailSender, EmailSender>();
+            services.AddScoped<IEmailSender, EmailSender>();       // Concrete class: EmailSender.cs
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
             services.Configure<SendGridSettings>(Configuration.GetSection("SendGrid"));
         }
