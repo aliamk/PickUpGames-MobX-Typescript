@@ -39,8 +39,8 @@ const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
                                 <p>{format(visit.date, 'eeee do MMMM')}</p>  {/*  long form */}
                                 <p>
                                     Hosted by{' '}
-                                    <Link to={`/profile/${host.username}`}>
-                                        <strong>{host.displayName}</strong>
+                                    <Link to={`/profile/${host?.username}`}>
+                                        <strong>{host?.displayName}</strong>
                                     </Link>
                                 </p>
                             </Item.Content>
