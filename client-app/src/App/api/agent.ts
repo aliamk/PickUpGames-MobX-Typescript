@@ -77,7 +77,12 @@ const Visits = {
 const User = {
     current: (): Promise<IUser> => requests.get('/user'),
     login: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/login`, user),
-    register: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/register`, user)
+    register: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/register`, user),
+    // Send token and email to the API for email verification
+    verifyEmail: (token: string, email: string) : Promise<void> => 
+        requests.post(`/user/verifyEmail`, {token, email}),
+        resendVerifyEmailConfirm: (email: string) : Promise<void> =>
+        requests.get(`/user/resendEmailVerification?email=${email}`)
 };
 
   const Profiles = {
@@ -87,7 +92,7 @@ const User = {
     deletePhoto: (id: string) => requests.del(`/photos/${id}`),
     updateProfile: (profile: Partial<IProfile>) => requests.put(`/profiles`, profile),
     listVisits: (username: string, predicate: string) => 
-        requests.get(`/profiles/${username}/visits?predicate=${predicate}`)
+        requests.get(`/profiles/${username}/visits?predicate=${predicate}`)    
 };
 
 
@@ -96,12 +101,3 @@ export default {
     User,
     Profiles
 }
-
-
-
-
-//     uploadPhoto: (photo: Blob): Promise<IPhoto> => requests.postForm(`/photos`, photo),
-//     follow: (username: string) => requests.post(`/profiles/${username}/follow`, {}),
-//     unfollow: (username: string) => requests.del(`/profiles/${username}/follow`),
-//     listFollowings: (username: string, predicate: string) => requests.get(`/profiles/${username}/follow?predicate=${predicate}`),
-//     listVisits: (username: string, predicate: string) => requests.get(`/profiles/${username}/visits?predicate=${predicate}`)
