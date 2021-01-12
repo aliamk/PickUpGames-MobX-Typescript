@@ -19,13 +19,13 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register(Register.Command command)
         {
-            var command.Origin = Request.Headers["origin"];
+            var origin = Request.Headers["origin"];
             await Mediator.Send(command);
             return Ok("Registration successful - please check your email");
         }
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost("verifyEmail")]
         public async Task<ActionResult> VerifyEmail(ConfirmEmail.Command command)
         {
             var result = await Mediator.Send(command);
