@@ -33,6 +33,16 @@ namespace API.Controllers
             return Ok("Email confirmed - you can now login");
         }
 
+        [AllowAnonymous]
+        [HttpGet("resendEmailVerification")]
+        public async Task<ActionResult> ResendEmailVerification([FromQuery] ResendEmailVerification.Query query)
+        {
+            query.Origin = Request.Headers["origin"];
+            await Mediator.Send(query);
+
+            return Ok("Emailverification sent - please check email");
+        }
+
         [HttpGet]
         public async Task<ActionResult<User>> CurrentUser()
         {
