@@ -14,10 +14,10 @@ const VisitListItem: React.FC<{ visit: IVisit }> = ({ visit }) => {
             <Segment>
                 <Item.Group>
                     <Item>
-                        <Item.Image size='tiny' circular src={host.image || 'assets/user.png'} style={{ marginBottom: 3 }} />        
+                        <Item.Image size='tiny' circular src={host?.image || 'assets/user.png'} style={{ marginBottom: 3 }} />        
                     <Item.Content>
                         <Item.Header as={Link} to={`/visits/${visit.id}`}> {visit.title}</Item.Header>
-                        <Item.Description>Hosted by <Link to={`/profile/${host.username}`}>{host.displayName}</Link></Item.Description>
+                        <Item.Description>Hosted by <Link to={`/profile/${host?.username}`}>{host?.displayName}</Link></Item.Description>
                         
                         {visit.isHost && 
                             <Item.Description>
