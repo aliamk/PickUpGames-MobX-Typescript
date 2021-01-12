@@ -40,7 +40,7 @@ namespace API.Controllers
             query.Origin = Request.Headers["origin"];
             await Mediator.Send(query);
 
-            return Ok("Emailverification sent - please check email");
+            return Ok("Email Verification Sent - please check email");
         }
 
         [HttpGet]
