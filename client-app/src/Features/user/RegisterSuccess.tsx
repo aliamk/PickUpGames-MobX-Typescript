@@ -15,7 +15,7 @@ const RegisterSuccess: React.FC<RouteComponentProps> = ({ location }) => {
     }
 
     return (
-        <Segment palceholder>
+        <Segment placeholder>
             <Header icon>
                 <Icon name='check' />
             </Header>
@@ -25,7 +25,7 @@ const RegisterSuccess: React.FC<RouteComponentProps> = ({ location }) => {
                     <p>Please check your mail (including junk folder) for the verification email</p>
                     {email &&
                         <>
-                            <p>Didn;t receive an email? Please request another from the button below</p>
+                            <p>Didn't receive an email? Please request another from the button below</p>
                             <Button onClick={handleConfirmEmailResend} primary content='Resend email' size='huge'/>
                         </>
                     }

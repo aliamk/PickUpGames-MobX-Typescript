@@ -151,7 +151,7 @@ export default class VisitStore {
         try {
             const visitsEnvelope = await agent.Visits.list(this.axiosParams) // from computed axiosParams to agent.ts
             const { visits, visitCount } = visitsEnvelope;
-            runInAction('loading visits', () => {
+            runInAction(() => {
                 visits.forEach((visit) => {
                    setVisitProps(visit, this.rootStore.userStore.user!)
                     this.visitRegistry.set(visit.id, visit);
@@ -160,7 +160,7 @@ export default class VisitStore {
                 this.loadingInitial = false
             }) 
             } catch (error) {
-                runInAction('loading visits error', () => {
+                runInAction(() => {
                     this.loadingInitial = false;                
                 })
             console.log(error)
@@ -177,7 +177,7 @@ export default class VisitStore {
            this.loadingInitial = true                                   // Else, show the loading spinner            
            try {                                                        // Whilst the try/catch block fetches the visit from the API (Visits.details - see SRC > APP > API > AGENT.TS)
                visit = await agent.Visits.details(id)
-               runInAction('getting visit', () => {
+               runInAction(() => {
                    setVisitProps(visit, this.rootStore.userStore.user!) 
                    this.visit = visit
                    this.visitRegistry.set(visit.id, visit);
@@ -185,7 +185,7 @@ export default class VisitStore {
                })
                return visit
            } catch (error) {
-               runInAction('getting visit error', () => {
+               runInAction(() => {
                    this.loadingInitial = false
                })
                console.log(error)
@@ -216,13 +216,13 @@ export default class VisitStore {
             visit.attendees = attendees
             visit.comments = [];
             visit.isHost = true
-            runInAction('creating visit', () => {
+            runInAction(() => {
                 this.visitRegistry.set(visit.id, visit);
                 this.submitting = false
             })
             history.push(`/visits/${visit.id}`)
         } catch (error) {
-            runInAction('creating visit error', () => {
+            runInAction(() => {
                 this.submitting = false
             })
             toast.error('Problem submitting data')
@@ -235,14 +235,14 @@ export default class VisitStore {
         this.submitting = true
         try {
             await agent.Visits.update(visit)             
-            runInAction('editing visit', () => {
+            runInAction(() => {
                 this.visitRegistry.set(visit.id, visit);
                 this.visit = visit
                 this.submitting = false
             })
             history.push(`/visits/${visit.id}`)         
         } catch (error) {                   
-            runInAction('editing visit error', () => {
+            runInAction(() => {
                 this.submitting = false
             })
             toast.error('Problem submitting data')
@@ -256,13 +256,13 @@ export default class VisitStore {
         this.target = event.currentTarget.name
         try {
             await agent.Visits.delete(id)                
-            runInAction('deleting visit', () => {
+            runInAction(() => {
                 this.visitRegistry.delete(id)
                 this.submitting = false
                 this.target = ''
             })               
         } catch (error) {               
-            runInAction('deleting visits error', () => {
+            runInAction(() => {
                 this.submitting = false
                 this.target = ''
             })               

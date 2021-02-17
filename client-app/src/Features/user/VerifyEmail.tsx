@@ -20,7 +20,8 @@ const VerifyEmail: React.FC<RouteComponentProps> = ({ location }) => {
     const {token, email} = queryString.parse(location.search)
     
     useEffect(() => {
-        agent.User.verifyEmail(token as string, email as string).then(() => {
+        agent.User.verifyEmail(token as string, email as string)
+        .then(() => {
             setStatus(Status.Success)
         }).catch(() => {
             setStatus(Status.Failed)
@@ -55,7 +56,7 @@ const VerifyEmail: React.FC<RouteComponentProps> = ({ location }) => {
     }
 
     return (
-        <Segment palceholder>
+        <Segment placeholder>
             <Header icon>
                 <Icon name='envelope' />
                 Email Verification

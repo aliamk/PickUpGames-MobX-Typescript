@@ -19,7 +19,7 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register(Register.Command command)
         {
-            var origin = Request.Headers["origin"];
+            command.Origin = Request.Headers["origin"];
             await Mediator.Send(command);
             return Ok("Registration successful - please check your email");
         }

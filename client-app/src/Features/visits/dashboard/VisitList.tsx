@@ -18,7 +18,7 @@ const VisitList: React.FC = () => {
             {visitsByDate.map(([group, visits]) => (
                 <Fragment key={group} >
                     <Label size='large' color='blue' >
-                        {format(group, 'eeee do MMMM')}
+                        {format(new Date(group), 'eeee do MMMM')}
                     </Label>        
    
                     <Item.Group divided>

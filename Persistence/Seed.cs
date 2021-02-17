@@ -29,14 +29,16 @@ namespace Persistence
                         Id = "b",
                         DisplayName = "Jane",
                         UserName = "jane",
-                        Email = "jane@test.com"
+                        Email = "jane@test.com",
+                        EmailConfirmed = true
                     },
                     new AppUser
                     {
                         Id = "c",
                         DisplayName = "Tom",
                         UserName = "tom",
-                        Email = "tom@test.com"
+                        Email = "tom@test.com",
+                        EmailConfirmed = true
                     },
                 };
                 foreach (var user in users)
