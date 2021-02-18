@@ -134,6 +134,8 @@ namespace API
             services.AddScoped<IEmailSender, EmailSender>();       // Concrete class: EmailSender.cs
 
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
+            services.Configure<CloudinarySettings>(Configuration.GetSection("Authentication:Facebook"));
+
             services.Configure<SendGridSettings>(Configuration.GetSection("SendGrid"));
         }
 
