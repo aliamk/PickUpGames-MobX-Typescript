@@ -78,6 +78,8 @@ const User = {
     current: (): Promise<IUser> => requests.get('/user'),
     login: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/login`, user),
     register: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/register`, user),
+    // Facebook login
+    fbLogin: (accessToken: string) => requests.post(`/user/facebook`, {accessToken}),    
     // Send token and email to the API for email verification
     verifyEmail: (token: string, email: string) : Promise<void> => 
         requests.post(`/user/verifyEmail`, {token, email}),

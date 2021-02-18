@@ -2,11 +2,12 @@ import { FORM_ERROR } from 'final-form';
 import React, { useContext } from 'react';
 import { Form as FinalForm, Field } from 'react-final-form';
 import { combineValidators, isRequired } from 'revalidate';
-import { Form, Button, Header } from 'semantic-ui-react';
+import { Form, Button, Header, Divider } from 'semantic-ui-react';
 import TextInput from '../../App/common/form/TextInput';
 import { IUserFormValues } from '../../App/models/user';
 import { RootStoreContext } from '../../App/stores/rootStore';
 import ErrorMessage from '../../App/common/form/ErrorMessage'
+import SocialLogin from './SocialLogin';
 
 // Revalidate package for checking user has filled required form fields
 const validate = combineValidators({
@@ -17,7 +18,7 @@ const validate = combineValidators({
 const LoginForm = () => {
     
     const rootStore = useContext(RootStoreContext);
-    const { login } = rootStore.userStore;
+    const { login, fbLogin } = rootStore.userStore;
 
     return (
         <FinalForm
@@ -29,19 +30,21 @@ const LoginForm = () => {
             validate={validate}
             render={({ handleSubmit, submitting, submitError, invalid, pristine, dirtySinceLastSubmit }) => (
                 <Form onSubmit={handleSubmit} error>
-                <Header as='h2' content='Login to PickUp Games' color='yellow' textAlign='center' />
-                <Field name='email' component={TextInput} placeholder='Email' />
-                <Field
-                    name='password'
-                    component={TextInput}
-                    placeholder='Password'
-                    type='password'
-                />
-                {submitError && !dirtySinceLastSubmit && (
-                    <ErrorMessage error={submitError} text='Invalid email or password' />
-                )}
-                
-                <Button disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} className="ui yellow button" content='Login' fluid />
+                    <Header as='h2' content='Login to PickUp Games' color='yellow' textAlign='center' />
+                    <Field name='email' component={TextInput} placeholder='Email' />
+                    <Field
+                        name='password'
+                        component={TextInput}
+                        placeholder='Password'
+                        type='password'
+                    />
+                    {submitError && !dirtySinceLastSubmit && (
+                        <ErrorMessage error={submitError} text='Invalid email or password' />
+                    )}
+                    
+                    <Button disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} className="ui yellow button" content='Login' fluid />
+                    <Divider horizontal>Or</Divider>
+                    <SocialLogin fbCallback={fbLogin} />
                 </Form>
             )}
         />
