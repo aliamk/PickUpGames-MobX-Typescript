@@ -13,14 +13,14 @@ const NavBar: React.FC = () => {
     
     return (
         <Menu fixed='top' inverted >
-            <Container> 
+            <Container color='yellow'> 
                 <Menu.Item header as={NavLink} exact to='/' >
-                    <img src="/assets/heart_logo.png" alt="logo" style={{marginRight: '10px'}} />
-                    Pinga
+                    {/* <img src="/assets/heart_logo.png" alt="logo" style={{marginRight: '10px'}} /> */}
+                    PickUp Games
                 </Menu.Item>
-                <Menu.Item name='Visits' as={NavLink} exact to='/visits' />
+                <Menu.Item name='Games' as={NavLink} exact to='/visits'/>
                 <Menu.Item>
-                    <Button as={NavLink} to='/createVisit' positive content='Add a Visit' />
+                    <Button as={NavLink} to='/createVisit' className="ui inverted yellow button" content='Add a Game' />
                 </Menu.Item>
                 {user && (
                     <Menu.Item position='right'>

@@ -29,7 +29,7 @@ const LoginForm = () => {
             validate={validate}
             render={({ handleSubmit, submitting, submitError, invalid, pristine, dirtySinceLastSubmit }) => (
                 <Form onSubmit={handleSubmit} error>
-                <Header as='h2' content='Login to Pinga' color='teal' textAlign='center' />
+                <Header as='h2' content='Login to PickUp Games' color='yellow' textAlign='center' />
                 <Field name='email' component={TextInput} placeholder='Email' />
                 <Field
                     name='password'
@@ -41,7 +41,7 @@ const LoginForm = () => {
                     <ErrorMessage error={submitError} text='Invalid email or password' />
                 )}
                 
-                <Button disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} color='teal' content='Login' fluid />
+                <Button disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} className="ui yellow button" content='Login' fluid />
                 </Form>
             )}
         />

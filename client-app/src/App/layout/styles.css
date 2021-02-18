@@ -1,13 +1,18 @@
+@font-face {
+  font-family: myFont;
+  src: url('FRIDAYNIGHTLIGHTS-L5PE.TTF');
+}
+
 body {
   background-color: rgb(234, 234, 234) !important;
+  font-family: myFont;
 }
 
 .ui.inverted.top.fixed.menu {
   background-image: linear-gradient(
-    135deg,
-    rgb(24, 42, 115) 0%,
-    rgb(33, 138, 174) 69%,
-    rgb(32, 167, 172) 89%
+    to right,
+    #4cb8c4 69%,
+    #3cd3ad 89%
   ) !important;
 }
 
@@ -16,13 +21,9 @@ body {
 .masthead {
   display: flex;
   align-items: center;
-  background-image: linear-gradient(
-          135deg,
-          rgb(24, 42, 115) 0%,
-          rgb(33, 138, 174) 69%,
-          rgb(32, 167, 172) 89%
-  ) !important;
+  background-image: url('football.jpg') !important;
   height: 100vh;
+  width: 100vw;  
 }
 
 .masthead .ui.menu .ui.button,
@@ -31,11 +32,24 @@ body {
 }
 
 .masthead h1.ui.header {
-  font-size: 4em;
+  font-size: 5em;
   font-weight: normal;
+  font-family: myFont;
+  letter-spacing: 0.05em;
+  color: yellow;
 }
 
 .masthead h2 {
   font-size: 1.7em;
-  font-weight: normal;
+  font-weight: normal;  
+}
+
+@media only screen and (max-width: 700px) {
+  .masthead {
+    background-image: url('football_smallest.jpg') !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    height:  100vw !important;
+    width: 100vw !important;
+  }
 }
