@@ -74,6 +74,7 @@ namespace API
             {
                 cfg.RegisterValidatorsFromAssemblyContaining<Create>();
             });
+            
             // Identity builder
             var builder = services.AddIdentityCore<AppUser>(options =>
             {
@@ -107,7 +108,7 @@ namespace API
                         ValidateAudience = false,
                         ValidateIssuer = false,
                         ValidateLifetime = true,
-                        ClockSkew = TimeSpan.Zero
+                        ClockSkew = TimeSpan.Zero  // Invalidates token as soon as it expires
                     };
                     // SIGNALR - GET TOKEN FOR THE HUB CONTEXT
                     opt.Events = new JwtBearerEvents
@@ -132,10 +133,10 @@ namespace API
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
             services.AddScoped<IEmailSender, EmailSender>();       // Concrete class: EmailSender.cs
+            services.AddScoped<IFacebookAccessor, FacebookAccessor>();
 
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
             services.Configure<CloudinarySettings>(Configuration.GetSection("Authentication:Facebook"));
-
             services.Configure<SendGridSettings>(Configuration.GetSection("SendGrid"));
         }
 

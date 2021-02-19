@@ -8,6 +8,7 @@ import { IUserFormValues } from '../../App/models/user';
 import { RootStoreContext } from '../../App/stores/rootStore';
 import ErrorMessage from '../../App/common/form/ErrorMessage'
 import SocialLogin from './SocialLogin';
+import { observer } from 'mobx-react-lite'
 
 // Revalidate package for checking user has filled required form fields
 const validate = combineValidators({
@@ -18,7 +19,7 @@ const validate = combineValidators({
 const LoginForm = () => {
     
     const rootStore = useContext(RootStoreContext);
-    const { login, fbLogin } = rootStore.userStore;
+    const { login, fbLogin, loading } = rootStore.userStore;
 
     return (
         <FinalForm
@@ -44,11 +45,11 @@ const LoginForm = () => {
                     
                     <Button disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} className="ui yellow button" content='Login' fluid />
                     <Divider horizontal>Or</Divider>
-                    <SocialLogin fbCallback={fbLogin} />
+                    <SocialLogin loading={loading} fbCallback={fbLogin} />
                 </Form>
             )}
         />
     );
 };
 
-export default LoginForm;
+export default observer(LoginForm);

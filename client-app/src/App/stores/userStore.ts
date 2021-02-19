@@ -5,7 +5,7 @@ import { RootStore } from './rootStore';
 import { history } from '../..';
 
 export default class UserStore {
-
+  refreshTokenTimeout: any;
   rootStore: RootStore;
   constructor(rootStore: RootStore) {
     this.rootStore = rootStore;
@@ -13,6 +13,7 @@ export default class UserStore {
 
   // Create an observable for state changes
   @observable user: IUser | null = null;
+  @observable loading = false;
 
   // See whether a user is logged-in
   @computed get isLoggedIn() { 
@@ -27,6 +28,7 @@ export default class UserStore {
         this.user = user;        
       });
       this.rootStore.commonStore.setToken(user.token);
+      this.startRefreshTokenTimer(user);
       this.rootStore.modalStore.closeModal();
       history.push('/visits')
     } catch (error) {
@@ -36,11 +38,25 @@ export default class UserStore {
 
   @action register = async (values: IUserFormValues) => {
     try {
-      await agent.User.register(values);      
+      await agent.User.register(values);   
       this.rootStore.modalStore.closeModal();
       history.push(`/user/registerSuccess?email=${values.email}`)
     } catch (error) {
       throw error;
+    }
+  }
+
+  @action refreshToken = async () => {
+    this.stopRefreshTokenTimer();
+    try {
+      const user = await agent.User.refreshToken();
+      runInAction(() => {
+        this.user = user;
+      })
+      this.rootStore.commonStore.setToken(user.token);
+      this.startRefreshTokenTimer(user);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -51,6 +67,8 @@ export default class UserStore {
       runInAction(() => {
         this.user = user;
       });
+      this.rootStore.commonStore.setToken(user.token);
+      this.startRefreshTokenTimer(user);
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +81,37 @@ export default class UserStore {
   };
 
   @action fbLogin = async (response: any) => {
-    console.log('fblogin userStore: ', response)
+    console.log('fblogin userStore: ', response)    
+    this.loading = true;
+    try {
+      const user = await agent.User.fbLogin(response.accessToken);  
+      runInAction(() => {
+        this.user = user;
+        this.rootStore.commonStore.setToken(user.token);
+        this.startRefreshTokenTimer(user);
+        this.rootStore.modalStore.closeModal();
+        this.loading = false;
+      })
+      history.push('/visits');
+      console.log('user userStore: ', user)   
+      } catch (error) {    
+        runInAction(() => { 
+          this.loading = false; 
+          throw error;
+        })
+    }
   }
+
+  private startRefreshTokenTimer(user: IUser) {
+    const jwtToken = JSON.parse(atob(user.token.split('.')[1]));
+    const expires = new Date(jwtToken.exp * 1000);
+    const timeout = expires.getTime() - Date.now() - (60 * 1000);
+    this.refreshTokenTimeout = setTimeout(this.refreshToken, timeout);
+  }
+
+  private stopRefreshTokenTimer() {
+    clearTimeout(this.refreshTokenTimeout);
+  }
+
+
 }

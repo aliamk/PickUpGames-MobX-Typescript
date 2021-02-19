@@ -3,6 +3,7 @@ using System.Collections.Generic;           // Claim
 using System.IdentityModel.Tokens.Jwt;      // JwtRegisteredClaimNames
 using System.Security.Claims;               // Claim
 using System.Text;
+using System.Security.Cryptography;         // RandomNumberGenerator
 using Application.Interfaces;
 using Domain;
 using Microsoft.Extensions.Configuration;   // IConfiguration
@@ -31,7 +32,7 @@ namespace Infrastructure.Security
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.Now.AddMinutes(2),
                 SigningCredentials = creds
             };
             // Generate and return the token
@@ -40,6 +41,15 @@ namespace Infrastructure.Security
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
             return tokenHandler.WriteToken(token);
+        }
+        public RefreshToken GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(randomNumber);
+            return new RefreshToken{
+                Token = Convert.ToBase64String(randomNumber)
+            };
         }
     }
 }
