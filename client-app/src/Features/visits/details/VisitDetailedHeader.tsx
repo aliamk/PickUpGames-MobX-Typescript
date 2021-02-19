@@ -51,11 +51,11 @@ const VisitDetailedHeader: React.FC<{ visit: IVisit }> = ({ visit }) => {
 
             <Segment clearing attached='bottom'>
                 {visit.isHost ? (
-                    <Button as={Link} to={`/manage/${visit.id}`} color='orange' floated='right'>Manage Visit</Button>
+                    <Button as={Link} to={`/manage/${visit.id}`} color='orange' floated='right'>Manage Game</Button>
                 ) : visit.isGoing ? (
                     <Button loading={loading} onClick={cancelAttendance}>Cancel Attendance</Button> 
                 ) : (
-                    <Button loading={loading} onClick={attendVisit} color='teal'>Join Visit</Button>
+                    <Button loading={loading} onClick={attendVisit} color='teal'>Join Game</Button>
                 )}             
             </Segment>
 
