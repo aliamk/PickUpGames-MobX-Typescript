@@ -76,6 +76,7 @@ export default class UserStore {
 
   @action logout = () => {
     this.rootStore.commonStore.setToken(null);
+    this.stopRefreshTokenTimer(); // to stop refreshing on logout
     this.user = null; 
     history.push('/')   
   };
@@ -102,6 +103,7 @@ export default class UserStore {
     }
   }
 
+  // Create private method to use in above methods
   private startRefreshTokenTimer(user: IUser) {
     const jwtToken = JSON.parse(atob(user.token.split('.')[1]));
     const expires = new Date(jwtToken.exp * 1000);

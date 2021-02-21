@@ -8,7 +8,8 @@ import LoginForm from './LoginForm';
 import { toast } from 'react-toastify';
 
 const VerifyEmail: React.FC<RouteComponentProps> = ({ location }) => {
-  const rootStore = useContext(RootStoreContext);
+  const rootStore = useContext(RootStoreContext);     // to access the modal
+  
   const Status = {
     Verifying: 'Verifying',
     Failed: 'Failed',
@@ -20,17 +21,14 @@ const VerifyEmail: React.FC<RouteComponentProps> = ({ location }) => {
   const { token, email } = queryString.parse(location.search);
 
   useEffect(() => {
-    agent.User.verifyEmail(token as string, email as string)
-      .then(() => {
+    agent.User.verifyEmail(token as string, email as string).then(() => {
         setStatus(Status.Success);
-      })
-      .catch(() => {
+      }).catch(() => {
         setStatus(Status.Failed);
       });
   }, [Status.Failed, Status.Success, token, email]);
 
   const handleConfirmEmailResend = () => {
-    console.log('handleConfrimEmail triggered: ', handleConfirmEmailResend)
     agent.User.resendVerifyEmailConfirm(email as string)
       .then(() => {
         toast.success('Verification email resent - please check your email');
@@ -45,9 +43,7 @@ const VerifyEmail: React.FC<RouteComponentProps> = ({ location }) => {
       case Status.Failed:
         return (
           <div className='center'>
-            <p>
-              Verication failed - you can try resending the verification email
-            </p>
+            <p>Verification failed - you can try resending the verification email</p>
             <Button onClick={handleConfirmEmailResend} primary size='huge' content='Resend email' />
           </div>
         );
@@ -55,12 +51,7 @@ const VerifyEmail: React.FC<RouteComponentProps> = ({ location }) => {
         return (
           <div className='center'>
             <p>Email has been verified - you can now login</p>
-            <Button
-              primary
-              onClick={() => openModal(<LoginForm />)}
-              size='large'
-              content='Login'
-            />
+            <Button onClick={() => openModal(<LoginForm />)} primary size='large' content='Login' />
           </div>
         );
     }
@@ -72,7 +63,6 @@ const VerifyEmail: React.FC<RouteComponentProps> = ({ location }) => {
             <Icon name='envelope' />
             Email verification
         </Header>
-
         <Segment.Inline>
             {getBody()}
         </Segment.Inline>

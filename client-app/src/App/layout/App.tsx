@@ -14,8 +14,8 @@ import LoadingComponent from './LoadingComponent'
 import ModalContainer from '../common/modals/ModalContainer'
 import ProfilePage from '../../Features/profiles/ProfilePage'
 import PrivateRoute from './PrivateRoute'
-import RegisterSuccess from '../../../src/Features/user/RegisterSuccess'
-import VerifyEmail from '../../../src/Features/user/VerifyEmail'
+import RegisterSuccess from '../../Features/user/RegisterSuccess'
+import VerifyEmail from '../../Features/user/VerifyEmail'
 
 const App: React.FC<RouteComponentProps> = ({ location }) => {  
 

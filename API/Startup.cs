@@ -5,6 +5,7 @@ using API.Middleware;                                   // ErrorHandlingMiddlewa
 using API.SignalR;                                      // ChatHub
 using Application.Interfaces;                           // IJwtGenerator
 using Application.Visits;                               // (typeof(List))
+// using Application.Profiles; 
 using AutoMapper;                                       // AddAutoMapper
 using Domain;                                           // AppUser
 using FluentValidation.AspNetCore;                      // AddFluentValidation
@@ -132,11 +133,12 @@ namespace API
             services.AddScoped<IJwtGenerator, JwtGenerator>();
             services.AddScoped<IUserAccessor, UserAccessor>();
             services.AddScoped<IPhotoAccessor, PhotoAccessor>();
-            services.AddScoped<IEmailSender, EmailSender>();       // Concrete class: EmailSender.cs
+            // services.AddScoped<IProfileReader, ProfileReader>();
+            services.AddScoped<IEmailSender, EmailSender>();            // Concrete class: EmailSender.cs
             services.AddScoped<IFacebookAccessor, FacebookAccessor>();
 
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
-            services.Configure<CloudinarySettings>(Configuration.GetSection("Authentication:Facebook"));
+            services.Configure<FacebookAppSettings>(Configuration.GetSection("Authentication:Facebook"));
             services.Configure<SendGridSettings>(Configuration.GetSection("SendGrid"));
         }
 
@@ -151,19 +153,17 @@ namespace API
 
             // app.UseHttpsRedirection();
 
-            app.UseRouting();
-
-            app.UseCors("CorsPolicy");
-
-            app.UseAuthentication();
-
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapHub<ChatHub>("/chat");
+            app.UseRouting();	
+            app.UseCors("CorsPolicy");	
+            app.UseAuthentication();	
+            app.UseAuthorization();	
+            app.UseEndpoints(endpoints =>	
+            {	
+                endpoints.MapControllers();	
+                endpoints.MapHub<ChatHub>("/chat");	
+                // endpoints.MapFallbackToController("Index", "Fallback");	
             });
+
         }
     }
 }

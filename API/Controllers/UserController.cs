@@ -71,11 +71,10 @@ namespace API.Controllers
         {
             query.Origin = Request.Headers["origin"];
             await Mediator.Send(query);
-
             return Ok("Email Verification Sent - please check email");
         }
 
-
+        // Created private method to be used in all the methods above
         private void SetTokenCookie(string refreshToken)
         {
             var cookieOptions = new CookieOptions
@@ -85,7 +84,6 @@ namespace API.Controllers
             };
             Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);
         }
-
 
     }
 }

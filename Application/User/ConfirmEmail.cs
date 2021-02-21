@@ -12,7 +12,7 @@ namespace Application.User
     public class ConfirmEmail
     {
         public class Command : IRequest<IdentityResult>
-        {
+        {            
             // Send email and token from body of request received from user clicking the confirmation email link
             public string Token { get; set; }
             public string Email { get; set; }
@@ -26,6 +26,7 @@ namespace Application.User
                 RuleFor(x => x.Token).NotEmpty();
             }
         }
+
         public class Handler : IRequestHandler<Command, IdentityResult>
         {
             private readonly UserManager<AppUser> _userManager;
@@ -36,15 +37,14 @@ namespace Application.User
 
             public async Task<IdentityResult> Handle(Command request, CancellationToken cancellationToken)
             {
-                // Get the user from the userManager
                 var user = await _userManager.FindByEmailAsync(request.Email);
-
-                // Decode the token (reverse the encoding done in Register.cs)
                 var decodedTokenBytes = WebEncoders.Base64UrlDecode(request.Token);
                 var decodedToken = Encoding.UTF8.GetString(decodedTokenBytes);
-
-                return await _userManager.ConfirmEmailAsync(user, decodedToken);
+                return await _userManager.ConfirmEmailAsync(user, decodedToken); 
             }
         }
     }
 }
+
+
+

@@ -21,7 +21,8 @@ namespace Application.User
         public string Token { get; set; }
         public string Username { get; set; }
         public string Image { get; set; }
-        [JsonIgnore]
+        
+        [JsonIgnore]  // set as cookie that we return to the client
         public string RefreshToken { get; set; }
     }
 }

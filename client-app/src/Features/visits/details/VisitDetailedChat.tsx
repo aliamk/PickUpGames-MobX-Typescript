@@ -33,7 +33,7 @@ const VisitDetailedChat = () => {
                     <Comment.Avatar src={comment.image || '/assets/user.png'} />
                     <Comment.Content>
                         <Comment.Author as={Link} to={`/profile/${comment.username}`}>{comment.displayName}</Comment.Author>
-                        <Comment.Metadata><div>{formatDistance(comment.createdAt, new Date())}</div></Comment.Metadata>
+                        <Comment.Metadata><div>{formatDistance(new Date(comment.createdAt), new Date())}</div></Comment.Metadata>
                         <Comment.Text>{comment.body}</Comment.Text>
                     </Comment.Content>
                 </Comment>

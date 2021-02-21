@@ -7,6 +7,8 @@ import { IVisit, IVisitsEnvelope } from '../models/visit_interface';
 import { IProfile, IPhoto } from '../models/profile';
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.withCredentials = true;
+
 
 // Check if there's a token; if yes, attach to the authorization header; if no, return error 
 axios.interceptors.request.use(config => {
@@ -27,12 +29,12 @@ axios.interceptors.response.use(undefined, error => {
     if (status === 404) {
         history.push('/notfound')
     }
-    if (status === 401 && headers['www-authenticate'].includes('The token expired')) {
+    if (status === 401 && headers['www-authenticate'] === ('The token is expired')) {
         window.localStorage.removeItem('jwt')
         history.push('/')
         toast.info('Your session has expired, please login again')
     }
-    console.log(error.response)
+    // console.log(error.response)
     if (status === 400 && config.method === 'get' && data.errors.hasOwnProperty('id')) {
         history.push('/notfound')
     }
@@ -80,9 +82,9 @@ const User = {
     register: (user: IUserFormValues): Promise<IUser> => requests.post(`/user/register`, user),
     // Facebook login
     fbLogin: (accessToken: string) => requests.post(`/user/facebook`, {accessToken}), 
-    // Refresh token
+    // Refresh tokens
     refreshToken: (): Promise<IUser> => requests.post(`/user/refreshToken`, {}),   
-    // Send token and email to the API for email verification
+    // Send token and email to the API for email verification    
     verifyEmail: (token: string, email: string): Promise<void> =>
         requests.post(`/user/verifyEmail`, { token, email }),
     resendVerifyEmailConfirm: (email: string): Promise<void> =>
