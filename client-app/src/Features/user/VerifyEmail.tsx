@@ -8,7 +8,9 @@ import LoginForm from './LoginForm';
 import { toast } from 'react-toastify';
 
 const VerifyEmail: React.FC<RouteComponentProps> = ({ location }) => {
+  
   const rootStore = useContext(RootStoreContext);
+
   const Status = {
     Verifying: 'Verifying',
     Failed: 'Failed',

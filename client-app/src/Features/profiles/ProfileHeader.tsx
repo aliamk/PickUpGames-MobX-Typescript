@@ -14,7 +14,7 @@ const ProfileHeader: React.FC<IProps> = ({ profile }) => {
         <Grid.Column width={12}>
           <Item.Group>
             <Item>
-              <Item.Image avatar size='small' src={profile.image || '/assets/user.png'} />
+              <Item.Image avatar size='small' src={profile.image || '/assets/users/user.png'} />
               <Item.Content verticalAlign='middle'>
                 <Header as='h1'>{profile.displayName}</Header>
               </Item.Content>

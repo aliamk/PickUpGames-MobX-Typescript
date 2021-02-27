@@ -7,6 +7,8 @@ import { toast } from 'react-toastify'
 
 const RegisterSuccess: React.FC<RouteComponentProps> = ({ location }) => {
     const { email } = queryString.parse(location.search)
+    console.log('location: ', location)
+    console.log('email: ', email)
 
     const handleConfirmEmailResend = () => {
         agent.User.resendVerifyEmailConfirm(email as string).then(() => {

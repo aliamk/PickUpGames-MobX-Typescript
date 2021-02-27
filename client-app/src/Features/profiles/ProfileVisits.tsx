@@ -64,7 +64,7 @@ const ProfileEvents = () => {
                 key={visit.id}
               >
                 <Image
-                  src={`/assets/locationImages/${visit.venue}.jpg`}
+                  src={`/assets/games/${visit.title}.jpg`}
                   style={{ minHeight: 100, objectFit: 'cover' }}
                 />
                 <Card.Content>

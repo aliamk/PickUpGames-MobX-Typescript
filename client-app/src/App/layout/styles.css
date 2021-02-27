@@ -44,6 +44,46 @@ body {
   font-weight: normal;  
 }
 
+.ui.column.grid>[class*="twelve wide"].column {
+  width: 100% !important;
+}
+
+.ui.large.label {
+  background-image: linear-gradient(
+    to right,
+    #4cb8c4 69%,
+    #3cd3ad 89%
+  ) !important;
+  color: yellow !important; 
+  border: 1px solid yellow !important;
+}
+
+.ui.blue.button {
+  background-image: linear-gradient(
+    to right,
+    #4cb8c4 69%,
+    #3cd3ad 89%
+  ) !important;
+  border: 1px solid yellow;
+  color: yellow !important; 
+  margin-top: 1em;
+}
+
+.ui.attached.header {
+  background-image: linear-gradient(
+    to right,
+    #4cb8c4 69%,
+    #3cd3ad 89%
+  ) !important;
+  color: yellow;
+}
+
+.rw-cell.rw-state-selected {
+  background-color: yellow;
+  border-color: teal;
+  color: black;
+}
+
 @media only screen and (max-width: 700px) {
   .masthead {
     background-image: url('football_smallest.jpg') !important;
@@ -51,5 +91,5 @@ body {
     background-size: cover !important;
     height:  100vw !important;
     width: 100vw !important;
-  }
+  }  
 }

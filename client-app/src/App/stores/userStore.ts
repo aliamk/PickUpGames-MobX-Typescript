@@ -40,7 +40,9 @@ export default class UserStore {
     try {
       await agent.User.register(values);   
       this.rootStore.modalStore.closeModal();
+      console.log('register values: ', values)
       history.push(`/user/registerSuccess?email=${values.email}`)
+      console.log('register history values: ', values)
     } catch (error) {
       throw error;
     }

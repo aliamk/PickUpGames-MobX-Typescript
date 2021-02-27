@@ -18,7 +18,6 @@ namespace API.Controllers
             var user = await Mediator.Send(query);
             SetTokenCookie(user.RefreshToken);
             return user;
-            // return await Mediator.Send(query);
         }
 
         [AllowAnonymous]
@@ -72,9 +71,8 @@ namespace API.Controllers
             query.Origin = Request.Headers["origin"];
             await Mediator.Send(query);
 
-            return Ok("Email Verification Sent - please check email");
+            return Ok("Email verification link sent - please check email");
         }
-
 
         private void SetTokenCookie(string refreshToken)
         {
@@ -85,7 +83,5 @@ namespace API.Controllers
             };
             Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);
         }
-
-
     }
 }

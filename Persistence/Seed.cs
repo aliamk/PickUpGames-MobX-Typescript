@@ -35,9 +35,33 @@ namespace Persistence
                     new AppUser
                     {
                         Id = "c",
-                        DisplayName = "Tom",
-                        UserName = "tom",
-                        Email = "tom@test.com",
+                        DisplayName = "Soraya",
+                        UserName = "soraya",
+                        Email = "soraya@test.com",
+                        EmailConfirmed = true
+                    },
+                    new AppUser
+                    {
+                        Id = "d",
+                        DisplayName = "Safina",
+                        UserName = "safina",
+                        Email = "safina@test.com",
+                        EmailConfirmed = true
+                    },
+                    new AppUser
+                    {
+                        Id = "e",
+                        DisplayName = "Li",
+                        UserName = "Li",
+                        Email = "lijie@test.com",
+                        EmailConfirmed = true
+                    },
+                    new AppUser
+                    {
+                        Id = "f",
+                        DisplayName = "Joaquin",
+                        UserName = "Joaquin",
+                        Email = "joaquin@test.com",
                         EmailConfirmed = true
                     },
                 };
@@ -54,10 +78,10 @@ namespace Persistence
                 {
                     new Visit
                     {
-                        Title = "First appointment with Dr Krull",
-                        Description = "Nervous first meeting with Dr Krull",
+                        Title = "Cycling",
+                        Description = "Bring your own bikes and repair kits",
                         Date = DateTime.Now.AddMonths(-7),
-                        Venue = "St Thomas' Hospital",
+                        Venue = "Regents Park",
                         City = "London",
                         UserVisits = new List<UserVisit>
                         {
@@ -71,10 +95,10 @@ namespace Persistence
                     },
                     new Visit
                     {
-                        Title = "Second appointment with Dr Krull",
-                        Description = "Had to wait forever but had some good news so happy",
-                        Date = DateTime.Now.AddMonths(-6),
-                        Venue = "St Thomas' Hospital",
+                        Title = "Tennis",
+                        Description = "For amateurs",
+                        Date = DateTime.Now.AddMonths(2),
+                        Venue = "Kiburn tennis centre",
                         City = "London",
                         UserVisits = new List<UserVisit>
                         {
@@ -90,14 +114,20 @@ namespace Persistence
                                 IsHost = false,
                                 DateJoined = DateTime.Now.AddMonths(-1)
                             },
+                            new UserVisit
+                            {
+                                AppUserId = "e",
+                                IsHost = false,
+                                DateJoined = DateTime.Now.AddMonths(-2)
+                            },
                         }
                     },
                     new Visit
                     {
-                        Title = "Third appointment with Dr Krull",
-                        Description = "Changing medications today",
+                        Title = "Basketball",
+                        Description = "Friendly game of basketball - non-competitive",
                         Date = DateTime.Now.AddMonths(-5),
-                        Venue = "St Thomas' Hospital",
+                        Venue = "Enfield Sports Centre",
                         City = "London",
                         UserVisits = new List<UserVisit>
                         {
@@ -117,9 +147,9 @@ namespace Persistence
                     },
                     new Visit
                     {
-                        Title = "Last Day with Dr Kelly",
-                        Description = "Got used to coming here - being transferred to St Thomas' Hospital",
-                        Date = DateTime.Now.AddMonths(-8),
+                        Title = "Football",
+                        Description = "I'm 40 - looking for others about that age for some footie",
+                        Date = DateTime.Now.AddMonths(2),
                         Venue = "St Bart's Hospital",
                         City = "London",
                         UserVisits = new List<UserVisit>
@@ -140,10 +170,10 @@ namespace Persistence
                     },
                     new Visit
                     {
-                        Title = "Lots of changes",
-                        Description = "Some good and bad news in today's medical report...",
-                        Date = DateTime.Now.AddMonths(-9),
-                        Venue = "StBartsHospital",
+                        Title = "Basketball",
+                        Description = "Join us for a FUN game",
+                        Date = DateTime.Now.AddMonths(1),
+                        Venue = "Southwark Sports Hall",
                         City = "London",
                         UserVisits = new List<UserVisit>
                         {
@@ -163,11 +193,11 @@ namespace Persistence
                     },
                     new Visit
                     {
-                        Title = "Road Trip! (Sort of) ",
-                        Description = "Referred to a specialist for the first time",
+                        Title = "Football",
+                        Description = "Looking for 5 people to join us",
                         Date = DateTime.Now.AddMonths(-11),
-                        Venue = "Manchester Royal Infirmary",
-                        City = "Manchester",
+                        Venue = "Camberwell Football Hall",
+                        City = "London",
                          UserVisits = new List<UserVisit>
                         {
                             new UserVisit

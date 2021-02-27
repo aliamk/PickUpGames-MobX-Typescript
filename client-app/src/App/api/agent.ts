@@ -83,13 +83,13 @@ const User = {
     // Refresh token
     refreshToken: (): Promise<IUser> => requests.post(`/user/refreshToken`, {}),   
     // Send token and email to the API for email verification
-    verifyEmail: (token: string, email: string): Promise<void> =>
+    verifyEmail: (token: string, email: string): Promise<void> => 
         requests.post(`/user/verifyEmail`, { token, email }),
     resendVerifyEmailConfirm: (email: string): Promise<void> =>
         requests.get(`/user/resendEmailVerification?email=${email}`)
 };
 
-  const Profiles = {
+const Profiles = {
     get: (username: string): Promise<IProfile> => requests.get(`/profiles/${username}`),
     uploadPhoto: (photo: Blob): Promise<IPhoto> => requests.postForm(`/photos`, photo),
     setMainPhoto: (id: string) => requests.post(`/photos/${id}/setMain`, {}),
