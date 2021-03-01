@@ -8,14 +8,9 @@ import LoginForm from './LoginForm';
 import { toast } from 'react-toastify';
 
 const VerifyEmail: React.FC<RouteComponentProps> = ({ location }) => {
-<<<<<<< HEAD
-  
-  const rootStore = useContext(RootStoreContext);
 
-=======
-  const rootStore = useContext(RootStoreContext);     // to access the modal
-  
->>>>>>> socialLogin
+  const rootStore = useContext(RootStoreContext);     // to access the modal 
+
   const Status = {
     Verifying: 'Verifying',
     Failed: 'Failed',

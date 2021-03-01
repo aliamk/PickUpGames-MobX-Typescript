@@ -84,13 +84,8 @@ const User = {
     fbLogin: (accessToken: string) => requests.post(`/user/facebook`, {accessToken}), 
     // Refresh tokens
     refreshToken: (): Promise<IUser> => requests.post(`/user/refreshToken`, {}),   
-<<<<<<< HEAD
     // Send token and email to the API for email verification
     verifyEmail: (token: string, email: string): Promise<void> => 
-=======
-    // Send token and email to the API for email verification    
-    verifyEmail: (token: string, email: string): Promise<void> =>
->>>>>>> socialLogin
         requests.post(`/user/verifyEmail`, { token, email }),
     resendVerifyEmailConfirm: (email: string): Promise<void> =>
         requests.get(`/user/resendEmailVerification?email=${email}`)

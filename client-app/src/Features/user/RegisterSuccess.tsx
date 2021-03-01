@@ -6,13 +6,10 @@ import agent from '../../App/api/agent';
 import { toast } from 'react-toastify';
 
 const RegisterSuccess: React.FC<RouteComponentProps> = ({ location }) => {
-<<<<<<< HEAD
+
     const { email } = queryString.parse(location.search)
     console.log('location: ', location)
     console.log('email: ', email)
-=======
-  const { email } = queryString.parse(location.search)
->>>>>>> socialLogin
 
   const handleConfirmEmailResend = () => {
     agent.User.resendVerifyEmailConfirm(email as string)

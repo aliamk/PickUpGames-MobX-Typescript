@@ -70,17 +70,11 @@ namespace API.Controllers
         {
             query.Origin = Request.Headers["origin"];
             await Mediator.Send(query);
-<<<<<<< HEAD
 
-            return Ok("Email verification link sent - please check email");
-        }
-
-=======
             return Ok("Email Verification Sent - please check email");
         }
 
         // Created private method to be used in all the methods above
->>>>>>> socialLogin
         private void SetTokenCookie(string refreshToken)
         {
             var cookieOptions = new CookieOptions
@@ -90,9 +84,5 @@ namespace API.Controllers
             };
             Response.Cookies.Append("refreshToken", refreshToken, cookieOptions);
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> socialLogin
     }
 }
