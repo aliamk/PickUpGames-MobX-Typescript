@@ -5,10 +5,10 @@ import { observer } from 'mobx-react-lite';
 
 interface IProps {
     fbCallback: (response: any) => void;
-    loading: boolean;
+    // loading: boolean;
 }
 
-const SocialLogin: React.FC<IProps> = ({fbCallback, loading}) => {
+const SocialLogin: React.FC<IProps> = ({fbCallback/*, loading*/}) => {
     return (
         <div>
             <FacebookLogin 
@@ -17,7 +17,7 @@ const SocialLogin: React.FC<IProps> = ({fbCallback, loading}) => {
                 callback={fbCallback}
                 render={(renderProps: any) => {
                     return (
-                        <Button loading={loading} onClick={renderProps.onClick} type="button" fluid color="facebook">
+                        <Button /*loading={loading}*/ onClick={renderProps.onClick} type="button" fluid color="facebook">
                             <Icon name="facebook" />
                             Login with Facebook
                         </Button>

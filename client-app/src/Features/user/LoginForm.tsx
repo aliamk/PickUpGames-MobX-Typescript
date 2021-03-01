@@ -19,7 +19,7 @@ const validate = combineValidators({
 const LoginForm = () => {
     
     const rootStore = useContext(RootStoreContext);
-    const { login, fbLogin, loading } = rootStore.userStore;
+    const { login, fbLogin/*, loading*/ } = rootStore.userStore;
 
     return (
         <FinalForm
@@ -43,9 +43,9 @@ const LoginForm = () => {
                         <ErrorMessage error={submitError} text='Invalid email or password' />
                     )}
                     
-                    <Button disabled={(invalid && !dirtySinceLastSubmit) || pristine} loading={submitting} className="ui yellow button" content='Login' fluid />
+                    <Button disabled={(invalid && !dirtySinceLastSubmit) || pristine} /*loading={submitting}*/ className="ui yellow button" content='Login' fluid />
                     <Divider horizontal>Or</Divider>
-                    <SocialLogin loading={loading} fbCallback={fbLogin} />
+                    <SocialLogin /*loading={loading}*/ fbCallback={fbLogin} />
                 </Form>
             )}
         />

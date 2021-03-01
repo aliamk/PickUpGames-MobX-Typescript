@@ -83,28 +83,29 @@ export default class UserStore {
     history.push('/')   
   };
 
-  @action fbLogin = async (response: any) => {
-       
-    this.loading = true;
-    try {
-      const user = await agent.User.fbLogin(response.accessToken);  
-      runInAction(() => {
-        this.user = user;
-        this.rootStore.commonStore.setToken(user.token);
-        this.startRefreshTokenTimer(user);
-        this.rootStore.modalStore.closeModal();
-        this.loading = false;
-      })
-       
-      history.push('/visits');
-      console.log('user userStore: ', user)   
-      } catch (error) {    
-        runInAction(() => { 
-          this.loading = false; 
-          throw error;
-        })
-    }
-    console.log('fblogin userStore: ', response)
+  @action fbLogin = async (response: any) => {   
+    console.log('fbLogin userStore: ', response)
+   
+    // this.loading = true;
+    // try {
+    //   const user = await agent.User.fbLogin(response.accessToken);  
+    //   console.log('fbLogin userStore: ', response)
+    //   runInAction(() => {
+    //     this.user = user;
+    //     this.rootStore.commonStore.setToken(user.token);
+    //     this.startRefreshTokenTimer(user);
+    //     this.rootStore.modalStore.closeModal();
+    //     this.loading = false;
+    //   })       
+    //   history.push('/visits');
+    //   console.log('user userStore: ', user)   
+    //   } catch (error) {    
+    //     runInAction(() => { 
+    //       this.loading = false; 
+    //       throw error;
+    //     })
+    // }
+    // console.log('fblogin userStore: ', response)
   }
 
   // Create private method to use in above methods
