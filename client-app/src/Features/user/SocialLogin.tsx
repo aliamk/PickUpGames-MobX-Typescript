@@ -12,8 +12,8 @@ const SocialLogin: React.FC<IProps> = ({fbCallback, loading}) => {
     return (
         <div>
             <FacebookLogin 
-                appId="464450101591130"     // This doesn't need to be hidden
-                fields="name,email,picture" // the fields we want back from FB
+                appId="464450101591130"             // This doesn't need to be hidden
+                fields="name,email,picture"         // the fields we want back from FB
                 callback={fbCallback}
                 render={(renderProps: any) => {
                     return (
