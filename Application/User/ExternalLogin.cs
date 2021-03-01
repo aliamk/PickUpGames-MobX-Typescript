@@ -27,6 +27,7 @@ namespace Application.User
                 _jwtGenerator = jwtGenerator;
                 _facebookAccessor = facebookAccessor;
                 _userManager = userManager;
+
             }
 
             public async Task<User> Handle(Query request, CancellationToken cancellationToken)

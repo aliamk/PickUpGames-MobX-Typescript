@@ -74,7 +74,7 @@ namespace Application.User
                 if (!result.Succeeded) throw new Exception("Problem creating user");
                 // Generate a token to send via email and pass in the user
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                // Generates a token in pure string format, not query string
+                // Generates a token in pure string format and pass to query string
                 token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
                 // What the confirm registration url should look like in the email
                 var verifyUrl = $"{request.Origin}/user/verifyEmail?token={token}&email={request.Email}";

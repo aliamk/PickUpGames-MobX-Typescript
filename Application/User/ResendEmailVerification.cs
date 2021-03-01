@@ -1,6 +1,8 @@
 using System.Text;                          // Encoding
 using System.Threading;
 using System.Threading.Tasks;
+using System.Net; 
+using Application.Errors;                   // RestException
 using Application.Interfaces;               // IEmailSender
 using Domain;                               // AppUser
 using MediatR;                              // IRequest
@@ -19,17 +21,21 @@ namespace Application.User
 
         public class Handler : IRequestHandler<Query>
         {
-            private readonly IEmailSender _emailsender;
+            private readonly IEmailSender _emailSender;
             private readonly UserManager<AppUser> _userManager;
-            public Handler(UserManager<AppUser> usermanager, IEmailSender emailsender)
+            public Handler(UserManager<AppUser> usermanager, IEmailSender emailSender)
             {
                 _userManager = usermanager;
-                _emailsender = emailsender;
+                _emailSender = emailSender;
             }
 
             public async Task<Unit> Handle(Query request, CancellationToken cancellationToken)
             {
                 var user = await _userManager.FindByEmailAsync(request.Email);
+                if (user.EmailConfirmed)
+                {
+                    throw new RestException(HttpStatusCode.BadRequest, new { Email = "Email already verified. Please login" });
+                }
                 // Generate a token to send via email and pass in the user
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 // Generates a token in pure string format, not query string
@@ -39,7 +45,7 @@ namespace Application.User
                 // What the email should look like
                 var message = $"<p>Please click the below link to verify your email address:</p><p><a href='{verifyUrl}'>{verifyUrl}></a></p>";
                 // Replace the JwtGenerator with this method
-                await _emailsender.SendEmailAsync(request.Email, "Please verify email address", message);
+                await _emailSender.SendEmailAsync(request.Email, "Please verify email address", message);
 
                 return Unit.Value;
             }
