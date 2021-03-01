@@ -83,7 +83,7 @@ export default class UserStore {
   };
 
   @action fbLogin = async (response: any) => {
-    console.log('fblogin userStore: ', response)    
+       
     this.loading = true;
     try {
       const user = await agent.User.fbLogin(response.accessToken);  
@@ -94,6 +94,7 @@ export default class UserStore {
         this.rootStore.modalStore.closeModal();
         this.loading = false;
       })
+       
       history.push('/visits');
       console.log('user userStore: ', user)   
       } catch (error) {    
@@ -102,6 +103,7 @@ export default class UserStore {
           throw error;
         })
     }
+    console.log('fblogin userStore: ', response)
   }
 
   private startRefreshTokenTimer(user: IUser) {
@@ -114,6 +116,4 @@ export default class UserStore {
   private stopRefreshTokenTimer() {
     clearTimeout(this.refreshTokenTimeout);
   }
-
-
 }
