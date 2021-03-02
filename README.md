@@ -27,7 +27,7 @@
 ### Overview of App
 
 ### Logging-in and out as a previously registered user with client-side form validation
-![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/1. log_in_bob.gif)
+![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/1.log_in_bob.gif)
 
 
 ### Alternatively, facebook users can log-in via the second button (facebook issues an access token which this app verifies by sending it back to facebook and then generates a JWT token to the facebook user)
@@ -66,12 +66,12 @@
 ![profile picture](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/8.add_photos.gif)
 
 ---
----
+
 #### Facebook is currently not verifying apps with individual status in the dev portal due to covid so for now, only the test user I've created in the portal can login via Facebook - after covid, potentially any facebook user should be able to log-in
 ![facebook app verified](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/verification_pause.png)
 
 ---
----
+
 Installed packages:
 1. npx create-react-app client-app --use-npm --typescript
 1. npm install semantic-ui-react
