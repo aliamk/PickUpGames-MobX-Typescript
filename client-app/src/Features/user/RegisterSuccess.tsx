@@ -6,13 +6,10 @@ import agent from '../../App/api/agent';
 import { toast } from 'react-toastify';
 
 const RegisterSuccess: React.FC<RouteComponentProps> = ({ location }) => {
-
-    const { email } = queryString.parse(location.search)
-    console.log('location: ', location)
-    console.log('email: ', email)
+  const { email } = queryString.parse(location.search);
 
   const handleConfirmEmailResend = () => {
-    agent.User.resendVerifyEmailConfirm(email as string)
+    agent?.User?.resendVerifyEmailConfirm(email as string)
       .then(() => {
         toast.success('Verification email resent - please check your email');
       })
@@ -25,13 +22,24 @@ const RegisterSuccess: React.FC<RouteComponentProps> = ({ location }) => {
         <Icon name='check' />
         Successfully registered!
       </Header>
+
       <Segment.Inline>
         <div className='center'>
-          <p>Please check your email (including junk folder) for the verication email</p>
+          <p>
+            Please check your email (including junk folder) for the verication
+            email
+          </p>
           {email && (
             <>
-              <p>Didn't receive the email? Please click below button to resend</p>
-              <Button onClick={handleConfirmEmailResend} primary content='Resend email' size='huge' />
+              <p>
+                Didn't receive the email? Please click below button to resend
+              </p>
+              <Button
+                onClick={handleConfirmEmailResend}
+                primary
+                content='Resend email'
+                size='huge'
+              />
             </>
           )}
         </div>

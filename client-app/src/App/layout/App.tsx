@@ -49,8 +49,8 @@ const App: React.FC<RouteComponentProps> = ({ location }) => {
                 {/* Using location:key to create a new instance of the loaded component when a prop changes  */}
                 <PrivateRoute key={location.key} path={['/createVisit', '/manage/:id']} component={VisitForm} />  
                 <PrivateRoute path='/profile/:username' component={ProfilePage} />
-                <PrivateRoute path='/user/registerSuccess' component={RegisterSuccess} />
-                <PrivateRoute path='/user/verifyEmail' component={VerifyEmail} />
+                <Route path='/user/registerSuccess' component={RegisterSuccess} />
+                <Route path='/user/verifyEmail' component={VerifyEmail} />
                 {/* <Route path='/login' component={LoginForm} /> */}
                 <Route component={NotFound} />    
               </Switch>
