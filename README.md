@@ -3,8 +3,10 @@
 ## A social networking app made for sports enthusiasts who want like-minded users to play against
 * ASP.Net -  *
 
+### Logging-in as a previously registered user with client-side form validation
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/login.gif)
 
+### Alternatively, facebook users can login via the second button (facebook issues an access token which this app verifies by sending it back to facebook and then generates a JWT token to the facebook user)
 ![facebook login](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/facebook_login.gif)
 
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/join_create_game.gif)
