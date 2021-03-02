@@ -20,7 +20,8 @@
 ![SQL](https://img.icons8.com/nolan/45/sql.png)&nbsp;&nbsp;**SQL:**  Used SqLite in development for seeding data and swapped it out for MySql and SqlServer at deployment
 
 ![Semantic-UI](https://api.iconify.design/logos-semantic-ui.svg?height=35)&nbsp;&nbsp;**Semantic-UI:**  An easy to use style/theme framework with ready-to-use components and makes responsive layout easier to build
----
+
+
 ---
 
 ### Overview of App
