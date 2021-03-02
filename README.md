@@ -3,28 +3,36 @@
 ## A social networking app made for sports enthusiasts who want like-minded users to play against
 * ASP.Net -  *
 
-### Logging-in as a previously registered user with client-side form validation
+### Logging-in and out as a previously registered user with client-side form validation
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/login.gif)
 
 ### Alternatively, facebook users can login via the second button (facebook issues an access token which this app verifies by sending it back to facebook and then generates a JWT token to the facebook user)
 ![facebook login](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/facebook_login.gif)
 
+### A logged-in user can return to the site without logging-in again because persistence has been added by sending data to the server.  Once in, user create a game - this form also has client-side validation
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/join_create_game.gif)
 
+### Only the creator of a game can then edit the game - the Manage button only appears if the user is also the creator
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/Edit_game.gif)
 
+### A user can look up a game and join - multiple users can add messages in the chat box under every game
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/join_game_chat.gif)
 
+### All games are filterable by date or by a user looking at games they've created, or going to, or all games (no filter)
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/calendar_filters_lazyloading.gif)
 
+### The registration form has client-side validation and generates an email verification for the user
 ![user registration](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/user_register.gif)
 
+### User can't log-in without first clicking the verification link in the email
 ![verification failed](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/email_verification_failed.gif)
 
+### This is the page users are sent to when they click the email verification link
 ![email verified](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/Email_verified.png)
 
+### Users can then log-in and add a profile picture
 ![profile picture](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/add_profile_picture.gif)
 
 
-
+#### Facebook is currently not verifying apps with individual status in the dev portal due to covid so for now, only the test user I've created in the portal can login via Facebook - after covid, potentially any facebook user should be able to log-in
 ![email verified](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/verification_pause.png)
