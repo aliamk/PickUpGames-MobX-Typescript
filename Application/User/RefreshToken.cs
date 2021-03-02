@@ -33,21 +33,21 @@ namespace Application.User
             public async Task<User> Handle(Command request, CancellationToken cancellationToken)
             {
                 var user = await _userManager.FindByNameAsync(_userAccessor.GetCurrentUsername());
-
+                // Is old token valid?
                 var oldToken = user.RefreshTokens.SingleOrDefault(x => x.Token == request.RefreshToken);
-
+                // If not, return a 401
                 if (oldToken != null && !oldToken.IsActive) throw new RestException(HttpStatusCode.Unauthorized);
-
+                // If an old token exists, revoke it
                 if (oldToken != null)
                 {
                     oldToken.Revoked = DateTime.UtcNow;
                 }
-
+                // Create new token
                 var newRefreshToken = _jwtGenerator.GenerateRefreshToken();
                 user.RefreshTokens.Add(newRefreshToken);
-
+                // Update user
                 await _userManager.UpdateAsync(user);
-
+                // Return new user
                 return new User(user, _jwtGenerator, newRefreshToken.Token);
             }
         }

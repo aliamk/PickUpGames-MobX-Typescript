@@ -42,6 +42,8 @@ namespace Infrastructure.Security
 
             return tokenHandler.WriteToken(token);
         }
+
+        
         public RefreshToken GenerateRefreshToken()
         {
             var randomNumber = new byte[32];

@@ -64,8 +64,8 @@ namespace Application.User
                     IsMain = true
                 };
 
-                user.Photos.Add(photo);
-                user.RefreshTokens.Add(refreshToken);
+                user?.Photos?.Add(photo);
+                user?.RefreshTokens?.Add(refreshToken);
 
                 var result = await _userManager.CreateAsync(user);
 

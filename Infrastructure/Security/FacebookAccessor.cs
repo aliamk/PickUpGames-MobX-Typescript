@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Application.Interfaces;
 using Application.User;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;                  // JsonConvert
+using Newtonsoft.Json;
 
 namespace Infrastructure.Security
 {

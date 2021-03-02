@@ -1,11 +1,10 @@
-using System;                               // DateTime
-using Microsoft.AspNetCore.Mvc;             // HttpPost
-using System.Threading.Tasks;               // Task
-using Domain;                               // AppUser
-using Application.User;                     // Login
-using Microsoft.AspNetCore.Authorization;   // AllowAnonymous
-using Microsoft.AspNetCore.Http;            // CookieOptions
-
+using System;
+using System.Threading.Tasks;
+using Application.User;
+using Domain;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
@@ -71,10 +70,9 @@ namespace API.Controllers
             query.Origin = Request.Headers["origin"];
             await Mediator.Send(query);
 
-            return Ok("Email Verification Sent - please check email");
+            return Ok("Email verification link sent - please check email");
         }
 
-        // Created private method to be used in all the methods above
         private void SetTokenCookie(string refreshToken)
         {
             var cookieOptions = new CookieOptions

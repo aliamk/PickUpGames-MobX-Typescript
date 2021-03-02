@@ -59,7 +59,7 @@ namespace Application.User
 
                 if (result.Succeeded)
                 {
-                    // TODO: generate token
+                    // generate token
                     var refreshToken = _jwtGenerator.GenerateRefreshToken();
                     user.RefreshTokens.Add(refreshToken);
                     await _userManager.UpdateAsync(user);

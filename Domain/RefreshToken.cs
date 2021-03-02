@@ -1,4 +1,4 @@
-using System;           // DateTime
+using System;
 
 namespace Domain
 {

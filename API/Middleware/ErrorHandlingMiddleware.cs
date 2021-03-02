@@ -1,12 +1,11 @@
-using System;                               // Exception
-using System.Net;                           // HttpStatusCode
-using System.Text.Json;                     // JsonSerializer
-using System.Threading.Tasks;               // Task
-using Application.Errors;                   // RestException
-using Microsoft.AspNetCore.Http;            // RequestDelegate
-using Microsoft.Extensions.Logging;         // ILogger
+using System;
+using System.Net;
+using System.Text.Json;
+using System.Threading.Tasks;
+using Application.Errors;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
-// Custom Middleware
 namespace API.Middleware
 {
     public class ErrorHandlingMiddleware
@@ -24,7 +23,7 @@ namespace API.Middleware
             try
             {
                 await _next(context);
-            }
+            } 
             catch (Exception ex)
             {
                 await HandleExceptionAsync(context, ex, _logger);
@@ -52,7 +51,7 @@ namespace API.Middleware
             context.Response.ContentType = "application/json";
             if (errors != null)
             {
-                var result = JsonSerializer.Serialize(new
+                var result = JsonSerializer.Serialize(new 
                 {
                     errors
                 });
