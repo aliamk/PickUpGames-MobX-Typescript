@@ -3,6 +3,11 @@
   src: url('FRIDAYNIGHTLIGHTS-L5PE.TTF');
 }
 
+html {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: rgb(234, 234, 234) !important;
   font-family: myFont;
@@ -14,6 +19,7 @@ body {
     #4cb8c4 69%,
     #3cd3ad 89%
   ) !important;
+  border-bottom: 0.8em solid rgba(255, 255, 0, 0.089);
 }
 
 /*home page styles*/
@@ -22,8 +28,6 @@ body {
   display: flex;
   align-items: center;
   background-image: url('football.jpg') !important;
-  /* background-repeat: no-repeat !important;
-  background-size: cover !important; */
   height: 100vh;
   width: 100vw;  
 }
@@ -39,6 +43,15 @@ body {
   font-family: myFont;
   letter-spacing: 0.05em;
   color: yellow;
+}
+
+div#root {  
+  background-image: url("./4855443.jpg");
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .masthead h2 {
@@ -84,6 +97,13 @@ body {
   background-color: yellow;
   border-color: teal;
   color: black;
+}
+
+
+div.ui.segments, div.ui.large.vertical.menu, div.rw-calendar.rw-widget-container.rw-widget {
+  border-right: 1px solid yellow;
+  border-bottom: 1px solid yellow;
+  box-shadow: 2px 2px 1px 1px rgba(255, 255, 0, 0.068);
 }
 
 @media only screen and (max-width: 700px) {

@@ -12,7 +12,7 @@ const NavBar: React.FC = () => {
     const { user, logout } = rootStore.userStore;
     
     return (
-        <Menu fixed='top' inverted >
+        <Menu fixed='top' inverted size='massive'>
             <Container color='yellow'> 
                 <Menu.Item header as={NavLink} exact to='/' >
                     {/* <img src="/assets/heart_logo.png" alt="logo" style={{marginRight: '10px'}} /> */}

@@ -30,7 +30,7 @@ const VisitDashboard: React.FC = () => {
     // ======== DOM Display ======== //
     return (
         <Grid>
-            <Grid.Column width={10}>
+            <Grid.Column width={10} >
                 {loadingInitial && page === 0 ? ( <VisitListItemPlaceholder /> ) : ( 
                 <InfiniteScroll 
                     pageStart={0} 
