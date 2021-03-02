@@ -1,21 +1,23 @@
 # PickUp games
 
 ## A social networking app made for sports enthusiasts who want like-minded users to play against
-* ASP.Net -  *
+*ASP.Net Core - React - Typescript - MobX - Entity Framework - SqLite/MySql/SqlServer - Semantic-UI*
+
+![React logo](https://img.icons8.com/plasticine/40/000000/react.png)&nbsp;&nbsp;**React:** A library that allows declarative programming with reusable components and uni-directional data flow
 
 ### Logging-in and out as a previously registered user with client-side form validation
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/login.gif)
 
-### Alternatively, facebook users can login via the second button (facebook issues an access token which this app verifies by sending it back to facebook and then generates a JWT token to the facebook user)
+### Alternatively, facebook users can log-in via the second button (facebook issues an access token which this app verifies by sending it back to facebook and then generates a JWT token to the facebook user)
 ![facebook login](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/facebook_login.gif)
 
-### A logged-in user can return to the site without logging-in again because persistence has been added by sending data to the server.  Once in, user create a game - this form also has client-side validation
+### A logged-in user can return to the site without logging-in again because persistence has been added by sending data to the server.  Once in, a user can create a game - this form also has client-side validation
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/join_create_game.gif)
 
 ### Only the creator of a game can then edit the game - the Manage button only appears if the user is also the creator
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/Edit_game.gif)
 
-### A user can look up a game and join - multiple users can add messages in the chat box under every game
+### A user can look up a game and join - multiple users can add messages in the chat box under every game (SignalR)
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/join_game_chat.gif)
 
 ### All games are filterable by date or by a user looking at games they've created, or going to, or all games (no filter)
@@ -35,4 +37,4 @@
 
 
 #### Facebook is currently not verifying apps with individual status in the dev portal due to covid so for now, only the test user I've created in the portal can login via Facebook - after covid, potentially any facebook user should be able to log-in
-![email verified](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/verification_pause.png)
+![facebook app verified](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/verification_pause.png)
