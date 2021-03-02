@@ -25,4 +25,4 @@
 
 
 
-https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/verification_pause.png
+![email verified](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/verification_pause.png)
