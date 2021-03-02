@@ -9,9 +9,9 @@
 
 ![ASP.NET Core logo](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/.NET_Core_Logo.svg/35px-.NET_Core_Logo.svg.png)&nbsp;&nbsp;**.NET Core:** A framework for building a variety of apps that's liked for it's speed, versatility and scalability
 
-![react logo](https://img.icons8.com/plasticine/40/000000/react.png)&nbsp;&nbsp;**react:**  A library that allows declarative programming with reusable components and uni-directional data flow
+![react logo](https://img.icons8.com/plasticine/40/000000/react.png)&nbsp;&nbsp;**React:**  A library that allows declarative programming with reusable components and uni-directional data flow
 
-![typescript](https://img.icons8.com/color/40/000000/typescript.png)&nbsp;&nbsp;**typescript:**  A language that lets you strongly-type Javascript so you can keep track of your data-types and use the latest features of Javascript
+![typescript](https://img.icons8.com/color/40/000000/typescript.png)&nbsp;&nbsp;**Typescript:**  A language that lets you strongly-type Javascript so you can keep track of your data-types and use the latest features of Javascript
 
 ![MobX logo](https://api.iconify.design/logos-mobx.svg?height=30)&nbsp;&nbsp;**MobX:**  A library that helps simplify components by moving state from local to central - make components 'observers' of state in stores using react 'context'
 
