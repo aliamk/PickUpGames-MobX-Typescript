@@ -38,7 +38,7 @@
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/3.login_persistence_create_game.gif)
 
 
-### Only the creator of a game can then edit the game - the Manage button only appears if the user is also the creator
+### Only the creator of a game can then edit it - the Manage button only appears if the user is also the creator
 ![lazyloading](https://github.com/aliamk/PickUpGames/blob/main/ReadMe_assets/4.Edit_game_add_comment.gif)
 
 
@@ -81,7 +81,7 @@ Installed packages:
 1. npm install react-router-dom 
 1. npm install @types/react-router-dom 
 1. npm install react-toastify
-1. npm install react-FINAL-FORM FINAL-FORM
+1. npm install react-final-form final-form
 1. npm install react-widgets react-widgets-date-fns date-fns
 1. npm install @types/react-widgets
 1. npm install react-dropzone
